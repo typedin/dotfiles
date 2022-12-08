@@ -23,7 +23,6 @@
     enabled = true
 [merge]
     tool = nvimdiff
-    conflictstyle = diff3
 [interactive]
     diffFilter = delta --color-only
 [difftool]
