@@ -1,0 +1,19 @@
+export ZSH=$HOME/.oh-my-zsh
+source ~/.config/zsh/zsh-aliases
+source ~/.config/zsh/zsh-exports
+source ~/.config/zsh/zsh-path
+
+ZSH_THEME="robbyrussell"
+HIST_STAMPS="dd/mm/yyyy"
+
+plugins=(
+    composer
+    debian
+    git
+    git
+    laravel
+    npm
+    tmux
+)
+
+source $ZSH/oh-my-zsh.sh

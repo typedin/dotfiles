@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+###############################################################
+# ZSH
+###############################################################
+# no typo I don't want to have a hidden file
+# so it's not .zshrc
+ln -sf "$DOTFILES"/zsh/zshrc "$HOME"/.zshrc
+
+rm -rf "$HOME"/.config/zsh
+ln -sf "$DOTFILES"/zsh "$HOME"/.config/zsh
+ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
+# rm -rf "$HOME"/.config/tmux
+# ln -s "$DOTFILES"/tmux "$HOME"/.config/tmux
+
+rm -rf "$HOME"/.config/kitty
+ln -s "$DOTFILES"/kitty "$HOME"/.config/kitty
+
+rm -rf "$HOME"/.config/nvim
+ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
+
+rm -rf "$HOME"/.config/alacritty
+ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty

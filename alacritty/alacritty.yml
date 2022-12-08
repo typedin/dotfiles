@@ -1,0 +1,74 @@
+live_config_reload: true
+env:
+  TERM: alacritty
+font:
+  size: 9.0
+  offset:
+    x: 0
+    y: 10
+  glyph_offset:
+    x: 0
+    y: 6
+  normal:
+    family: Fira Code Nerd Font
+    style: Normal
+  semibold:
+    family: Fira Code Nerd Font
+    style: Medium
+  bold:
+    family: Fira Code Nerd Font
+    style: Bold
+  italic:
+    family: Fira Code Nerd Font
+    style: Italic
+  bold_italic:
+    family: Fira Code Nerd Font
+    style: Bold Italic
+window:
+  dimensions:
+    columns: 0
+    lines: 0
+  padding:
+    x: 0
+    y: 0
+  dynamic_padding: true
+  decorations: none
+scrolling:
+  history: 10000
+  multiplier: 3
+cursor:
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 800
+  unfocused_hollow: true
+draw_bold_text_with_bright_colors: false
+custom_cursor_colors: false
+# Colors (Monokai Dark)
+colors:
+  # Default colors
+  primary:
+    background: '#000000'
+    foreground: '#F8F8F2'
+
+  # Normal colors
+  normal:
+   black:   '#272822'
+   red:     '#F92672'
+   green:   '#A6E22E'
+   yellow:  '#F4BF75'
+   blue:    '#66D9EF'
+   magenta: '#AE81FF'
+   cyan:    '#A1EFE4'
+   white:   '#F8F8F2'
+
+  # Bright colors
+  bright:
+   black:   '#75715E'
+   red:     '#F92672'
+   green:   '#A6E22E'
+   yellow:  '#F4BF75'
+   blue:    '#66D9EF'
+   magenta: '#AE81FF'
+   cyan:    '#A1EFE4'
+   white:   '#F9F8F5'
