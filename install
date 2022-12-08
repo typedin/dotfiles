@@ -12,8 +12,6 @@ ln -sf "$DOTFILES"/zsh/zshrc "$HOME"/.zshrc
 rm -rf "$HOME"/.config/zsh
 ln -sf "$DOTFILES"/zsh "$HOME"/.config/zsh
 ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
-# rm -rf "$HOME"/.config/tmux
-# ln -s "$DOTFILES"/tmux "$HOME"/.config/tmux
 
 rm -rf "$HOME"/.config/kitty
 ln -s "$DOTFILES"/kitty "$HOME"/.config/kitty
@@ -23,3 +21,6 @@ ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
 
 rm -rf "$HOME"/.config/alacritty
 ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty
+
+ln -sf "$DOTFILES"/git/gitconfig "$HOME"/.gitconfig
+ln -sf "$DOTFILES"/gitignore_global "$HOME"/.gitignore_global

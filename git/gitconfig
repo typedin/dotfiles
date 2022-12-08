@@ -1,8 +1,6 @@
 [user]
     name = Antoine Cheynet
     email = antoine@typedin.dev
-[commit]
-    gpgsign = true
 [core]
     autocrlf = false
     excludesfile = /home/antoine/.gitignore_global

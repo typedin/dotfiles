@@ -7,3 +7,5 @@ shada
 .netrwhist
 !plugged/
 !undo/
+log
+logs/
