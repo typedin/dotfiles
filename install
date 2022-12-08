@@ -23,4 +23,4 @@ rm -rf "$HOME"/.config/alacritty
 ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty
 
 ln -sf "$DOTFILES"/git/gitconfig "$HOME"/.gitconfig
-ln -sf "$DOTFILES"/gitignore_global "$HOME"/.gitignore_global
+ln -sf "$DOTFILES"/git/gitignore_global "$HOME"/.gitignore_global
