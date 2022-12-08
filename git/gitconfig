@@ -1,0 +1,41 @@
+[user]
+    name = Antoine Cheynet
+    email = antoine@typedin.dev
+[commit]
+    gpgsign = true
+[core]
+    autocrlf = false
+    excludesfile = /home/antoine/.gitignore_global
+    editor = vim
+    excludesfile = ~/.gitignore_global
+    pager = bat
+[color]
+    ui = auto
+[diff]
+    tool = vimdiff
+[fetch]
+    prune = true
+[help]
+    autocorrect = 10
+[include]
+    path = ~/.gitconfig_local
+[push]
+    default = current
+[rerere]
+    enabled = true
+[merge]
+    tool = nvimdiff
+    conflictstyle = diff3
+[interactive]
+    diffFilter = delta --color-only
+[difftool]
+    prompt = false
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[init]
+    templatedir = ~/.git-templates
+    defaultBranch = main
+[credential]
+    helper = cache --timeout 604800
+[pull]
+    rebase = false
