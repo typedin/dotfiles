@@ -2,11 +2,9 @@
     name = Antoine Cheynet
     email = antoine@typedin.dev
 [core]
-    autocrlf = false
-    excludesfile = /home/antoine/.gitignore_global
     editor = vim
-    excludesfile = ~/.gitignore_global
     pager = bat
+    excludesfile = ~/.gitignore_global
 [color]
     ui = auto
 [diff]
