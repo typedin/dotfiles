@@ -194,7 +194,7 @@ _G.packer_plugins = {
   },
   ["lsp-trouble.nvim"] = {
     commands = { "Trouble" },
-    config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\17auto_preview\1\14auto_fold\2\nsetup\ftrouble\frequire\0" },
+    config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\14auto_fold\2\17auto_preview\1\nsetup\ftrouble\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -326,7 +326,7 @@ _G.packer_plugins = {
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["phpactor.nvim"] = {
-    config = { "\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\fgit_bin\bgit\vbranch\vmaster\17composer_bin\rcomposer\fphp_bin\bphp\21check_on_startup\tnone\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0" },
+    config = { "\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\fgit_bin\bgit\17composer_bin\rcomposer\vbranch\vmaster\fphp_bin\bphp\21check_on_startup\tnone\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0" },
     loaded = true,
     path = "/home/antoine/.local/share/nvim/site/pack/packer/start/phpactor.nvim",
     url = "https://github.com/gbprod/phpactor.nvim"
@@ -352,7 +352,7 @@ _G.packer_plugins = {
     url = "https://github.com/simrat39/rust-tools.nvim"
   },
   ["ssr.nvim"] = {
-    config = { "\27LJ\2\nŸ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\4\15prev_match\6N\16replace_all\17<leader><cr>\15next_match\6n\nclose\6q\1\0\2\14min_width\0032\15min_height\3\5\nsetup\bssr\frequire\0" },
+    config = { "\27LJ\2\nŸ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\4\16replace_all\17<leader><cr>\nclose\6q\15prev_match\6N\15next_match\6n\1\0\2\15min_height\3\5\14min_width\0032\nsetup\bssr\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -525,12 +525,18 @@ try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K
 time([[Config for modes.nvim]], false)
 -- Config for: phpactor.nvim
 time([[Config for phpactor.nvim]], true)
-try_loadstring("\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\fgit_bin\bgit\vbranch\vmaster\17composer_bin\rcomposer\fphp_bin\bphp\21check_on_startup\tnone\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0", "config", "phpactor.nvim")
+try_loadstring("\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\fgit_bin\bgit\17composer_bin\rcomposer\vbranch\vmaster\fphp_bin\bphp\21check_on_startup\tnone\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0", "config", "phpactor.nvim")
 time([[Config for phpactor.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Trouble lua require("packer.load")({'lsp-trouble.nvim'}, { cmd = "Trouble", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
+pcall(vim.api.nvim_create_user_command, 'Trouble', function(cmdargs)
+          require('packer.load')({'lsp-trouble.nvim'}, { cmd = 'Trouble', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'lsp-trouble.nvim'}, { cmd = 'Trouble' }, _G.packer_plugins)
+          return vim.fn.getcompletion('Trouble ', 'cmdline')
+      end})
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads

@@ -1,6 +1,6 @@
+require "plugins"
 require "impatient"
 require "visuals"
-require "plugins"
 require "utils"
 require "typedin"
 require "mappings"
