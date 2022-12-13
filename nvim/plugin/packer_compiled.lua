@@ -217,11 +217,24 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["mason-lspconfig.nvim"] = {
+    config = {
+      automatic_installation = true,
+      ensure_installed = { "bashls", "efm", "emmet_ls", "eslint", "html", "jsonls", "marksman", "phpactor", "prismals", "sumneko_lua", "tailwindcss", "tsserver", "vimls", "volar" }
+    },
     loaded = true,
     path = "/home/antoine/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
   ["mason.nvim"] = {
+    config = {
+      ui = {
+        icons = {
+          package_installed = "âœ“",
+          package_pending = "âžœ",
+          package_uninstalled = "âœ—"
+        }
+      }
+    },
     loaded = true,
     path = "/home/antoine/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
@@ -321,12 +334,13 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
+    config = {},
     loaded = true,
     path = "/home/antoine/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["phpactor.nvim"] = {
-    config = { "\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\fgit_bin\bgit\17composer_bin\rcomposer\vbranch\vmaster\fphp_bin\bphp\21check_on_startup\tnone\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0" },
+    config = { "\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\21check_on_startup\tnone\fgit_bin\bgit\17composer_bin\rcomposer\vbranch\vmaster\fphp_bin\bphp\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0" },
     loaded = true,
     path = "/home/antoine/.local/share/nvim/site/pack/packer/start/phpactor.nvim",
     url = "https://github.com/gbprod/phpactor.nvim"
@@ -352,7 +366,7 @@ _G.packer_plugins = {
     url = "https://github.com/simrat39/rust-tools.nvim"
   },
   ["ssr.nvim"] = {
-    config = { "\27LJ\2\nŸ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\4\16replace_all\17<leader><cr>\nclose\6q\15prev_match\6N\15next_match\6n\1\0\2\15min_height\3\5\14min_width\0032\nsetup\bssr\frequire\0" },
+    config = { "\27LJ\2\nŸ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\4\nclose\6q\16replace_all\17<leader><cr>\15prev_match\6N\15next_match\6n\1\0\2\15min_height\3\5\14min_width\0032\nsetup\bssr\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -511,6 +525,19 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+time([[Config for mason.nvim]], false)
+-- Config for: mason-lspconfig.nvim
+time([[Config for mason-lspconfig.nvim]], true)
+time([[Config for mason-lspconfig.nvim]], false)
+-- Config for: modes.nvim
+time([[Config for modes.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmodes\frequire\0", "config", "modes.nvim")
+time([[Config for modes.nvim]], false)
+-- Config for: packer.nvim
+time([[Config for packer.nvim]], true)
+time([[Config for packer.nvim]], false)
 -- Config for: windex.nvim
 time([[Config for windex.nvim]], true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vwindex\frequire\0", "config", "windex.nvim")
@@ -519,13 +546,9 @@ time([[Config for windex.nvim]], false)
 time([[Config for neo-tree.nvim]], true)
 
 time([[Config for neo-tree.nvim]], false)
--- Config for: modes.nvim
-time([[Config for modes.nvim]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmodes\frequire\0", "config", "modes.nvim")
-time([[Config for modes.nvim]], false)
 -- Config for: phpactor.nvim
 time([[Config for phpactor.nvim]], true)
-try_loadstring("\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\fgit_bin\bgit\17composer_bin\rcomposer\vbranch\vmaster\fphp_bin\bphp\21check_on_startup\tnone\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0", "config", "phpactor.nvim")
+try_loadstring("\27LJ\2\nò\2\0\0\a\0\18\0\0296\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\b\0006\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\a\0&\4\5\4=\4\t\0036\4\3\0009\4\4\0049\4\5\4'\6\6\0B\4\2\2'\5\n\0&\4\5\4=\4\v\3=\3\r\0025\3\14\0005\4\15\0=\4\16\3=\3\17\2B\0\2\1K\0\1\0\14lspconfig\foptions\1\0\1$language_server_phpstan_enabled\2\1\0\1\fenabled\2\finstall\1\0\0\bbin\31/opt/phpactor/bin/phpactor\tpath\1\0\5\21check_on_startup\tnone\fgit_bin\bgit\17composer_bin\rcomposer\vbranch\vmaster\fphp_bin\bphp\n/opt/\tdata\fstdpath\afn\bvim\nsetup\rphpactor\frequire\0", "config", "phpactor.nvim")
 time([[Config for phpactor.nvim]], false)
 
 -- Command lazy-loads

@@ -13,13 +13,15 @@ local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
     -- Packer can manage itself
-    use "wbthomason/packer.nvim"
+    use { "wbthomason/packer.nvim", config = require "typedin.config.packer" }
     use "lewis6991/impatient.nvim"
 
     -- LSP
     use {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
+    }
+    use {
         "neovim/nvim-lspconfig",
         "nvim-lua/lsp-status.nvim",
         --[[ "jose-elias-alvarez/null-ls.nvim", ]]
