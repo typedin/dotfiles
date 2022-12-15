@@ -11,6 +11,9 @@ vim.keymap.set({ "n", "x" }, "<LocalLeader>e", function()
     require("ssr").open()
 end)
 
+-- neotree
+vim.api.nvim_set_keymap("", "<Leader>e", ":Neotree toggle left<cr>", { noremap = true, silent = true })
+
 -- the primeagen
 vim.cmd [[
   nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'

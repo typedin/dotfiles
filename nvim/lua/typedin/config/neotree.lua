@@ -1,9 +1,4 @@
-local M = {
-    vim.cmd [[
-        let g:neo_tree_remove_legacy_commands = 1
-        let g:loaded_netrw       = 1
-        let g:loaded_netrwPlugin = 1
-    ]],
+local config = function()
     require("neo-tree").setup {
         window = {
             position = "left",
@@ -30,7 +25,7 @@ local M = {
                 },
             },
         },
-    },
-}
+    }
+end
 
-return M
+return config
