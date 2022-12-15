@@ -48,9 +48,7 @@ return require("packer").startup(function(use)
     -- comment
     use {
         "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end,
+        -- cannot move this to config file
     }
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
