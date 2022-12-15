@@ -38,12 +38,11 @@ return require("packer").startup(function(use)
         "ThePrimeagen/refactoring.nvim",
         requires = {
             { "nvim-lua/plenary.nvim" },
-            { "nvim-treesitter/nvim-treesitter" },
         },
     }
 
     -- TreeSitter
-    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = require "typedin.config.nvim-treesitter" }
     use "p00f/nvim-ts-rainbow"
 
     -- comment
