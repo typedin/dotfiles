@@ -46,7 +46,12 @@ return require("packer").startup(function(use)
     use "p00f/nvim-ts-rainbow"
 
     -- comment
-    use "numToStr/Comment.nvim"
+    use {
+        "numToStr/Comment.nvim",
+        config = function()
+            require("Comment").setup()
+        end,
+    }
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
     -- formatting
