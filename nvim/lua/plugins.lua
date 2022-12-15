@@ -138,7 +138,7 @@ return require("packer").startup(function(use)
 
     -- eye candy
     use "machakann/vim-highlightedyank"
-    use "NvChad/nvim-colorizer.lua"
+    use { "NvChad/nvim-colorizer.lua", config = require "typedin.config.nvim-colorizer" }
     use {
         "mvllow/modes.nvim",
         tag = "v0.2.0",
