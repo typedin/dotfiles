@@ -68,7 +68,6 @@ return require("packer").startup(function(use)
                 "nvim-telescope/telescope-file-browser.nvim",
                 "nvim-telescope/telescope-fzf-writer.nvim",
                 "nvim-telescope/telescope-fzy-native.nvim",
-                "nvim-telescope/telescope-github.nvim",
                 "nvim-telescope/telescope-hop.nvim",
                 "nvim-telescope/telescope-packer.nvim",
                 "nvim-telescope/telescope-rs.nvim",
@@ -99,18 +98,7 @@ return require("packer").startup(function(use)
         "cshuaimin/ssr.nvim",
         module = "ssr",
         -- Calling setup is optional.
-        config = function()
-            require("ssr").setup {
-                min_width = 50,
-                min_height = 5,
-                keymaps = {
-                    close = "q",
-                    next_match = "n",
-                    prev_match = "N",
-                    replace_all = "<leader><cr>",
-                },
-            }
-        end,
+        config = require "typedin.config.ssr",
     }
     --[[ use "wincent/scalpel" ]]
 
@@ -154,18 +142,14 @@ return require("packer").startup(function(use)
     use {
         "mvllow/modes.nvim",
         tag = "v0.2.0",
-        config = function()
-            require("modes").setup()
-        end,
+        config = require "typedin.config.modes",
     }
 
     use { "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" }
     use "onsails/lspkind-nvim"
     use {
         "declancm/windex.nvim",
-        config = function()
-            require("windex").setup()
-        end,
+        config = require "typedin.config.windex",
     }
     use "rebelot/kanagawa.nvim"
     use {
@@ -200,29 +184,7 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim", -- required to update phpactor
             "neovim/nvim-lspconfig", -- required to automaticly register lsp serveur
         },
-        config = function()
-            require("phpactor").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-                install = {
-                    path = vim.fn.stdpath "data" .. "/opt/",
-                    branch = "master",
-                    -- this is : ~/.local/share/nvim/opt/phpactor
-                    bin = vim.fn.stdpath "data" .. "/opt/phpactor/bin/phpactor",
-                    php_bin = "php",
-                    composer_bin = "composer",
-                    git_bin = "git",
-                    check_on_startup = "none",
-                },
-                lspconfig = {
-                    enabled = true,
-                    options = {
-                        language_server_phpstan_enabled = true,
-                    },
-                },
-            }
-        end,
+        config = require "typedin.config.phpactor",
     }
 
     -- rust
@@ -250,10 +212,7 @@ return require("packer").startup(function(use)
     use {
         "folke/lsp-trouble.nvim",
         cmd = "Trouble",
-        config = function()
-            -- Can use P to toggle auto movement
-            require("trouble").setup { auto_preview = false, auto_fold = true }
-        end,
+        config = require "typedin.config.lsp-trouble",
     }
 
     -- GIT:
