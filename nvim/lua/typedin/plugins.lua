@@ -13,11 +13,23 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
+    -- navigation
     use {
         'nvim-telescope/telescope.nvim', branch = '0.1.x',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = { 'nvim-lua/plenary.nvim',
+            "nvim-lua/plenary.nvim",
+            "nvim-lua/popup.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-fzf-writer.nvim",
+            "nvim-telescope/telescope-hop.nvim",
+            "nvim-telescope/telescope-packer.nvim",
+            "nvim-telescope/telescope-rs.nvim",
+            "nvim-telescope/telescope-smart-history.nvim",
+            "nvim-telescope/telescope-symbols.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
+            { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+        }
     }
-    -- navigation
     use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -38,23 +50,17 @@ return require('packer').startup(function(use)
     --
     -- Visuals
     use "rebelot/kanagawa.nvim"
-    --
-    -- eye candy
     use "machakann/vim-highlightedyank"
     use { "NvChad/nvim-colorizer.lua" }
-    use {
-        "mvllow/modes.nvim",
-        tag = "v0.2.0",
-    }
+    use { "mvllow/modes.nvim", tag = "v0.2.0", }
     use {
         "nvim-lualine/lualine.nvim",
         requires = { "SmiteshP/nvim-navic", "kyazdani42/nvim-web-devicons", opt = true },
     }
 
     -- php
-    use {
-        "gbprod/phpactor.nvim",
-    }
+    use "gbprod/phpactor.nvim"
+
     -- Git
     use "tpope/vim-fugitive"
 

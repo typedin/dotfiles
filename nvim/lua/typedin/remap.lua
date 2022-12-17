@@ -21,7 +21,7 @@ vim.keymap.set("n", "n", "nzzzv") -- keep cursor in the middle when cycling down
 vim.keymap.set("n", "N", "Nzzzv") -- keep cursor in the middle when cycling down search
 
 -- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]]) -- paste without yanking
+vim.keymap.set("x", "<localleader>p", [["_dP]]) -- paste without yanking
 
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]]) -- copy into system clip board
