@@ -1,5 +1,4 @@
-local config = function()
-    require("phpactor").setup {
+require("phpactor").setup {
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
@@ -20,6 +19,3 @@ local config = function()
             },
         },
     }
-end
-
-return config

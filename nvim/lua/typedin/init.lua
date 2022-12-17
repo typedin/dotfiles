@@ -1,2 +1,4 @@
-require "typedin.settings"
-require "typedin.lsp"
+require("typedin.plugins")
+require("typedin.remap")
+require("typedin.set")
+
