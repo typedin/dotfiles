@@ -1,14 +1,13 @@
 vim.g.mapleader = " " -- leader should act for anything that interacts with outside
 vim.g.maplocalleader = "," -- LocalLeader should act for anything buffer related
 
--- split 
+-- split
 -- navigation
-vim.keymap.set("n", "<C-J>", "<C-W><C-J>");
-vim.keymap.set("n", "<C-K>", "<C-W><C-K>");
-vim.keymap.set("n", "<C-L>", "<C-W><C-L>");
-vim.keymap.set("n", "<C-H>", "<C-W><C-H>");
+vim.keymap.set("n", "<C-J>", "<C-W><C-J>")
+vim.keymap.set("n", "<C-K>", "<C-W><C-K>")
+vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
+vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<LocalLeader><LocalLeader>", "<C-^>")
 
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move lines up

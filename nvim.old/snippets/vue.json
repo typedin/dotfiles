@@ -1,0 +1,20 @@
+{
+  "console.log": {
+    "prefix": ["clog"],
+    "body": ["console.log($1)"],
+    "description": "console.log"
+  },
+  "vue component": {
+    "prefix": ["vcomp"],
+    "body": [
+      "<template>",
+      "  <div />",
+      "</template>",
+      "<script>",
+      "export default {",
+      "  name: \"$TM_FILENAME_BASE\",",
+      "};",
+      "</script>"
+    ]
+  }
+}
