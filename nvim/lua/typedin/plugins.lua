@@ -113,6 +113,11 @@ return require('packer').startup(function(use)
   })
   -- autopairs
   use('windwp/nvim-autopairs')
+
+  -- increments
+  use('monaqa/dial.nvim')
+  use('nguyenvukhang/nvim-toggler')
+
   -- surround
   use('tpope/vim-surround')
 
