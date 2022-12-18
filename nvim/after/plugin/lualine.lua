@@ -1,53 +1,26 @@
-local navic = require "nvim-navic"
-navic.setup {
-    icons = {
-        File = " ",
-        Module = " ",
-        Namespace = " ",
-        Package = " ",
-        Class = " ",
-        Method = " ",
-        Property = " ",
-        Field = " ",
-        Constructor = " ",
-        Enum = " ",
-        Interface = " ",
-        Function = " ",
-        Variable = " ",
-        Constant = " ",
-        String = " ",
-        Number = " ",
-        Boolean = " ",
-        Array = " ",
-        Object = " ",
-        Key = " ",
-        Null = " ",
-        EnumMember = " ",
-        Struct = " ",
-        Event = " ",
-        Operator = " ",
-        TypeParameter = " ",
-    },
-}
+vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
+local git_blame = require('gitblame')
 
-require("lualine").setup {
+require('lualine').setup({
     options = {
         icons_enabled = true,
-        theme = "auto",
+        theme = 'auto',
     },
     sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch' },
         lualine_c = {
             {
-                "filename",
+                'filename',
                 file_status = true,
                 path = 1,
             },
         },
-        lualine_x = { { navic.get_location, cond = navic.is_available } },
-        lualine_y = { "filetype" },
-        lualine_z = { "location" },
+        lualine_x = {
+            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
+        },
+        lualine_y = { 'filetype' },
+        lualine_z = { 'location' },
     },
-    extensions = { "fugitive", "quickfix" },
-}
+    extensions = { 'fugitive', 'quickfix' },
+})

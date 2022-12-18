@@ -18,126 +18,135 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require('packer').startup(function(use)
-    use('wbthomason/packer.nvim')
-    use('lewis6991/impatient.nvim')
+return require('packer').startup({
+    function(use)
+        use('wbthomason/packer.nvim')
 
-    -- navigation
-    use({
-        'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'nvim-lua/plenary.nvim',
-            'nvim-lua/popup.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
-            'nvim-telescope/telescope-fzf-writer.nvim',
-            'nvim-telescope/telescope-hop.nvim',
-            'nvim-telescope/telescope-packer.nvim',
-            'nvim-telescope/telescope-rs.nvim',
-            'nvim-telescope/telescope-smart-history.nvim',
-            'nvim-telescope/telescope-symbols.nvim',
-            'nvim-telescope/telescope-ui-select.nvim',
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        -- navigation
+        use({
+            'nvim-telescope/telescope.nvim',
+            branch = '0.1.x',
+            requires = {
+                'nvim-lua/plenary.nvim',
+                'nvim-lua/plenary.nvim',
+                'nvim-lua/popup.nvim',
+                'nvim-telescope/telescope-file-browser.nvim',
+                'nvim-telescope/telescope-fzf-writer.nvim',
+                'nvim-telescope/telescope-hop.nvim',
+                'nvim-telescope/telescope-packer.nvim',
+                'nvim-telescope/telescope-rs.nvim',
+                'nvim-telescope/telescope-smart-history.nvim',
+                'nvim-telescope/telescope-symbols.nvim',
+                'nvim-telescope/telescope-ui-select.nvim',
+                { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+            },
+        })
+        use({
+            'nvim-neo-tree/neo-tree.nvim',
+            branch = 'v2.x',
+            requires = {
+                'nvim-lua/plenary.nvim',
+                'kyazdani42/nvim-web-devicons', -- not strictly required, but recommended
+                'MunifTanjim/nui.nvim',
+            },
+        })
+        use('tpope/vim-projectionist')
+        use({
+            'phaazon/hop.nvim',
+            branch = 'v2', --optional but strongly recommended
+        })
+        use('christoomey/vim-tmux-navigator')
+
+        -- Treesitter
+        use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
+        use('p00f/nvim-ts-rainbow')
+
+        -- visuals
+        use('rebelot/kanagawa.nvim')
+        use('andymass/vim-matchup')
+        use('machakann/vim-highlightedyank')
+        use('NvChad/nvim-colorizer.lua')
+        use({ 'mvllow/modes.nvim', tag = 'v0.2.0' })
+        use({
+            'nvim-lualine/lualine.nvim',
+            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        })
+
+        -- php
+        use('gbprod/phpactor.nvim')
+
+        -- tdd
+        use('neomake/neomake')
+        use('kana/vim-vspec')
+        use('vim-test/vim-test')
+        use('preservim/vimux')
+
+        -- Git
+        use('tpope/vim-fugitive')
+        use('lewis6991/gitsigns.nvim')
+        use('f-person/git-blame.nvim')
+
+        -- find and replace
+        use('wincent/scalpel')
+        -- LSP
+        use({
+            'VonHeikemen/lsp-zero.nvim',
+            requires = {
+                -- LSP Support
+                { 'neovim/nvim-lspconfig' },
+                { 'williamboman/mason.nvim' },
+                { 'williamboman/mason-lspconfig.nvim' },
+                -- Autocompletion
+                { 'hrsh7th/nvim-cmp', requires = 'rafamadriz/friendly-snippets' },
+                { 'hrsh7th/cmp-buffer' },
+                { 'hrsh7th/cmp-path' },
+                { 'hrsh7th/cmp-calc' },
+                { 'saadparwaiz1/cmp_luasnip' },
+                { 'hrsh7th/cmp-nvim-lsp' },
+                { 'hrsh7th/cmp-nvim-lua' },
+                -- Snippets
+                { 'L3MON4D3/LuaSnip' },
+                { 'rafamadriz/friendly-snippets' },
+            },
+        })
+
+        use('onsails/lspkind-nvim')
+
+        -- IDE
+        -- swap args
+        use('mizlan/iswap.nvim')
+        -- comments
+        use({
+            'numToStr/Comment.nvim',
+            requires = {
+                'JoosepAlviste/nvim-ts-context-commentstring',
+            },
+        })
+        -- autopairs
+        use('windwp/nvim-autopairs')
+
+        -- increments
+        use('monaqa/dial.nvim')
+        use('nguyenvukhang/nvim-toggler')
+
+        -- surround
+        use('tpope/vim-surround')
+
+        -- formatting
+        use('mhartington/formatter.nvim')
+
+        -- editorconfig
+        use('editorconfig/editorconfig-vim')
+
+        -- Automatically set up your configuration after cloning packer.nvim
+        -- Put this at the end after all plugins
+        if packer_bootstrap then
+            require('packer').sync()
+        end
+    end,
+    config = {
+        display = {
+            open_fn = require('packer.util').float,
         },
-    })
-    use({
-        'nvim-neo-tree/neo-tree.nvim',
-        branch = 'v2.x',
-        requires = {
-            'nvim-lua/plenary.nvim',
-            'kyazdani42/nvim-web-devicons', -- not strictly required, but recommended
-            'MunifTanjim/nui.nvim',
-        },
-    })
-    use('tpope/vim-projectionist')
-    use({
-        'phaazon/hop.nvim',
-        branch = 'v2', --optional but strongly recommended
-    })
-    use('christoomey/vim-tmux-navigator')
-
-    -- Treesitter
-    use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
-    use('p00f/nvim-ts-rainbow')
-
-    -- visuals
-    use('rebelot/kanagawa.nvim')
-    use('andymass/vim-matchup')
-    use('machakann/vim-highlightedyank')
-    use('NvChad/nvim-colorizer.lua')
-    use({ 'mvllow/modes.nvim', tag = 'v0.2.0' })
-    use({
-        'nvim-lualine/lualine.nvim',
-        requires = { 'SmiteshP/nvim-navic', 'kyazdani42/nvim-web-devicons', opt = true },
-    })
-
-    -- php
-    use('gbprod/phpactor.nvim')
-    --
-    -- tdd
-    use('neomake/neomake')
-    use('kana/vim-vspec')
-    use('vim-test/vim-test')
-    use('preservim/vimux')
-
-    -- Git
-    use('tpope/vim-fugitive')
-    -- find and replace
-    use('wincent/scalpel')
-    -- LSP
-    use({
-        'VonHeikemen/lsp-zero.nvim',
-        requires = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp', requires = 'rafamadriz/friendly-snippets' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'hrsh7th/cmp-calc' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-nvim-lua' },
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        },
-    })
-
-    use('onsails/lspkind-nvim')
-
-    -- IDE
-    -- swap args
-    use('mizlan/iswap.nvim')
-    -- comments
-    use({
-        'numToStr/Comment.nvim',
-        requires = {
-            'JoosepAlviste/nvim-ts-context-commentstring',
-        },
-    })
-    -- autopairs
-    use('windwp/nvim-autopairs')
-
-    -- increments
-    use('monaqa/dial.nvim')
-    use('nguyenvukhang/nvim-toggler')
-
-    -- surround
-    use('tpope/vim-surround')
-
-    -- formatting
-    use('mhartington/formatter.nvim')
-
-    -- editorconfig
-    use('editorconfig/editorconfig-vim')
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+    },
+})
