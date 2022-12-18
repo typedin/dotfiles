@@ -1,0 +1,18 @@
+{
+  "console.log": {
+    "prefix": ["clog"],
+    "body": ["console.log($1)"],
+    "description": "console.log"
+  },
+  "react fonctionnal component": {
+    "prefix": ["rfc"],
+    "body": [
+      "import React from \"react\"",
+      "\n",
+      "export default $TM_FILENAME_BASE (){",
+      "  $1",
+      "}"
+    ],
+    "description": "react fonctionnal component"
+  }
+}

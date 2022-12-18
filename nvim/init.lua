@@ -1,1 +1,1 @@
-require("typedin")
+require('typedin')
