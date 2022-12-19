@@ -1,11 +1,11 @@
 local function get_git_root()
-    local dot_git_path = vim.fn.finddir(".git", ".;")
-    return vim.fn.fnamemodify(dot_git_path, ":h")
+    local dot_git_path = vim.fn.finddir('.git', '.;')
+    return vim.fn.fnamemodify(dot_git_path, ':h')
 end
 
-local util = require "formatter.util"
+local util = require('formatter.util')
 
-require("formatter").setup {
+require('formatter').setup({
     -- Enable or disable logging
 
     logging = false,
@@ -31,39 +31,36 @@ require("formatter").setup {
         php = {
             function()
                 return {
-                    exe = "php-cs-fixer",
+                    exe = 'pint',
                     args = {
-                        "--config=" .. get_git_root() .. "/.php-cs-fixer.dist.php",
-                        "--using-cache=no",
-                        "--no-interaction",
-                        "fix",
+                        '--config',
+                        get_git_root() .. 'pint.json',
                     },
-                    stdin = false,
                 }
             end,
         },
         lua = {
             -- "formatter.filetypes.lua" defines default configurations for the
             -- "lua" filetype
-            require("formatter.filetypes.lua").stylua,
+            require('formatter.filetypes.lua').stylua,
 
             -- You can also define your own configuration
             function()
                 -- Supports conditional formatting
-                if util.get_current_buffer_file_name() == "plugins.lua" then
+                if util.get_current_buffer_file_name() == 'plugins.lua' then
                     -- formatting will break
                     return nil
                 end
                 -- Full specification of configurations is down below and in Vim help
                 -- files
                 return {
-                    exe = "stylua",
+                    exe = 'stylua',
                     args = {
-                        "--search-parent-directories",
-                        "--stdin-filepath",
+                        '--search-parent-directories',
+                        '--stdin-filepath',
                         util.escape_path(util.get_current_buffer_file_path()),
-                        "--",
-                        "-",
+                        '--',
+                        '-',
                     },
                     stdin = true,
                 }
@@ -72,12 +69,12 @@ require("formatter").setup {
         vue = {
             function()
                 return {
-                    exe = "eslint_d",
+                    exe = 'eslint_d',
                     args = {
-                        "--stdin",
-                        "--stdin-filename",
+                        '--stdin',
+                        '--stdin-filename',
                         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        "--fix-to-stdout",
+                        '--fix-to-stdout',
                     },
                     stdin = true,
                 }
@@ -86,8 +83,12 @@ require("formatter").setup {
         json = {
             function()
                 return {
-                    exe = "prettier",
-                    args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--double-quote" },
+                    exe = 'prettier',
+                    args = {
+                        '--stdin-filepath',
+                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                        '--double-quote',
+                    },
                     stdin = true,
                 }
             end,
@@ -95,12 +96,12 @@ require("formatter").setup {
         javascript = {
             function()
                 return {
-                    exe = "eslint_d",
+                    exe = 'eslint_d',
                     args = {
-                        "--stdin",
-                        "--stdin-filename",
+                        '--stdin',
+                        '--stdin-filename',
                         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        "--fix-to-stdout",
+                        '--fix-to-stdout',
                     },
                     stdin = true,
                 }
@@ -109,12 +110,12 @@ require("formatter").setup {
         typescript = {
             function()
                 return {
-                    exe = "eslint_d",
+                    exe = 'eslint_d',
                     args = {
-                        "--stdin",
-                        "--stdin-filename",
+                        '--stdin',
+                        '--stdin-filename',
                         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        "--fix-to-stdout",
+                        '--fix-to-stdout',
                     },
                     stdin = true,
                 }
@@ -124,11 +125,11 @@ require("formatter").setup {
         blade = {
             function()
                 return {
-                    exe = "blade-formatter",
+                    exe = 'blade-formatter',
                     args = {
-                        "--stdin",
-                        "--write",
-                        "--sort-attributes=vuejs",
+                        '--stdin',
+                        '--write',
+                        '--sort-attributes=vuejs',
                         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
                     },
                     stdin = true,
@@ -138,20 +139,24 @@ require("formatter").setup {
         css = {
             function()
                 return {
-                    exe = "prettier",
-                    args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--double-quote" },
+                    exe = 'prettier',
+                    args = {
+                        '--stdin-filepath',
+                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                        '--double-quote',
+                    },
                     stdin = true,
                 }
             end,
         },
     },
-}
+})
 
 local api = vim.api
 
-local formatting = api.nvim_create_augroup("Formatting", { clear = true })
+local formatting = api.nvim_create_augroup('Formatting', { clear = true })
 
-api.nvim_create_autocmd("BufWritePost ", {
-    command = "FormatWrite",
+api.nvim_create_autocmd('BufWritePost ', {
+    command = 'FormatWrite',
     group = formatting,
 })
