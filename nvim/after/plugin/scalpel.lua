@@ -1,1 +1,1 @@
-vim.cmd([[ nmap <LocalLeader>e <Plug>(Scalpel) ]])
+vim.keymap.set('n', '<LocalLeader>e', '<Plug>(Scalpel)')
