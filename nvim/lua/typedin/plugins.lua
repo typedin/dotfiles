@@ -85,6 +85,7 @@ return require('packer').startup({
         use('tpope/vim-fugitive')
         use('lewis6991/gitsigns.nvim')
         use('f-person/git-blame.nvim')
+        use({ 'akinsho/git-conflict.nvim', tag = '*' })
 
         -- find and replace
         use('wincent/scalpel')
