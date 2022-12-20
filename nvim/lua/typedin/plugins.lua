@@ -62,6 +62,7 @@ return require('packer').startup({
         use('p00f/nvim-ts-rainbow')
 
         -- visuals
+        use('lukas-reineke/indent-blankline.nvim')
         use('rebelot/kanagawa.nvim')
         use('andymass/vim-matchup')
         use('machakann/vim-highlightedyank')
@@ -108,6 +109,8 @@ return require('packer').startup({
                 -- Snippets
                 { 'L3MON4D3/LuaSnip' },
                 { 'rafamadriz/friendly-snippets' },
+                -- Useful status update for LSP
+                use('j-hui/fidget.nvim'),
             },
         })
 

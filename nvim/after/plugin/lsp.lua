@@ -72,35 +72,24 @@ lsp.set_preferences({
     },
 })
 
-lsp.on_attach(function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false }
-    --[[ if vim.bo.filetype == 'antlers' then ]]
-    --[[     if client.name == 'html' then ]]
-    --[[         vim.cmd.LspStop('html') ]]
-    --[[         return ]]
-    --[[     end ]]
-    --[[     vim.cmd.LspStart('tailwindcss') ]]
-    --[[ end ]]
-    --[[ if client.name == 'eslint' then ]]
-    --[[     vim.cmd.LspStop('eslint') ]]
-    --[[     return ]]
-    --[[ end ]]
-
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', '<LocalLeader>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<LocalLeader>R', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<LocalLeader>dl', '<cmd>Telescope diagnostics<cr>', opts) -- diagnostic list
-
-    vim.keymap.set('n', '<localleader>dn', vim.diagnostic.goto_next, opts)
-    vim.keymap.set('n', '<localleader>dp', vim.diagnostic.goto_prev, opts)
-
-    vim.keymap.set('i', '<localleader>h', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
+lsp.on_attach(function(_, bufnr)
+    local nmap = function(keys, func, desc)
+        if desc then
+            desc = 'LSP: ' .. desc
+        end
+        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    end
+    nmap('<LocalLeader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    nmap('<LocalLeader>R', vim.lsp.buf.rename, '[R]ename')
+    nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+    nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+    nmap('<localleader>dn', vim.diagnostic.goto_next, 'diagnostic [G]oto [N]ext')
+    nmap('<localleader>dp', vim.diagnostic.goto_prev, 'diagnostic [G]oto [P]revious')
+    nmap('K', vim.lsp.buf.hover, 'help do[K]ument ')
+    nmap('<LocalLeader>dl', require('telescope.builtin').diagnostics, '[D]iagnostics [L]ist') -- diagnostic list
+    nmap('<localleader>h', vim.lsp.buf.signature_help, 'Signature [H]elp')
 end)
 
 -- leave this before diagnostic config
