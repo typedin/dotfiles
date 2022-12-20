@@ -30,6 +30,12 @@ lsp.configure('sumneko_lua', {
     },
 })
 
+require('lspconfig').tailwindcss.setup({
+    filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
+})
+
+require('lspconfig').antlersls.setup({})
+
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -59,20 +65,26 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = true,
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I',
+        Error = ' ',
+        Warn = ' ',
+        Hint = ' ',
+        Info = ' ',
     },
 })
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
-
-    if client.name == 'eslint' then
-        vim.cmd.LspStop('eslint')
-        return
-    end
+    --[[ if vim.bo.filetype == 'antlers' then ]]
+    --[[     if client.name == 'html' then ]]
+    --[[         vim.cmd.LspStop('html') ]]
+    --[[         return ]]
+    --[[     end ]]
+    --[[     vim.cmd.LspStart('tailwindcss') ]]
+    --[[ end ]]
+    --[[ if client.name == 'eslint' then ]]
+    --[[     vim.cmd.LspStop('eslint') ]]
+    --[[     return ]]
+    --[[ end ]]
 
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, opts)

@@ -113,6 +113,9 @@ return require('packer').startup({
 
         use('onsails/lspkind-nvim')
 
+        -- syntaxt highlighting
+        use('matthewbdaly/vim-statamic-antlers')
+
         -- IDE
         -- swap args
         use('mizlan/iswap.nvim')
