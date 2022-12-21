@@ -62,6 +62,7 @@ return require('packer').startup({
         use('p00f/nvim-ts-rainbow')
 
         -- visuals
+        use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
         use('lukas-reineke/indent-blankline.nvim')
         use('rebelot/kanagawa.nvim')
         use('andymass/vim-matchup')
