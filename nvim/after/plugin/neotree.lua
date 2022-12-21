@@ -1,5 +1,11 @@
 -- neotree
 vim.api.nvim_set_keymap('', '<Leader>e', ':Neotree toggle left<cr>', { noremap = true, silent = true })
+
+vim.fn.sign_define('DiagnosticSignError', { text = vim.g.signs.error, texthl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = vim.g.signs.warn, texthl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = vim.g.signs.info, texthl = 'DiagnosticSignInfo' })
+vim.fn.sign_define('DiagnosticSignHint', { text = vim.g.signs.hint, texthl = 'DiagnosticSignHint' })
+
 require('neo-tree').setup({
     window = {
         position = 'left',

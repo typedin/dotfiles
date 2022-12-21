@@ -69,3 +69,11 @@ local shortmessage_options = {
 for _, value in pairs(shortmessage_options) do
     vim.opt.shortmess:append(value)
 end
+
+-- lsp diagnostics icons
+vim.g.signs = {
+    error = '',
+    warn = '',
+    info = '',
+    hint = ' ',
+}
