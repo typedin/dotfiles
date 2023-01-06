@@ -36,7 +36,7 @@ vim.opt.updatetime = 50
 vim.opt.splitbelow = false -- open horizontal splits below current window
 vim.opt.splitright = true -- open vertical splits to the right of the current window
 
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.opt.title = true
 vim.opt.wildmode = 'longest:full,full' -- complete the longest common mathc, and allow tabbing the results to fully complete them

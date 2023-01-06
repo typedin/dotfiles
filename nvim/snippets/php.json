@@ -1,13 +1,8 @@
 {
   "$": {
     "prefix": ["$"],
-    "body": ["$this->"],
+    "body": ["this->"],
     "description": "php this"
-  },
-  "dd": {
-    "prefix": ["dd"],
-    "body": ["dd($1);"],
-    "description": "die and dump"
   },
   "test": {
     "prefix": ["test", "it"],

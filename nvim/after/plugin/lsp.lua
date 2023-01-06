@@ -7,7 +7,6 @@ lsp.ensure_installed({
     'efm',
     'eslint',
     'html',
-    'intelephense',
     'jsonls',
     'marksman',
     'phpactor',
@@ -35,6 +34,12 @@ require('lspconfig').tailwindcss.setup({
 })
 
 require('lspconfig').antlersls.setup({})
+
+-- completion
+-- stylua: ignore start
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets/" } })
+-- stylua: ignore end
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -96,5 +101,7 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
+    underline = true,
+    signs = true,
 })
