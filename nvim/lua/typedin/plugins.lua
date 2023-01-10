@@ -64,7 +64,10 @@ return require('packer').startup({
         -- visuals
         use({ 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' })
         use('lukas-reineke/indent-blankline.nvim')
-        use('rebelot/kanagawa.nvim')
+        --[[ use('rebelot/kanagawa.nvim') ]]
+        use({
+            'navarasu/onedark.nvim',
+        })
         use('andymass/vim-matchup')
         use('machakann/vim-highlightedyank')
         use('NvChad/nvim-colorizer.lua')
@@ -72,6 +75,12 @@ return require('packer').startup({
         use({
             'nvim-lualine/lualine.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        })
+        use({
+            'luukvbaal/statuscol.nvim',
+            config = function()
+                require('statuscol').setup()
+            end,
         })
 
         -- php

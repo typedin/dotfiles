@@ -1,6 +1,9 @@
-function ColorMyPencils(color)
-	color = color or "kanagawa"
-	vim.cmd.colorscheme(color)
-end
-
-ColorMyPencils()
+local onedark = require('onedark')
+onedark.setup({
+    style = 'deep',
+    transparent = true,
+    lualine = {
+        transparent = true, -- lualine center bar transparency
+    },
+})
+onedark.load()
