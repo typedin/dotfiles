@@ -1,7 +1,7 @@
 export ZSH=$HOME/.oh-my-zsh
 source ~/.config/zsh/zsh-aliases
 source ~/.config/zsh/zsh-exports
-source ~/.config/zsh/zsh-path
+# source ~/.config/zsh/zsh-path
 
 ZSH_THEME="robbyrussell"
 HIST_STAMPS="dd/mm/yyyy"
@@ -15,5 +15,15 @@ plugins=(
     npm
     tmux
 )
+
+# Per user npm bin
+
+NPM_PACKAGES="${HOME}/.local/share/npm-packages"
+
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 source $ZSH/oh-my-zsh.sh

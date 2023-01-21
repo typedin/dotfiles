@@ -5,10 +5,11 @@ require('lualine').setup({
     options = {
         icons_enabled = true,
         theme = 'auto',
+        globalstatus = true,
     },
     sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
+        lualine_b = { 'branch', "diff" },
         lualine_c = {
             {
                 'filename',
@@ -20,7 +21,9 @@ require('lualine').setup({
             { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
         },
         lualine_y = { 'filetype' },
-        lualine_z = { 'location' },
+        lualine_z = {
+            { 'diagnostics', sources = { 'nvim_diagnostic' } },
+        },
     },
     extensions = { 'fugitive', 'quickfix' },
 })
