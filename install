@@ -41,6 +41,18 @@ if ! command -v git &> /dev/null
 then
     echo "git executable could not be found"
 else
+    # nvim
     mkdir -p "${HOME}/.local/share/nvim/opt"
     git clone git@github.com:phpactor/phpactor "${HOME}/.local/share/nvim/opt/phpactor"
+    # tmux
+    git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
 fi
+
+if ! command -v composer &> /dev/null
+then
+    echo "git executable could not be found"
+else
+    mkdir -p "${HOME}/.local/share/composer"
+    composer global require laravel/pint --dev
+fi
+

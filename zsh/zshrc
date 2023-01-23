@@ -17,13 +17,17 @@ plugins=(
 )
 
 # Per user npm bin
-
 NPM_PACKAGES="${HOME}/.local/share/npm-packages"
+PATH="$PATH:$NPM_PACKAGES/bin"
 
-export PATH="$PATH:$NPM_PACKAGES/bin"
-
+# Per user composer bin
+PATH="$(composer config -g home)/.local/share/composer/vendor/bin:$PATH"
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
+# Per user go 
+PATH=$PATH:/usr/local/go/bin
+
+export PATH
 source $ZSH/oh-my-zsh.sh

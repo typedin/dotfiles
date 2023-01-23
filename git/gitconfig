@@ -1,6 +1,6 @@
 [user]
-    name = Antoine Cheynet
-    email = antoine@typedin.dev
+	name = typedin
+	email = antoine@typedin.dev
 [core]
     editor = vim
     pager = bat
