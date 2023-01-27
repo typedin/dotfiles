@@ -58,7 +58,13 @@ return require('packer').startup({
         use('christoomey/vim-tmux-navigator')
 
         -- Treesitter
-        use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
+        use({ 'nvim-treesitter/nvim-treesitter', run = function()
+            require('nvim-treesitter.install').update({ with_sync = true })
+        end,
+        requires = {
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            'nvim-treesitter/nvim-treesitter-textobjects',
+        }, })
         use('p00f/nvim-ts-rainbow')
 
         -- visuals
