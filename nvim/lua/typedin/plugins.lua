@@ -130,6 +130,20 @@ return require('packer').startup({
         use('matthewbdaly/vim-statamic-antlers')
 
         -- IDE
+        -- terminal
+        use({ "voldikss/vim-floaterm", config = function ()
+            vim.g.floaterm_height = 0.3
+            vim.g.floaterm_wintype = "split" 
+            vim.keymap.set("n", "<F2>", ":FloatermToggle<CR>")
+            vim.keymap.set("t", "<F2>", "<C-\\><C-n>:FloatermToggle<CR>")
+            vim.cmd([[
+              highlight link Floaterm CursorLine
+              highlight link FloatermBorder CursorLineBg
+
+              set norelativenumber
+              set nonumber
+            ]])
+        end })
         -- swap args
         use('mizlan/iswap.nvim')
         -- comments
