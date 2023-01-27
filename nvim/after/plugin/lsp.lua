@@ -12,6 +12,7 @@ lsp.ensure_installed({
     'phpactor',
     'prismals',
     'sumneko_lua',
+    'rust_analyzer',
     'tailwindcss',
     'tsserver',
     'vimls',
