@@ -3,7 +3,7 @@ source ~/.config/zsh/zsh-aliases
 source ~/.config/zsh/zsh-exports
 # source ~/.config/zsh/zsh-path
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 HIST_STAMPS="dd/mm/yyyy"
 
 plugins=(
