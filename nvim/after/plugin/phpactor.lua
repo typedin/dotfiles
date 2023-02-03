@@ -2,14 +2,15 @@
 local install_path = vim.fn.stdpath('data') .. '/opt/phpactor/'
 
 local function check_for_executable()
-    local f = io.open(install_path, 'r')
-    if f == nil then
-        return false
-    end
-    -- check if the file is executable by checking x in its mods
-    --
-    local attributes = require('lfs').attributes(install_path .. '/bin/phpactor')
-    return string.find(attributes['permissions'], 'x')
+    --[[ local f = io.open(install_path, 'r') ]]
+    --[[ if f == nil then ]]
+    --[[     return false ]]
+    --[[ end ]]
+    --[[ -- check if the file is executable by checking x in its mods ]]
+    --[[ -- ]]
+    --[[ local attributes = require('lfs').attributes(install_path .. '/bin/phpactor') ]]
+    --[[ return string.find(attributes['permissions'], 'x') ]]
+    return true
 end
 
 if not check_for_executable() then

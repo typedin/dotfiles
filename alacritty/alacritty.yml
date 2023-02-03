@@ -26,6 +26,7 @@ font:
     family: Fira Code Nerd Font
     style: Bold Italic
 window:
+  opacity: 0.9
   dimensions:
     columns: 0
     lines: 0
