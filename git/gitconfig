@@ -2,15 +2,15 @@
 	name = typedin
 	email = antoine@typedin.dev
 [core]
-    editor = vim
+    editor = nvim
     pager = delta
     excludesfile = ~/.gitignore_global
 [color]
     ui = auto
-[difftool]
-    prompt = true
 [diff]
     tool = nvimdiff
+[difftool]
+    prompt = false
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [fetch]
@@ -27,10 +27,6 @@
     tool = nvimdiff
 [interactive]
     diffFilter = "delta --theme=OneDark"
-[difftool]
-    prompt = false
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [init]
     templatedir = ~/.git-templates
     defaultBranch = main
