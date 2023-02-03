@@ -28,7 +28,7 @@
 [interactive]
     diffFilter = "delta --theme=OneDark"
 [init]
-    templatedir = ~/.git-templates
+    templatedir = /share/git-core/templates
     defaultBranch = main
 [credential]
     helper = cache --timeout 604800
