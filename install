@@ -55,4 +55,3 @@ else
     mkdir -p "${HOME}/.local/share/composer"
     composer global require laravel/pint --dev
 fi
-

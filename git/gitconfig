@@ -3,12 +3,16 @@
 	email = antoine@typedin.dev
 [core]
     editor = vim
-    pager = bat
+    pager = delta
     excludesfile = ~/.gitignore_global
 [color]
     ui = auto
+[difftool]
+    prompt = true
 [diff]
-    tool = vimdiff
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [fetch]
     prune = true
 [help]
@@ -22,7 +26,7 @@
 [merge]
     tool = nvimdiff
 [interactive]
-    diffFilter = delta --color-only
+    diffFilter = "delta --theme=OneDark"
 [difftool]
     prompt = false
 [difftool "nvimdiff"]
