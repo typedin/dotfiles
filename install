@@ -18,9 +18,11 @@ ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
 rm -rf "$HOME"/.config/spaceship
 ln -sf "$DOTFILES"/spaceship "$HOME"/.config/spaceship
 
-
-rm -rf "$HOME"/.config/kitty
-ln -s "$DOTFILES"/kitty "$HOME"/.config/kitty
+###############################################################
+# NPM 
+###############################################################
+rm -rf "$HOME"/.npmrc
+ln -sf "$DOTFILES"/npm/npmrc "$HOME"/.npmrc
 
 rm -rf "$HOME"/.config/nvim
 ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
