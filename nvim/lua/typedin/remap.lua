@@ -21,7 +21,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
-vim.keymap.set('n', 'q:', ':q') -- disable command line when I make a typo
+--[[ vim.keymap.set('n', 'q:', ':q') -- disable command line when I make a typo ]]
 vim.keymap.set('i', ';;', '<Esc>A;') -- add a , (coma) at the end of the line
 vim.keymap.set('i', ',,', '<Esc>A,') -- add a ; (semicolumn) at the end of the line
 
