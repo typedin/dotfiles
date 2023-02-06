@@ -39,7 +39,6 @@ return {
     'p00f/nvim-ts-rainbow',
 
     -- visuals
-    { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
     'lukas-reineke/indent-blankline.nvim',
     'machakann/vim-highlightedyank',
     'NvChad/nvim-colorizer.lua',
@@ -61,10 +60,7 @@ return {
     'preservim/vimux',
 
     -- Git
-    'tpope/vim-fugitive',
-    'lewis6991/gitsigns.nvim',
     'f-person/git-blame.nvim',
-    'akinsho/git-conflict.nvim',
 
     -- find and replace
     'wincent/scalpel',
@@ -120,7 +116,6 @@ return {
     'mizlan/iswap.nvim',
 
     -- increments
-    'monaqa/dial.nvim',
     'nguyenvukhang/nvim-toggler',
 
     -- surround
