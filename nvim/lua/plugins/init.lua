@@ -26,7 +26,7 @@ return {
     'christoomey/vim-tmux-navigator',
 
     -- Treesitter
-    { 
+    {
         'nvim-treesitter/nvim-treesitter',
         build = function()
             require('nvim-treesitter.install').update({ with_sync = true })
@@ -34,8 +34,8 @@ return {
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
             'nvim-treesitter/nvim-treesitter-textobjects',
-        }
-    } ,
+        },
+    },
     'p00f/nvim-ts-rainbow',
 
     -- visuals
@@ -64,7 +64,7 @@ return {
     'tpope/vim-fugitive',
     'lewis6991/gitsigns.nvim',
     'f-person/git-blame.nvim',
-     'akinsho/git-conflict.nvim',  
+    'akinsho/git-conflict.nvim',
 
     -- find and replace
     'wincent/scalpel',
@@ -73,21 +73,21 @@ return {
         'VonHeikemen/lsp-zero.nvim',
         dependencies = {
             -- LSP Support
-            'neovim/nvim-lspconfig' ,
-            'williamboman/mason.nvim' ,
-            'williamboman/mason-lspconfig.nvim' ,
+            'neovim/nvim-lspconfig',
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
             -- Autocompletion
-            'hrsh7th/nvim-cmp', 
-            'rafamadriz/friendly-snippets' ,
-            'hrsh7th/cmp-buffer' ,
-            'hrsh7th/cmp-path' ,
-            'hrsh7th/cmp-calc' ,
-            'saadparwaiz1/cmp_luasnip' ,
-            'hrsh7th/cmp-nvim-lsp' ,
-            'hrsh7th/cmp-nvim-lua' ,
+            'hrsh7th/nvim-cmp',
+            'rafamadriz/friendly-snippets',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-calc',
+            'saadparwaiz1/cmp_luasnip',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua',
             -- Snippets
-            'L3MON4D3/LuaSnip' ,
-            'rafamadriz/friendly-snippets' ,
+            'L3MON4D3/LuaSnip',
+            'rafamadriz/friendly-snippets',
             -- Useful status update for LSP
             'j-hui/fidget.nvim',
         },
@@ -100,19 +100,22 @@ return {
 
     -- IDE
     -- terminal
-    { "voldikss/vim-floaterm", config = function ()
-        vim.g.floaterm_height = 0.3
-        vim.g.floaterm_wintype = "split"
-        vim.keymap.set("n", "<F2>", ":FloatermToggle<CR>")
-        vim.keymap.set("t", "<F2>", "<C-\\><C-n>:FloatermToggle<CR>")
-        vim.cmd([[
+    {
+        'voldikss/vim-floaterm',
+        config = function()
+            vim.g.floaterm_height = 0.3
+            vim.g.floaterm_wintype = 'split'
+            vim.keymap.set('n', '<F2>', ':FloatermToggle<CR>')
+            vim.keymap.set('t', '<F2>', '<C-\\><C-n>:FloatermToggle<CR>')
+            vim.cmd([[
         highlight link Floaterm CursorLine
         highlight link FloatermBorder CursorLineBg
 
         set norelativenumber
         set nonumber
         ]])
-    end },
+        end,
+    },
     -- swap args
     'mizlan/iswap.nvim',
 

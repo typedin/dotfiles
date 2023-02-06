@@ -1,6 +1,6 @@
 return {
     'navarasu/onedark.nvim',
-    config= function ()
+    config = function()
         require('onedark').setup({
             style = 'deep',
             transparent = true,
@@ -8,5 +8,5 @@ return {
                 transparent = true, -- lualine center bar transparency
             },
         })
-    end
+    end,
 }

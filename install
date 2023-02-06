@@ -61,3 +61,10 @@ else
     mkdir -p "${HOME}/.local/share/composer"
     composer global require laravel/pint --dev
 fi
+
+if ! command -v cargo &> /dev/null
+then
+    echo "cargo executable could not be found"
+else
+    cargo install stylua
+fi

@@ -1,12 +1,12 @@
 return {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 
-        'kyazdani42/nvim-web-devicons', 
+    dependencies = {
+        'kyazdani42/nvim-web-devicons',
         'f-person/git-blame.nvim',
     },
-    config = function ()
-            local git_blame = require('gitblame')
-            vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
+    config = function()
+        local git_blame = require('gitblame')
+        vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
         require('lualine').setup({
             options = {
                 icons_enabled = true,
@@ -15,7 +15,7 @@ return {
             },
             sections = {
                 lualine_a = { 'mode' },
-                lualine_b = { 'branch', "diff" },
+                lualine_b = { 'branch', 'diff' },
                 lualine_c = {
                     {
                         'filename',
@@ -33,6 +33,5 @@ return {
             },
             extensions = { 'fugitive', 'quickfix' },
         })
-    end
+    end,
 }
-
