@@ -20,24 +20,11 @@ return {
     },
     'christoomey/vim-tmux-navigator',
 
-    -- Treesitter
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = function()
-            require('nvim-treesitter.install').update({ with_sync = true })
-        end,
-        dependencies = {
-            'JoosepAlviste/nvim-ts-context-commentstring',
-            'nvim-treesitter/nvim-treesitter-textobjects',
-        },
-    },
     'p00f/nvim-ts-rainbow',
 
     -- visuals
-    'lukas-reineke/indent-blankline.nvim',
     'machakann/vim-highlightedyank',
     'NvChad/nvim-colorizer.lua',
-    { 'mvllow/modes.nvim', tag = 'v0.2.0' },
 
     -- php
     'gbprod/phpactor.nvim',
@@ -81,24 +68,6 @@ return {
     -- syntaxt highlighting
     'matthewbdaly/vim-statamic-antlers',
 
-    -- IDE
-    -- terminal
-    {
-        'voldikss/vim-floaterm',
-        config = function()
-            vim.g.floaterm_height = 0.3
-            vim.g.floaterm_wintype = 'split'
-            vim.keymap.set('n', '<F2>', ':FloatermToggle<CR>')
-            vim.keymap.set('t', '<F2>', '<C-\\><C-n>:FloatermToggle<CR>')
-            vim.cmd([[
-        highlight link Floaterm CursorLine
-        highlight link FloatermBorder CursorLineBg
-
-        set norelativenumber
-        set nonumber
-        ]])
-        end,
-    },
     -- swap args
     'mizlan/iswap.nvim',
 
