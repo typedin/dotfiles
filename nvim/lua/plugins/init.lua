@@ -18,11 +18,6 @@ return {
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         },
     },
-    'tpope/vim-projectionist',
-    {
-        'phaazon/hop.nvim',
-        branch = 'v2', --optional but strongly recommended
-    },
     'christoomey/vim-tmux-navigator',
 
     -- Treesitter
@@ -43,12 +38,6 @@ return {
     'machakann/vim-highlightedyank',
     'NvChad/nvim-colorizer.lua',
     { 'mvllow/modes.nvim', tag = 'v0.2.0' },
-    {
-        'luukvbaal/statuscol.nvim',
-        config = function()
-            require('statuscol').setup()
-        end,
-    },
 
     -- php
     'gbprod/phpactor.nvim',
@@ -62,8 +51,6 @@ return {
     -- Git
     'f-person/git-blame.nvim',
 
-    -- find and replace
-    'wincent/scalpel',
     -- LSP
     {
         'VonHeikemen/lsp-zero.nvim',
