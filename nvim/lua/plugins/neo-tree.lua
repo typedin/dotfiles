@@ -19,7 +19,7 @@ return {
             desc = 'Neotree',
         },
     },
-    config = {
+    opts = {
         window = {
             position = 'left',
             filesystem = {
