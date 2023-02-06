@@ -41,8 +41,6 @@ return {
     -- visuals
     { 'kevinhwang91/nvim-ufo', dependencies = 'kevinhwang91/promise-async' },
     'lukas-reineke/indent-blankline.nvim',
-    'navarasu/onedark.nvim',
-    'andymass/vim-matchup',
     'machakann/vim-highlightedyank',
     'NvChad/nvim-colorizer.lua',
     { 'mvllow/modes.nvim', tag = 'v0.2.0' },
