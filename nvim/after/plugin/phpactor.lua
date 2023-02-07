@@ -20,10 +20,12 @@ if not check_for_executable() then
     print('(see: https://phpactor.readthedocs.io/en/master/usage/standalone.html)')
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require('phpactor').setup({
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
+    capabilities = capabilities,
     install = {
         path = install_path,
         branch = 'master',

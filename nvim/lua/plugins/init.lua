@@ -60,6 +60,8 @@ return {
             'rafamadriz/friendly-snippets',
             -- Useful status update for LSP
             'j-hui/fidget.nvim',
+            -- json schema
+            'b0o/SchemaStore.nvim',
         },
     },
 

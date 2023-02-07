@@ -40,6 +40,7 @@ vim.opt.spell = false
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.opt.title = true
 vim.opt.wildmode = 'longest:full,full' -- complete the longest common mathc, and allow tabbing the results to fully complete them
+vim.opt.completeopt = 'menuone,longest,preview'
 vim.opt.cmdheight = 0
 
 -- Search

@@ -1,3 +1,4 @@
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
@@ -21,6 +22,7 @@ lsp.ensure_installed({
 
 -- Fix Undefined global 'vim'
 lsp.configure('sumneko_lua', {
+    capabilities = capabilities,
     settings = {
         Lua = {
             diagnostics = {
@@ -30,11 +32,28 @@ lsp.configure('sumneko_lua', {
     },
 })
 
+--[[ require('volar').tailwindcss.setup({ ]]
+--[[     capabilities = capabilities, ]]
+--[[     filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, ]]
+--[[ }) ]]
+
 require('lspconfig').tailwindcss.setup({
+    capabilities = capabilities,
     filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
 })
 
-require('lspconfig').antlersls.setup({})
+require('lspconfig').jsonls.setup({
+    capabilities = capabilities,
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+        },
+    },
+})
+
+require('lspconfig').antlersls.setup({
+    capabilities = capabilities,
+})
 
 -- completion
 -- stylua: ignore start
@@ -56,8 +75,9 @@ cmp.setup({
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
+    experitemental = { ghost_test = true },
     sources = cmp.config.sources({
-        { name = 'nvim_lsp', priority = 3000, keyword_length = 2 },
+        { name = 'nvim_lsp', priority = 2999, keyword_length = 1 },
         { name = 'luasnip', priority = 2000, keyword_length = 2 },
         { name = 'buffer', priority = 1000, keyword_length = 2 },
         { name = 'path', priority = 900, keyword_length = 2 },
@@ -97,7 +117,6 @@ lsp.on_attach(function(_, bufnr)
     nmap('<LocalLeader>dl', require('telescope.builtin').diagnostics, '[D]iagnostics [L]ist') -- diagnostic list
     nmap('<localleader>h', vim.lsp.buf.signature_help, 'Signature [H]elp')
 end)
-
 -- leave this before diagnostic config
 lsp.setup()
 
