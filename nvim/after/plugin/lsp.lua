@@ -12,7 +12,8 @@ lsp.ensure_installed({
     'html',
     'jsonls',
     'marksman',
-    --[[ 'phpactor', ]]
+    'intelephense',
+    'phpactor',
     'prismals',
     'sumneko_lua',
     'rust_analyzer',
@@ -33,11 +34,15 @@ lsp.configure('sumneko_lua', {
         },
     },
 })
---[[ require('volar').tailwindcss.setup({ ]]
---[[     capabilities = capabilities, ]]
---[[     filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, ]]
---[[ }) ]]
+require('lspconfig').volar.setup({
+    capabilities = capabilities,
+    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+})
 
+require('lspconfig').intelephense.setup({
+    capabilities = capabilities,
+    filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
+})
 require('lspconfig').tailwindcss.setup({
     capabilities = capabilities,
     filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
