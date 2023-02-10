@@ -2,3 +2,7 @@ code_transform.class_new.variants:
   laravel-test: laravel-test
   orchestral-test: orchestral-test
   unit-test: unit-test
+language_server_php_cs_fixer.enabled: true
+language_server_phpstan.enabled: true
+phpunit.enabled: true
+
