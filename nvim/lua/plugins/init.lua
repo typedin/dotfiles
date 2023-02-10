@@ -26,9 +26,6 @@ return {
     'machakann/vim-highlightedyank',
     'NvChad/nvim-colorizer.lua',
 
-    -- php
-    'gbprod/phpactor.nvim',
-
     -- tdd
     'neomake/neomake',
     'kana/vim-vspec',

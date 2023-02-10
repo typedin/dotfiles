@@ -1,0 +1,4 @@
+code_transform.class_new.variants:
+  laravel-test: laravel-test
+  orchestral-test: orchestral-test
+  unit-test: unit-test

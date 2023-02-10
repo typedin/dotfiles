@@ -24,14 +24,29 @@ ln -sf "$DOTFILES"/spaceship "$HOME"/.config/spaceship
 rm -rf "$HOME"/.npmrc
 ln -sf "$DOTFILES"/npm/npmrc "$HOME"/.npmrc
 
+###############################################################
+# nvim 
+###############################################################
 rm -rf "$HOME"/.config/nvim
 ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
 
+###############################################################
+# alacritty 
+###############################################################
 rm -rf "$HOME"/.config/alacritty
 ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty
 
+###############################################################
+# git 
+###############################################################
 ln -sf "$DOTFILES"/git/gitconfig "$HOME"/.gitconfig
 ln -sf "$DOTFILES"/git/gitignore_global "$HOME"/.gitignore_global
+
+###############################################################
+# phpactor 
+###############################################################
+rm -rf $HOME/.config/phpactor
+ln -s $DOTFILES/phpactor $HOME/.config/phpactor
 
 if ! command -v npm &> /dev/null
 then

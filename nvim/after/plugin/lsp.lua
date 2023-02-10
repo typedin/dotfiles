@@ -3,6 +3,8 @@ local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
 
+-- antlers is not in the Mason directory
+-- so I do it manually
 lsp.ensure_installed({
     'bashls',
     'efm',
@@ -10,7 +12,7 @@ lsp.ensure_installed({
     'html',
     'jsonls',
     'marksman',
-    'phpactor',
+    --[[ 'phpactor', ]]
     'prismals',
     'sumneko_lua',
     'rust_analyzer',
@@ -31,7 +33,6 @@ lsp.configure('sumneko_lua', {
         },
     },
 })
-
 --[[ require('volar').tailwindcss.setup({ ]]
 --[[     capabilities = capabilities, ]]
 --[[     filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, ]]
@@ -51,9 +52,7 @@ require('lspconfig').jsonls.setup({
     },
 })
 
-require('lspconfig').antlersls.setup({
-    capabilities = capabilities,
-})
+require('lspconfig').antlersls.setup({})
 
 -- completion
 -- stylua: ignore start
