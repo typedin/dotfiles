@@ -55,7 +55,7 @@ else
     mkdir -p "${HOME}/.local/share/npm-packages"
     npm config set prefix "${HOME}/.local/share/npm-packages"
 
-    npm i -g tree-sitter-cli
+    npm i -g tree-sitter-cli intelephense
 fi
 
 if ! command -v git &> /dev/null

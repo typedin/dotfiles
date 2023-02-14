@@ -10,13 +10,14 @@ lsp.ensure_installed({
     'efm',
     'eslint',
     'html',
+    'intelephense',
     'jsonls',
     'marksman',
     'intelephense',
     'phpactor',
     'prismals',
-    'sumneko_lua',
     'rust_analyzer',
+    'lua_ls',
     'tailwindcss',
     'tsserver',
     'vimls',
@@ -24,7 +25,7 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -39,10 +40,11 @@ require('lspconfig').volar.setup({
     filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
 
-require('lspconfig').intelephense.setup({
+require('lspconfig').volar.setup({
     capabilities = capabilities,
-    filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
+    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
+
 require('lspconfig').tailwindcss.setup({
     capabilities = capabilities,
     filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
@@ -58,6 +60,14 @@ require('lspconfig').jsonls.setup({
 })
 
 require('lspconfig').antlersls.setup({})
+
+require('lspconfig').intelephense.setup({
+    capabilities = capabilities,
+})
+
+require('lspconfig').phpactor.setup({
+    capabilities = capabilities,
+})
 
 -- completion
 -- stylua: ignore start
