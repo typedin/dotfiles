@@ -8,12 +8,13 @@ lsp.ensure_installed({
     'efm',
     'eslint',
     'html',
+    'intelephense',
     'jsonls',
     'marksman',
     'phpactor',
     'prismals',
-    'sumneko_lua',
     'rust_analyzer',
+    'lua_ls',
     'tailwindcss',
     'tsserver',
     'vimls',
@@ -21,7 +22,7 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -32,10 +33,10 @@ lsp.configure('sumneko_lua', {
     },
 })
 
---[[ require('volar').tailwindcss.setup({ ]]
---[[     capabilities = capabilities, ]]
---[[     filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, ]]
---[[ }) ]]
+require('lspconfig').volar.setup({
+    capabilities = capabilities,
+    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+})
 
 require('lspconfig').tailwindcss.setup({
     capabilities = capabilities,
@@ -52,6 +53,14 @@ require('lspconfig').jsonls.setup({
 })
 
 require('lspconfig').antlersls.setup({
+    capabilities = capabilities,
+})
+
+require('lspconfig').intelephense.setup({
+    capabilities = capabilities,
+})
+
+require('lspconfig').phpactor.setup({
     capabilities = capabilities,
 })
 
