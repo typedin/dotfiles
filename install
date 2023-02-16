@@ -19,13 +19,13 @@ rm -rf "$HOME"/.config/spaceship
 ln -sf "$DOTFILES"/spaceship "$HOME"/.config/spaceship
 
 ###############################################################
-# NPM 
+# NPM
 ###############################################################
 rm -rf "$HOME"/.npmrc
 ln -sf "$DOTFILES"/npm/npmrc "$HOME"/.npmrc
 
 ###############################################################
-# nvim 
+# nvim
 ###############################################################
 rm -rf "$HOME"/.config/nvim
 ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim

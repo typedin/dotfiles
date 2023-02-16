@@ -13,6 +13,17 @@ require('formatter').setup({
     log_level = vim.log.levels.WARN,
     -- All formatter configurations are opt-in
     filetype = {
+        sh = {
+            function()
+                return {
+                    exe = 'shellcheck',
+                    args = {
+                        '--severity', 'warning'
+                    },
+                }
+            end,
+
+        },
         --[[ antlers = { ]]
         --[[     function() ]]
         --[[         return { ]]
