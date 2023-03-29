@@ -58,7 +58,9 @@ require('lspconfig').jsonls.setup({
     },
 })
 
-require('lspconfig').antlersls.setup({})
+require('lspconfig').antlersls.setup({
+    capabilities = capabilities,
+})
 
 require('lspconfig').intelephense.setup({
     capabilities = capabilities,

@@ -13,6 +13,14 @@ require('formatter').setup({
     log_level = vim.log.levels.WARN,
     -- All formatter configurations are opt-in
     filetype = {
+        rust = {
+            function()
+                return {
+                    exe = 'rustfmt',
+                    stdin = true,
+                }
+            end,
+        },
         sh = {
             function()
                 return {

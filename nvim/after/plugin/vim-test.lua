@@ -1,19 +1,19 @@
-vim.cmd [[
+vim.cmd([[
     let test#javascript#reactscripts#executable = "npm test"
     let test#typescript#runner = 'vitest'
-]]
+]])
 
 -- set is for option
 -- let is for variables
 -- g is for global
 -- vim-ultest
-vim.api.nvim_set_var("ultest_use_pty", 1)
+vim.api.nvim_set_var('ultest_use_pty', 1)
 
 -- vim-test
-vim.api.nvim_set_var("testing_status", "")
-vim.api.nvim_set_var("test#strategy", "vimux")
+vim.api.nvim_set_var('testing_status', '')
+vim.api.nvim_set_var('test#strategy', 'neovim')
 
-vim.cmd [[
+vim.cmd([[
     " set current path when vim loads up
     let g:test#project_root = finddir('.git/..', expand('%:p:h').';')
 
@@ -75,4 +75,4 @@ vim.cmd [[
     function! PrintStatus()
     :echo g:testing_status
     endfunction
-]]
+]])
