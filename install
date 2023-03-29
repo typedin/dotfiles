@@ -35,6 +35,12 @@ ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
 ###############################################################
 rm -rf "$HOME"/.config/alacritty
 ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty
+#
+###############################################################
+# zellij 
+###############################################################
+rm -rf "$HOME"/.config/zellij
+ln -s "$DOTFILES"/zellij "$HOME"/.config/zellij
 
 ###############################################################
 # git 

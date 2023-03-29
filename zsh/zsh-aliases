@@ -79,7 +79,9 @@ alias nvi="nvim"
 alias c="nvim"
 alias vi="nvim"
 alias vim="nvim"
+
 alias files="nautilus"
+#
 # LARAVEL
 alias pamt="php artisan make:test"
 alias pas="php artisan serve"
