@@ -125,7 +125,43 @@ require('formatter').setup({
                     stdin = true,
                 }
             end,
+            function()
+                return {
+                    exe = 'prettier',
+                    args = {
+                        '--stdin-filepath',
+                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                        '--double-quote',
+                    },
+                    stdin = true,
+                }
+            end,
         },
+        typescriptreact = {
+            function()
+                return {
+                    exe = 'eslint_d',
+                    args = {
+                        '--stdin',
+                        '--stdin-filename',
+                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                        '--fix-to-stdout',
+                    },
+                    stdin = true,
+                }
+            end,
+            function()
+                return {
+                    exe = 'prettier',
+                    args = {
+                        '--stdin-filepath',
+                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                        '--double-quote',
+                    },
+                    stdin = true,
+                }
+            end,
+         },
         typescript = {
             function()
                 return {
@@ -135,6 +171,17 @@ require('formatter').setup({
                         '--stdin-filename',
                         vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
                         '--fix-to-stdout',
+                    },
+                    stdin = true,
+                }
+            end,
+            function()
+                return {
+                    exe = 'prettier',
+                    args = {
+                        '--stdin-filepath',
+                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                        '--double-quote',
                     },
                     stdin = true,
                 }
