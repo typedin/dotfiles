@@ -18,11 +18,15 @@ end
 
 config.color_scheme = 'nord'
 config.font = wezterm.font('JetBrains Mono')
---[[ config.text_background_opacity = 0.3 ]]
+config.show_update_window = true
+config.check_for_updates_interval_seconds = 86400 -- a day
+
 config.font_size = 10
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.95
 config.window_decorations = 'RESIZE'
-config.line_height = 1.4
+config.audible_bell = 'Disabled'
+config.line_height = 1.6
+
 config.window_frame = {
     -- The font used in the tab bar.
     -- Roboto Bold is the default; this font is bundled
