@@ -1,13 +1,6 @@
 vim.g.mapleader = ' ' -- leader should act for anything that interacts with outside
 vim.g.maplocalleader = ',' -- LocalLeader should act for anything buffer related
 
--- split
--- navigation
-vim.keymap.set('n', '<C-J>', '<C-W><C-J>')
-vim.keymap.set('n', '<C-K>', '<C-W><C-K>')
-vim.keymap.set('n', '<C-L>', '<C-W><C-L>')
-vim.keymap.set('n', '<C-H>', '<C-W><C-H>')
-
 vim.keymap.set('n', '<LocalLeader><LocalLeader>', '<C-^>')
 
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv") -- move lines up
@@ -51,3 +44,4 @@ vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
 vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- replace the word I was on
+
