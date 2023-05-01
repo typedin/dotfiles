@@ -31,32 +31,32 @@ rm -rf "$HOME"/.config/nvim
 ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
 
 ###############################################################
-# alacritty 
+# alacritty
 ###############################################################
 rm -rf "$HOME"/.config/alacritty
 ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty
 
 ###############################################################
-# WezTerm 
+# WezTerm
 ###############################################################
 rm -rf "$HOME"/.wezterm.lua
 ln -s "$DOTFILES"/WezTerm/ "$HOME"/.config/wezterm
 # ln -s "$DOTFILES"/WezTerm/config.lua "$HOME"/.wezterm.lua
 
 ###############################################################
-# zellij 
+# zellij
 ###############################################################
 rm -rf "$HOME"/.config/zellij
 ln -s "$DOTFILES"/zellij "$HOME"/.config/zellij
 
 ###############################################################
-# git 
+# git
 ###############################################################
 ln -sf "$DOTFILES"/git/gitconfig "$HOME"/.gitconfig
 ln -sf "$DOTFILES"/git/gitignore_global "$HOME"/.gitignore_global
 
 ###############################################################
-# phpactor 
+# phpactor
 ###############################################################
 rm -rf $HOME/.config/phpactor
 ln -s $DOTFILES/phpactor $HOME/.config/phpactor
