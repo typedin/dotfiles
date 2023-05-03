@@ -43,5 +43,6 @@ return {
         { key = 'l', mods = 'CTRL', action = act.EmitEvent('ActivatePaneDirection-right') },
         { key = '5', mods = 'CTRL', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
         { key = "'", mods = 'CTRL', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+        { key = 'p', mods = 'CTRL', action = wezterm.action.ActivateCommandPalette },
     },
 }
