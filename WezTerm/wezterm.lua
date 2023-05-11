@@ -37,14 +37,20 @@ config.audible_bell = 'Disabled'
 config.enable_tab_bar = false
 config.default_cursor_style = 'BlinkingBlock'
 config.cursor_blink_rate = 800
-config.cursor_blink_ease_in = 'EaseInOut'
-config.cursor_blink_ease_out = 'EaseInOut'
+config.cursor_blink_ease_in = 'EaseOut'
+config.cursor_blink_ease_out = 'EaseIn'
+
 config.visual_bell = {
-    fade_in_function = 'EaseIn',
-    fade_in_duration_ms = 150,
+    fade_in_function = 'EaseOut',
+    fade_in_duration_ms = 50,
     fade_out_function = 'EaseOut',
     fade_out_duration_ms = 150,
+    target = 'CursorColor',
 }
+config.colors = {
+    visual_bell = '#ff0000',
+}
+
 config.hide_mouse_cursor_when_typing = true
 
 config.window_padding = {
