@@ -29,11 +29,12 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
+# lua
+LUAROCKS="${HOME}/.luarocks"
+export PATH="$PATH:$LUAROCKS/bin"
 
 # Per user npm bin
-
 NPM_PACKAGES="${HOME}/.local/share/npm-packages"
-
 export PATH="$PATH:$NPM_PACKAGES/bin"
 
 # Preserve MANPATH if you already defined it somewhere in your config.
