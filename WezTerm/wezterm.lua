@@ -20,14 +20,15 @@ config.front_end = 'OpenGL'
 config.show_update_window = true
 config.check_for_updates_interval_seconds = 86400 -- a day
 
-config.color_scheme = 'nordfox'
+config.color_scheme = 'OneDark (base16)'
+
 config.font = wezterm.font('JetBrains Mono')
 
-config.foreground_text_hsb = {
-    hue = 1.0,
-    saturation = 1.5,
-    brightness = 1.5,
-}
+--[[ config.foreground_text_hsb = { ]]
+--[[     hue = 1.0, ]]
+--[[     saturation = 1.5, ]]
+--[[     brightness = 1.5, ]]
+--[[ } ]]
 
 config.font_size = 10.0
 config.line_height = 1.9
@@ -54,8 +55,8 @@ config.colors = {
 config.hide_mouse_cursor_when_typing = true
 
 config.window_padding = {
-    left = 0,
-    right = 0,
+    left = 2,
+    right = 2,
     top = 0,
     bottom = 0,
 }
