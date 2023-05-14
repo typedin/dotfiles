@@ -1,7 +1,7 @@
-vim.fn.sign_define('DiagnosticSignError', { text = vim.g.signs.error, texthl = 'DiagnosticSignError' })
-vim.fn.sign_define('DiagnosticSignWarn', { text = vim.g.signs.warn, texthl = 'DiagnosticSignWarn' })
-vim.fn.sign_define('DiagnosticSignInfo', { text = vim.g.signs.info, texthl = 'DiagnosticSignInfo' })
-vim.fn.sign_define('DiagnosticSignHint', { text = vim.g.signs.hint, texthl = 'DiagnosticSignHint' })
+vim.fn.sign_define('DiagnosticSignError', { text = require('typedin.signs').error, texthl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = require('typedin.signs').warn, texthl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = require('typedin.signs').info, texthl = 'DiagnosticSignInfo' })
+vim.fn.sign_define('DiagnosticSignHint', { text = require('typedin.signs').hint, texthl = 'DiagnosticSignHint' })
 
 return {
     'nvim-neo-tree/neo-tree.nvim',
