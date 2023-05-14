@@ -13,10 +13,11 @@ plugins=(
     git
     laravel
     npm
-    tmux
 )
 
+export COLORTERM=truecolor
 export LC_ALL=en_US.UTF-8
+#
 # Per user npm bin
 NPM_PACKAGES="${HOME}/.local/share/npm-packages"
 PATH="$PATH:$NPM_PACKAGES/bin"
