@@ -10,8 +10,8 @@ return {
         require('lualine').setup({
             options = {
                 icons_enabled = true,
-                theme = 'auto',
                 globalstatus = true,
+                theme = 'onedark',
             },
             sections = {
                 lualine_a = { 'mode' },
@@ -28,7 +28,27 @@ return {
                 },
                 lualine_y = { 'filetype' },
                 lualine_z = {
-                    { 'diagnostics', sources = { 'nvim_diagnostic' } },
+                    {
+                        'diagnostics',
+                        sources = { 'nvim_diagnostic' },
+                        sections = { 'error', 'warn', 'info', 'hint' },
+                        diagnostics_color = {
+                            -- Same values as the general color option can be used here.
+                            error = 'DiagnosticError', -- Changes diagnostics' error color.
+                            warn = 'DiagnosticWarn', -- Changes diagnostics' warn color.
+                            info = 'DiagnosticInfo', -- Changes diagnostics' info color.
+                            hint = 'DiagnosticHint', -- Changes diagnostics' hint color.
+                        },
+                        symbols = {
+                            error = require('typedin.signs').error,
+                            hint = require('typedin.signs').hint,
+                            info = require('typedin.signs').info,
+                            warn = require('typedin.signs').warn,
+                        },
+                        colored = true, -- Displays diagnostics status in color if set to true.
+                        update_in_insert = false, -- Update diagnostics in insert mode.
+                        always_visible = false, -- Show diagnostics even if there are none.
+                    },
                 },
             },
             extensions = { 'fugitive', 'quickfix' },

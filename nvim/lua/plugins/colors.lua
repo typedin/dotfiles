@@ -1,11 +1,8 @@
 return {
-    'gbprod/nord.nvim',
+    'navarasu/onedark.nvim',
     config = function()
-        require('nord').setup({
-            transparent = true,
-            terminal_colors = true,
-            borders = true,
+        require('onedark').setup({
+            style = 'deep',
         })
-        vim.cmd([[ colorscheme nord ]])
     end,
 }

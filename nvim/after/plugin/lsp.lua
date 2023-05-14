@@ -60,6 +60,7 @@ require('lspconfig').jsonls.setup({
 
 require('lspconfig').antlersls.setup({
     capabilities = capabilities,
+    filetype = { 'antlers' },
 })
 
 require('lspconfig').intelephense.setup({
@@ -106,10 +107,10 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
     suggest_lsp_servers = true,
     sign_icons = {
-        Error = ' ',
-        Warn = ' ',
-        Hint = ' ',
-        Info = ' ',
+        Error = require('typedin.signs').error,
+        Hint = require('typedin.signs').hint,
+        Info = require('typedin.signs').info,
+        Warn = require('typedin.signs').warn,
     },
 })
 
