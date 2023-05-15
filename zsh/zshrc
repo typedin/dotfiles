@@ -31,6 +31,10 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 # Per user go 
 PATH=$PATH:/usr/local/go/bin
 
+# Per user lua 
+LUA_PACKAGES="${HOME}/.luarocks/"
+PATH="$PATH:$LUA_PACKAGES/bin"
+
 export PATH
 source $ZSH/oh-my-zsh.sh
 
