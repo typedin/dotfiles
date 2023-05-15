@@ -1,117 +1,12 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lsp = require('lsp-zero')
+local lsp = require('lsp-zero').preset({})
 
-lsp.preset('recommended')
-
--- antlers is not in the Mason directory
--- so I do it manually
-lsp.ensure_installed({
-    'bashls',
-    'efm',
-    'eslint',
-    'html',
-    'intelephense',
-    'jsonls',
-    'lua_ls',
-    'marksman',
-    'phpactor',
-    'prismals',
-    'rust_analyzer',
-    'tailwindcss',
-    'tsserver',
-    'vimls',
-    'volar',
-})
-
--- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
-    capabilities = capabilities,
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' },
-            },
-        },
-    },
-})
-require('lspconfig').volar.setup({
-    capabilities = capabilities,
-    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-})
-
-require('lspconfig').volar.setup({
-    capabilities = capabilities,
-    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-})
-
-require('lspconfig').tailwindcss.setup({
-    capabilities = capabilities,
-    filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
-})
-
-require('lspconfig').jsonls.setup({
-    capabilities = capabilities,
-    settings = {
-        json = {
-            schemas = require('schemastore').json.schemas(),
-        },
-    },
-})
-
-require('lspconfig').antlersls.setup({
-    capabilities = capabilities,
-    filetype = { 'antlers' },
-})
-
-require('lspconfig').intelephense.setup({
-    capabilities = capabilities,
-})
-
-require('lspconfig').phpactor.setup({
-    capabilities = capabilities,
-})
-
--- completion
--- stylua: ignore start
-require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets/" } })
--- stylua: ignore end
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-})
-
-cmp.setup({
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    experitemental = { ghost_test = true },
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp', priority = 2999, keyword_length = 1 },
-        { name = 'luasnip', priority = 2000, keyword_length = 2 },
-        { name = 'buffer', priority = 1000, keyword_length = 2 },
-        { name = 'path', priority = 900, keyword_length = 2 },
-        { name = 'calc', priority = 800 },
-    }),
-})
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings,
-})
-
-lsp.set_preferences({
-    suggest_lsp_servers = true,
-    sign_icons = {
-        Error = require('typedin.signs').error,
-        Hint = require('typedin.signs').hint,
-        Info = require('typedin.signs').info,
-        Warn = require('typedin.signs').warn,
-    },
+-- (Optional) Configure lua language server for neovim
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lsp.set_sign_icons({
+    error = require('typedin.signs').error,
+    hint = require('typedin.signs').hint,
+    info = require('typedin.signs').info,
+    warn = require('typedin.signs').warn,
 })
 
 lsp.on_attach(function(_, bufnr)
@@ -133,8 +28,38 @@ lsp.on_attach(function(_, bufnr)
     nmap('<LocalLeader>dl', require('telescope.builtin').diagnostics, '[D]iagnostics [L]ist') -- diagnostic list
     nmap('<localleader>h', vim.lsp.buf.signature_help, 'Signature [H]elp')
 end)
--- leave this before diagnostic config
 lsp.setup()
+
+-- You need to setup `cmp` after lsp-zero
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+cmp.setup({
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp', priority = 2999, keyword_length = 1 },
+        { name = 'luasnip', priority = 2000, keyword_length = 2 },
+        { name = 'buffer', priority = 1000, keyword_length = 2 },
+        { name = 'path', priority = 900, keyword_length = 2 },
+        { name = 'calc', priority = 800 },
+    }),
+    mapping = {
+        -- `Enter` key to confirm completion
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        -- Ctrl+Space to trigger completion menu
+        ['<C-Space>'] = cmp.mapping.complete(),
+        -- Navigate between snippet placeholder
+        ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+        ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
+    },
+})
 
 vim.diagnostic.config({
     virtual_text = false,

@@ -16,6 +16,7 @@ vim.api.nvim_set_var('test#strategy', 'neovim')
 vim.cmd([[
     " set current path when vim loads up
     let g:test#project_root = finddir('.git/..', expand('%:p:h').';')
+    let test#lua#runner = 'busted'
 
     " initially empty status
     " let g:testing_status = ''
@@ -29,11 +30,11 @@ vim.cmd([[
 
     function! ToggleStrategy()
     if g:test#strategy == "vimux"
-    let g:test#strategy = "neomake"
+        let g:test#strategy = "neomake"
     else
-    let g:test#strategy = "vimux"
+        let g:test#strategy = "vimux"
     endif
-    :echo "changed test strategy to: " . g:test#strategy
+        :echo "changed test strategy to: " . g:test#strategy
     endfunction
 
     " use neomake for async running of tests
@@ -41,38 +42,38 @@ vim.cmd([[
     let g:neomake_open_list = 1
 
     augroup neomake_hook
-    au!
-    autocmd User NeomakeJobFinished call TestFinished()
-    autocmd User NeomakeJobStarted call TestStarted()
+        au!
+        autocmd User NeomakeJobFinished call TestFinished()
+        autocmd User NeomakeJobStarted call TestStarted()
     augroup END
 
     " Start test
     function! TestStarted() abort
-    let g:testing_status = 'Test ⌛'
-    :call PrintStatus()
+        let g:testing_status = 'Test ⌛'
+        :call PrintStatus()
     endfunction
 
     " Show message when all tests are passing
     function! TestFinished() abort
-    let context = g:neomake_hook_context
-    if context.jobinfo.exit_code == 0
-    let g:testing_status = 'Test ✅'
-    " test commit
-    execute '!(cd ' . g:test#project_root .'; git add . ; git commit -n -m "wip (tcr) ")'
-    endif
-    if context.jobinfo.exit_code == 1
-    let g:testing_status = 'Test ❌'
-    " test revert
-    :!git reset --hard
-    endif
-    :call PrintStatus()
+        let context = g:neomake_hook_context
+        if context.jobinfo.exit_code == 0
+            let g:testing_status = 'Test ✅'
+            " test commit
+            execute '!(cd ' . g:test#project_root .'; git add . ; git commit -n -m "wip (tcr) ")'
+        endif
+        if context.jobinfo.exit_code == 1
+            let g:testing_status = 'Test ❌'
+            " test revert
+            :!git reset --hard
+        endif
+        :call PrintStatus()
     endfunction
 
     function! TestStatus() abort
-    :call PrintStatus()
+        :call PrintStatus()
     endfunction
 
     function! PrintStatus()
-    :echo g:testing_status
+        :echo g:testing_status
     endfunction
 ]])
