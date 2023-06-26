@@ -1,13 +1,38 @@
+local util = require('formatter.util')
+local formatting = vim.api.nvim_create_augroup('Formatting', { clear = true })
+
 local function get_git_root()
     local dot_git_path = vim.fn.finddir('.git', '.;')
     return vim.fn.fnamemodify(dot_git_path, ':h')
 end
 
-local util = require('formatter.util')
-
+local prettier_func = function()
+    return {
+        exe = 'prettier',
+        args = {
+            '--stdin-filepath',
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            '--double-quote',
+        },
+        stdin = true,
+    }
+end
+local eslint_func = function()
+    return {
+        exe = 'eslint_d',
+        args = {
+            '--config',
+            util.escape_path(util.get_current_buffer_file_path()),
+            '--stdin',
+            '--stdin-filename',
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            '--fix-to-stdout',
+        },
+        stdin = true,
+    }
+end
 require('formatter').setup({
     -- Enable or disable logging
-
     logging = false,
     -- Set the log level
     log_level = vim.log.levels.WARN,
@@ -26,11 +51,11 @@ require('formatter').setup({
                 return {
                     exe = 'shellcheck',
                     args = {
-                        '--severity', 'warning'
+                        '--severity',
+                        'warning',
                     },
                 }
             end,
-
         },
         --[[ antlers = { ]]
         --[[     function() ]]
@@ -86,106 +111,26 @@ require('formatter').setup({
             end,
         },
         vue = {
-            function()
-                return {
-                    exe = 'eslint_d',
-                    args = {
-                        '--stdin',
-                        '--stdin-filename',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--fix-to-stdout',
-                    },
-                    stdin = true,
-                }
-            end,
+            eslint_func,
+            prettier_func,
         },
         json = {
-            function()
-                return {
-                    exe = 'prettier',
-                    args = {
-                        '--stdin-filepath',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--double-quote',
-                    },
-                    stdin = true,
-                }
-            end,
+            prettier_func,
+        },
+        css = {
+            prettier_func,
         },
         javascript = {
-            function()
-                return {
-                    exe = 'eslint_d',
-                    args = {
-                        '--stdin',
-                        '--stdin-filename',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--fix-to-stdout',
-                    },
-                    stdin = true,
-                }
-            end,
-            function()
-                return {
-                    exe = 'prettier',
-                    args = {
-                        '--stdin-filepath',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--double-quote',
-                    },
-                    stdin = true,
-                }
-            end,
+            eslint_func,
+            prettier_func,
         },
         typescriptreact = {
-            function()
-                return {
-                    exe = 'eslint_d',
-                    args = {
-                        '--stdin',
-                        '--stdin-filename',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--fix-to-stdout',
-                    },
-                    stdin = true,
-                }
-            end,
-            function()
-                return {
-                    exe = 'prettier',
-                    args = {
-                        '--stdin-filepath',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--double-quote',
-                    },
-                    stdin = true,
-                }
-            end,
-         },
+            eslint_func,
+            prettier_func,
+        },
         typescript = {
-            function()
-                return {
-                    exe = 'eslint_d',
-                    args = {
-                        '--stdin',
-                        '--stdin-filename',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--fix-to-stdout',
-                    },
-                    stdin = true,
-                }
-            end,
-            function()
-                return {
-                    exe = 'prettier',
-                    args = {
-                        '--stdin-filepath',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--double-quote',
-                    },
-                    stdin = true,
-                }
-            end,
+            eslint_func,
+            prettier_func,
         },
         -- php: use intelephense to perform formatting
         blade = {
@@ -202,27 +147,10 @@ require('formatter').setup({
                 }
             end,
         },
-        css = {
-            function()
-                return {
-                    exe = 'prettier',
-                    args = {
-                        '--stdin-filepath',
-                        vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
-                        '--double-quote',
-                    },
-                    stdin = true,
-                }
-            end,
-        },
     },
 })
 
-local api = vim.api
-
-local formatting = api.nvim_create_augroup('Formatting', { clear = true })
-
-api.nvim_create_autocmd('BufWritePost ', {
+vim.api.nvim_create_autocmd('BufWritePost ', {
     command = 'FormatWrite',
     group = formatting,
 })
