@@ -1,9 +1,11 @@
 return {
     'vim-test/vim-test',
     dependencies = {
+        'kana/vim-vspec',
+        'kana/vim-vspec',
         'neomake/neomake',
-        'kana/vim-vspec',
         'preservim/vimux',
-        'kana/vim-vspec',
+        'tpope/vim-dispatch',
+        'voldikss/vim-floaterm',
     },
 }

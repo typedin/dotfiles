@@ -11,7 +11,7 @@ vim.api.nvim_set_var('ultest_use_pty', 1)
 
 -- vim-test
 vim.api.nvim_set_var('testing_status', '')
-vim.api.nvim_set_var('test#strategy', 'neovim')
+vim.api.nvim_set_var('test#strategy', 'floaterm')
 
 vim.cmd([[
     " set current path when vim loads up
