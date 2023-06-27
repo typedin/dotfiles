@@ -9,9 +9,30 @@ vim.cmd([[
 -- vim-ultest
 vim.api.nvim_set_var('ultest_use_pty', 1)
 
+local default_strategy = 'floaterm'
+local tcr_strategy = 'neomake'
 -- vim-test
 vim.api.nvim_set_var('testing_status', '')
-vim.api.nvim_set_var('test#strategy', 'floaterm')
+vim.api.nvim_set_var('test#strategy', default_strategy)
+
+--[[ nnoremap <silent>tcr :call ToggleStrategy()<CR> ]]
+vim.keymap.set('n', 'tcr', function()
+    if vim.api.nvim_get_var('test#strategy') == default_strategy then
+        vim.api.nvim_set_var('test#strategy', tcr_strategy)
+        vim.api.nvim_set_var('neomake_open_list', 0)
+    else
+        vim.api.nvim_set_var('test#strategy', default_strategy)
+        vim.api.nvim_set_var('neomake_open_list', 1)
+    end
+    print('changed testing strategy to ' .. vim.api.nvim_get_var('test#strategy'))
+end, { silent = true })
+
+vim.keymap.set('n', 'tn', ':TestNearest<CR>', { silent = true })
+vim.keymap.set('n', 'tf', ':TestFile<CR>', { silent = true })
+vim.keymap.set('n', 'ts', ':TestSuite<CR>', { silent = true })
+vim.keymap.set('n', 'tl', ':TestLast<CR>', { silent = true })
+
+--  nnoremap <silent> t_ ^/function <CR>ewvt(:s/\%V /_/g<CR>jji<TAB>
 
 vim.cmd([[
     " set current path when vim loads up
@@ -21,25 +42,11 @@ vim.cmd([[
     " initially empty status
     " let g:testing_status = ''
 
-    nmap <silent>tn :TestNearest<CR>
-    nmap <silent>tf :TestFile<CR>
-    nmap <silent>ts :TestSuite<CR>
-    nmap <silent>tl :TestLast<CR>
     nnoremap <silent> t_ ^/function <CR>ewvt(:s/\%V /_/g<CR>jji<TAB>
-    nnoremap <silent>tcr :call ToggleStrategy()<CR>
-
-    function! ToggleStrategy()
-    if g:test#strategy == "vimux"
-        let g:test#strategy = "neomake"
-    else
-        let g:test#strategy = "vimux"
-    endif
-        :echo "changed test strategy to: " . g:test#strategy
-    endfunction
 
     " use neomake for async running of tests
     " do not open the test run results, can be changed to show them
-    let g:neomake_open_list = 1
+    "let g:neomake_open_list = 1
 
     augroup neomake_hook
         au!
