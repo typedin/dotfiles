@@ -1,3 +1,17 @@
+local api = vim.api
+-- Show command line when recording macro
+local vimEnter = api.nvim_create_augroup('VimEnter', { clear = false })
+
+api.nvim_create_autocmd('vimEnter', {
+    callback = function()
+        -- use automatticaly vitest if vitest is configured
+        if vim.fn.filereadable('./vitest.config.ts') then
+            vim.cmd([[ let g:test#javascript#runner = 'vitest' ]])
+        end
+    end,
+    group = vimEnter,
+})
+
 vim.cmd([[
     let test#javascript#reactscripts#executable = "npm test"
     let test#typescript#runner = 'vitest'

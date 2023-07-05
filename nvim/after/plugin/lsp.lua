@@ -50,6 +50,7 @@ lsp.on_attach(function(_, bufnr)
     nmap('<LocalLeader>dl', require('telescope.builtin').diagnostics, '[D]iagnostics [L]ist') -- diagnostic list
     nmap('<localleader>h', vim.lsp.buf.signature_help, 'Signature [H]elp')
 end)
+lsp.nvim_lua_ls()
 lsp.setup()
 
 -- You need to setup `cmp` after lsp-zero
@@ -62,13 +63,15 @@ cmp.setup({
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp', priority = 2999, keyword_length = 1 },
-        { name = 'luasnip', priority = 2000, keyword_length = 2 },
-        { name = 'buffer', priority = 1000, keyword_length = 2 },
-        { name = 'path', priority = 900, keyword_length = 2 },
-        { name = 'calc', priority = 800 },
-    }),
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+        { name = 'calc' },
+    },
+
     mapping = {
         -- `Enter` key to confirm completion
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
