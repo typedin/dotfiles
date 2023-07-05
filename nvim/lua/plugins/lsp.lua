@@ -3,8 +3,8 @@ return {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
         dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' }, -- Required
+            -- LSP Suppor
+            { 'neovim/nvim-lspconfig', dependencies = { 'b0o/schemastore.nvim' } }, -- Required
             { -- Optional
                 'williamboman/mason.nvim',
                 build = function()
