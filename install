@@ -87,7 +87,8 @@ then
     echo "git executable could not be found"
 else
     mkdir -p "${HOME}/.local/share/composer"
-    composer global require laravel/pint --dev
+    ln -sf "$DOTFILES"/composer/composer.json "$HOME"/.config/composer/composer.json
+    composer global install
 fi
 
 if ! command -v cargo &> /dev/null

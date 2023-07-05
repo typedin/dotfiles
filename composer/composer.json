@@ -1,0 +1,11 @@
+{
+    "require-dev": {
+        "laravel/pint": "^1.10",
+        "friendsofphp/php-cs-fixer": "^3.20"
+    },
+    "require": {
+        "laravel/installer": "^4.4",
+        "statamic/cli": "^2.5",
+        "phpstan/phpstan": "^1.10"
+    }
+}
