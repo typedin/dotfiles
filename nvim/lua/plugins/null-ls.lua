@@ -22,6 +22,7 @@ return {
                 require('null-ls').builtins.diagnostics.luacheck,
                 require('null-ls').builtins.formatting.prettierd,
                 require('null-ls').builtins.code_actions.refactoring,
+                require('null-ls').builtins.formatting.phpcsfixer,
             },
         })
 

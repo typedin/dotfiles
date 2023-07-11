@@ -1,5 +1,5 @@
 local lsp = require('lsp-zero').preset({})
-
+ 
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup({
     settings = {
@@ -23,48 +23,7 @@ require('lspconfig').lua_ls.setup({
         },
     },
 })
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig').volar.setup({
-    capabilities = capabilities,
-    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-})
 
-require('lspconfig').volar.setup({
-    capabilities = capabilities,
-    filetype = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-})
-
-require('lspconfig').tailwindcss.setup({
-    capabilities = capabilities,
-    filetype = { 'antlers', 'html', 'vue', 'jsx', 'tsx', 'blade' },
-})
-
-require('lspconfig').jsonls.setup({
-    capabilities = capabilities,
-    settings = {
-        json = {
-            schemas = require('schemastore').json.schemas(),
-            validate = { enable = true },
-        },
-        yaml = {
-            schemas = require('schemastore').yaml.schemas(),
-            validate = { enable = true },
-        },
-    },
-})
-
-require('lspconfig').antlersls.setup({
-    capabilities = capabilities,
-    filetype = { 'antlers' },
-})
-
-require('lspconfig').intelephense.setup({
-    capabilities = capabilities,
-})
-
-require('lspconfig').phpactor.setup({
-    capabilities = capabilities,
-})
 lsp.set_sign_icons({
     error = require('typedin.signs').error,
     hint = require('typedin.signs').hint,

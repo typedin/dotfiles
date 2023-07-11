@@ -1,15 +1,15 @@
 return {
-    'phpactor/phpactor',
-    ft = 'php',
-    build = 'composer install --no-dev --optimize-autoloader',
-    keys = {
+    'gbprod/phpactor.nvim',
+    dependencies = {
         {
-            '<LocalLeader>pm',
-            ':PhpactorContextMenu<CR>',
-        },
-        {
-            '<LocalLeader>pn',
-            ':PhpactorClassNew<CR>',
+            'phpactor/phpactor',
+            branch = 'master',
+            ft = 'php',
+            run = 'composer install --no-dev -o',
+            build = 'composer install --no-dev -o',
+            config = function()
+                require('phpactor').setup()
+            end,
         },
     },
 }

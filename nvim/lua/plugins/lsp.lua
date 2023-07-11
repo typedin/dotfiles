@@ -11,6 +11,8 @@ return {
                     pcall(vim.cmd, 'MasonUpdate')
                 end,
             },
+            { 'folke/neodev.nvim', opts = {} },
+            'ThePrimeagen/refactoring.nvim',
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' }, -- Required

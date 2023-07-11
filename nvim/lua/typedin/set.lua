@@ -1,8 +1,8 @@
 vim.opt.guicursor = ''
 
 vim.opt.emoji = false -- don't assume all emoji are double width
-vim.opt.nu = true -- WTF ????
 vim.opt.relativenumber = true
+vim.opt.number = true
 vim.opt.scrolloff = 8
 
 vim.opt.expandtab = true

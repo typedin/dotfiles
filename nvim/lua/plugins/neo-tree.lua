@@ -21,6 +21,10 @@ return {
     },
     opts = {
         window = {
+            mappings = {
+                ['<cr>'] = 'open',
+                ['<space>'] = 'open',
+            },
             position = 'left',
             filesystem = {
                 filtered_items = {
