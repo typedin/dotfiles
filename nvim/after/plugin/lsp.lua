@@ -1,5 +1,5 @@
 local lsp = require('lsp-zero').preset({})
- 
+
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup({
     settings = {
@@ -21,6 +21,26 @@ require('lspconfig').lua_ls.setup({
                 enable = false,
             },
         },
+    },
+})
+require('lspconfig').html.setup({
+    filetypes = {
+        'htmg',
+    },
+})
+require('lspconfig').antlersls.setup({
+    filetypes = {
+        'antlers',
+    },
+})
+
+require('lspconfig').emmet_ls.setup({
+    filetypes = {
+        'html',
+        'typescriptreact',
+        'javascriptreact',
+        'css',
+        'markdown',
     },
 })
 
