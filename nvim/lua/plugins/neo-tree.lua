@@ -23,7 +23,6 @@ return {
         window = {
             mappings = {
                 ['<cr>'] = 'open',
-                ['<space>'] = 'open',
             },
             position = 'left',
             filesystem = {
