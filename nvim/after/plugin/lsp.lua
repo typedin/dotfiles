@@ -26,7 +26,9 @@ require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
         -- Replace these with whatever servers you want to install
+        'intelephense',
         'lua_ls',
+        'phpactor',
         'rust_analyzer',
         'tsserver',
     },
@@ -41,41 +43,4 @@ require('mason-lspconfig').setup_handlers({
             capabilities = lsp_capabilities,
         })
     end,
-})
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-cmp.setup({
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'calc' },
-    },
-
-    mapping = {
-        -- `Enter` key to confirm completion
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        -- Ctrl+Space to trigger completion menu
-        ['<C-Space>'] = cmp.mapping.complete(),
-        -- Navigate between snippet placeholder
-        --[[ ['<C-f>'] = cmp_action.luasnip_jump_forward(), ]]
-        --[[ ['<C-b>'] = cmp_action.luasnip_jump_backward(), ]]
-
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-    },
-})
-
-vim.diagnostic.config({
-    virtual_text = false,
-    underline = true,
-    signs = true,
 })
