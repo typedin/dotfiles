@@ -3,6 +3,7 @@ local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require('luasnip')
 
 cmp.setup({
+    preselect = cmp.PreselectMode.First,
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
