@@ -2,4 +2,5 @@
 -- let is for variables
 -- g is for global
 require('typedin')
-require('onedark').load()
+--[[ require('onedark').load() ]]
+vim.cmd([[colorscheme tokyonight]])

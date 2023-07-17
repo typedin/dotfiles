@@ -11,7 +11,7 @@ return {
             options = {
                 icons_enabled = true,
                 globalstatus = true,
-                theme = 'onedark',
+                theme = 'tokyonight',
             },
             sections = {
                 lualine_a = { 'mode' },

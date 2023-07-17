@@ -20,7 +20,7 @@ config.front_end = 'OpenGL'
 config.show_update_window = true
 config.check_for_updates_interval_seconds = 86400 -- a day
 
-config.color_scheme = 'OneDark (base16)'
+config.color_scheme = 'Tokyo Night Moon'
 
 config.font = wezterm.font('JetBrains Mono')
 
