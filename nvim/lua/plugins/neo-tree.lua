@@ -1,22 +1,29 @@
-vim.fn.sign_define('DiagnosticSignError', { text = require('typedin.signs').error, texthl = 'DiagnosticSignError' })
-vim.fn.sign_define('DiagnosticSignWarn', { text = require('typedin.signs').warn, texthl = 'DiagnosticSignWarn' })
-vim.fn.sign_define('DiagnosticSignInfo', { text = require('typedin.signs').info, texthl = 'DiagnosticSignInfo' })
-vim.fn.sign_define('DiagnosticSignHint', { text = require('typedin.signs').hint, texthl = 'DiagnosticSignHint' })
-
+local signs = require('typedin.signs')
 return {
     'nvim-neo-tree/neo-tree.nvim',
     cmd = 'Neotree',
-    branch = 'v2.x',
+    branch = 'v3.x',
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
         'MunifTanjim/nui.nvim',
     },
+    config = function()
+        vim.fn.sign_define('DiagnosticSignError', { text = signs.error, texthl = 'DiagnosticSignError' })
+        vim.fn.sign_define('DiagnosticSignWarn', { text = signs.warn, texthl = 'DiagnosticSignWarn' })
+        vim.fn.sign_define('DiagnosticSignInfo', { text = signs.info, texthl = 'DiagnosticSignInfo' })
+        vim.fn.sign_define('DiagnosticSignHint', { text = signs.hint, texthl = 'DiagnosticSignHint' })
+    end,
     keys = {
         {
             '<Leader>e',
             ':Neotree toggle left<cr>',
             desc = 'Neotree',
+        },
+        {
+            '<Leader>b',
+            ':Neotree source=buffers toggle position=float<cr>',
+            desc = 'Neotree opened buffers in a floating window',
         },
     },
     opts = {
