@@ -1,3 +1,4 @@
+local signs = require('typedin.signs')
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
@@ -40,10 +41,10 @@ return {
                             hint = 'DiagnosticHint', -- Changes diagnostics' hint color.
                         },
                         symbols = {
-                            error = require('typedin.signs').error,
-                            hint = require('typedin.signs').hint,
-                            info = require('typedin.signs').info,
-                            warn = require('typedin.signs').warn,
+                            error = signs.error,
+                            hint = signs.hint,
+                            info = signs.info,
+                            warn = signs.warn,
                         },
                         colored = true, -- Displays diagnostics status in color if set to true.
                         update_in_insert = false, -- Update diagnostics in insert mode.
