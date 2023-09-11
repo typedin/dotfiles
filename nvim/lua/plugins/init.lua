@@ -2,7 +2,17 @@ return {
     'p00f/nvim-ts-rainbow',
     -- visuals
     'machakann/vim-highlightedyank',
-    'NvChad/nvim-colorizer.lua',
+    {
+        'NvChad/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end,
+        opts = {
+            user_default_options = {
+                tailwind = true,
+            },
+        },
+    },
 
     -- Git
     'f-person/git-blame.nvim',

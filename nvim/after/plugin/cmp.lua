@@ -1,3 +1,4 @@
+
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local luasnip = require('luasnip')
@@ -28,8 +29,8 @@ cmp.setup({
     mapping = {
         -- `Enter` key to confirm completion
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['['] = cmp.mapping.select_prev_item(cmp_select),
-        [']'] = cmp.mapping.select_next_item(cmp_select),
+        ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
     },
 })
 

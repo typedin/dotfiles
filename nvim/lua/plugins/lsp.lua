@@ -8,7 +8,9 @@ return {
                 pcall(vim.cmd, 'MasonUpdate')
             end,
         },
-        'williamboman/mason-lspconfig.nvim',
-        'hrsh7th/nvim-cmp', -- Required
+        'williamboman/mason-lspconfig.nvim', -- Required
+        { 'hrsh7th/nvim-cmp', dependencies = {
+            { 'roobert/tailwindcss-colorizer-cmp.nvim', config = true },
+        } },
     },
 }

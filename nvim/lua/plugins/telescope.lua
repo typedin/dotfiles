@@ -24,6 +24,11 @@ return {
                     vertical = { width = 50 },
                 },
             },
+            pickers = {
+                find_files = {
+                    theme = 'dropdown',
+                },
+            },
         })
         -- Me
         vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = '[G]it [F]iles' })

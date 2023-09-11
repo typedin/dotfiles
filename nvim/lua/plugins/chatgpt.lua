@@ -3,7 +3,7 @@ return {
     event = 'VeryLazy',
     config = function()
         require('chatgpt').setup({
-            async_api_key_cmd = "sed '2q;d' ../../../api.txt",
+            async_api_key_cmd = 'pass show chatgpt',
         })
     end,
     dependencies = {
