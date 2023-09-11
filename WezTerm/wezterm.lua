@@ -24,12 +24,7 @@ config.color_scheme = 'Tokyo Night Moon'
 
 config.font = wezterm.font('JetBrains Mono')
 
---[[ config.foreground_text_hsb = { ]]
---[[     hue = 1.0, ]]
---[[     saturation = 1.5, ]]
---[[     brightness = 1.5, ]]
---[[ } ]]
-
+config.underline_thickness = 1
 config.font_size = 10.0
 config.line_height = 1.9
 config.window_background_opacity = 0.95
