@@ -1,12 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require('wezterm')
-local mux = wezterm.mux
 local keys = require('keys').keys
-
-wezterm.on('gui-startup', function(cmd)
-    local window = mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
-end)
 
 local config = {}
 

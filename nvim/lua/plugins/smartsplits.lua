@@ -1,9 +1,9 @@
 return {
     'mrjones2014/smart-splits.nvim',
-    version = '>=1.0.0',
     dependencies = 'mrjones2014/legendary.nvim',
+    lazy = false,
+    opts = { ignored_buftypes = { 'nofile' } },
     config = function()
-        require('smart-splits').setup()
         require('legendary').setup({
             extensions = {
                 -- default settings shown below:
