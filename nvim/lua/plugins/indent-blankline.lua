@@ -1,9 +1,9 @@
 return {
     'lukas-reineke/indent-blankline.nvim',
-    config = function()
-        require('indent_blankline').setup({
-            char = '⁞',
-            show_trailing_blankline_indent = false,
-        })
-    end,
+    main = 'ibl',
+    opts = {
+        debounce = 100,
+        whitespace = { highlight = { 'Whitespace', 'NonText' } },
+        remove_blankline_trail = true,
+    },
 }
