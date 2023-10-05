@@ -3,7 +3,17 @@ return {
     main = 'ibl',
     opts = {
         debounce = 100,
-        whitespace = { highlight = { 'Whitespace', 'NonText' } },
-        remove_blankline_trail = true,
+        whitespace = {
+            highlight = { 'Function', 'Label', 'Whitespace', 'NonText' },
+            remove_blankline_trail = true,
+        },
+        scope = {
+            enabled = true,
+            show_start = true,
+            show_end = false,
+            injected_languages = false,
+            highlight = { 'Function', 'Label' },
+            priority = 500,
+        },
     },
 }
