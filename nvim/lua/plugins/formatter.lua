@@ -3,7 +3,7 @@ return {
     config = function()
         require('conform').setup({
             formatters_by_ft = {
-                blade = { 'prettier' },
+                blade = { 'blade-formatter' },
                 css = { { 'prettierd', 'prettier' } },
                 javascript = { { 'prettierd', 'prettier' } },
                 json = { { 'prettierd', 'prettier' } },
