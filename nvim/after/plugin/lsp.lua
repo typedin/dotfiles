@@ -43,12 +43,17 @@ require('mason-lspconfig').setup({
     ensure_installed = {
         -- Replace these with whatever servers you want to install
         'antlersls',
+        'black',
+        'isort',
         'intelephense',
         'lua_ls',
         'phpactor',
+        "prettierd",
         'rust_analyzer',
         'tsserver',
+        'stylua'
     },
+    automatic_installation = true,
 })
 
 local lspconfig = require('lspconfig')
