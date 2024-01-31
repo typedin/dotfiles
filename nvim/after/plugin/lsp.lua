@@ -37,33 +37,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
         nmap('<localleader>h', vim.lsp.buf.signature_help, 'Signature [H]elp')
     end,
 })
-
-require('mason').setup()
-require('mason-lspconfig').setup({
-    ensure_installed = {
-        -- Replace these with whatever servers you want to install
-        'antlersls',
-        'black',
-        'isort',
-        'intelephense',
-        'lua_ls',
-        'phpactor',
-        "prettierd",
-        'rust_analyzer',
-        'tsserver',
-        'stylua'
-    },
-    automatic_installation = true,
-})
-
-local lspconfig = require('lspconfig')
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-require('mason-lspconfig').setup_handlers({
-    function(server_name)
-        lspconfig[server_name].setup({
-            on_attach = require('lsp-format').on_attach,
-            capabilities = lsp_capabilities,
-        })
-    end,
-})

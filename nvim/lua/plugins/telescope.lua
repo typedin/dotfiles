@@ -12,7 +12,19 @@ return {
         'nvim-telescope/telescope-rs.nvim',
         'nvim-telescope/telescope-smart-history.nvim',
         'nvim-telescope/telescope-symbols.nvim',
-        'nvim-telescope/telescope-ui-select.nvim',
+        {
+            'nvim-telescope/telescope-ui-select.nvim',
+            config = function ()
+                require("telescope").setup ({
+                    extensions = {
+                        ["ui-select"] = {
+                            require("telescope.themes").get_dropdown { }
+                        }
+                    }
+                })
+                require("telescope").load_extension("ui-select")
+            end
+        },
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     init = function()
@@ -34,7 +46,8 @@ return {
         vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = '[G]it [F]iles' })
 
         -- TJ DeVries
-        vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+        vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,
+            { desc = '[?] Find recently opened files' })
         vim.keymap.set('n', '/', function()
             require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
                 windblend = 10,
