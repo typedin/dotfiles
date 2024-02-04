@@ -3,4 +3,4 @@
 -- g is for global
 require('typedin')
 
-vim.cmd([[ colorscheme tokyonight ]])
+vim.cmd.colorscheme "tokyonight"
