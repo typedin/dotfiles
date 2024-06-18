@@ -1,22 +1,23 @@
 return {
-    {
-        'mhartington/formatter.nvim',
-    },
-    {
-        "lukas-reineke/lsp-format.nvim",
-    },
+    { 'mhartington/formatter.nvim', },
+    { "lukas-reineke/lsp-format.nvim", },
     {
         "nvimtools/none-ls.nvim",
+        dependencies = {
+            "nvimtools/none-ls-extras.nvim",
+            "gbprod/none-ls-php.nvim",
+        },
         config = function()
             local null_ls = require("null-ls")
-
+            null_ls.register(require("none-ls-php.diagnostics.php"))
             null_ls.setup({
                 sources = {
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.formatting.prettier,
                     null_ls.builtins.formatting.blade_formatter,
-                    null_ls.builtins.diagnostics.eslint_d,
                     null_ls.builtins.completion.spell,
+                    require("none-ls.diagnostics.eslint_d"),
+                    require("none-ls.code_actions.eslint_d")
                 }
             })
 

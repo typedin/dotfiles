@@ -20,6 +20,7 @@ return {
                     'phpactor',
                     'rust_analyzer',
                     'tsserver',
+                    'eslint_d'
                 },
                 automatic_installation = true,
             })
