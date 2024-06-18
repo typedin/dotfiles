@@ -28,6 +28,10 @@ PATH="$(composer config -g home)/.local/share/composer/vendor/bin:$PATH"
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
+# Per user add mason bin to path 
+MASON_PACKAGES="${HOME}/.local/share/nvim/mason"
+PATH="$PATH:$MASON_PACKAGES/bin"
+
 # Per user go 
 PATH=$PATH:/usr/local/go/bin
 
@@ -49,3 +53,4 @@ export OPENAI_API_KEY=`pass show chatgpt`
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+

@@ -1,1 +1,2 @@
 prefix=/home/antoine/.local/share/npm-packages
+legacy-peer-deps=true
