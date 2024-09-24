@@ -1,0 +1,32 @@
+{
+  "hoverProvider": true,
+  "documentLinkProvider": {},
+  "colorProvider": true,
+  "codeActionProvider": true,
+  "textDocumentSync": {
+    "save": {
+      "includeText": false
+    },
+    "willSaveWaitUntil": false,
+    "willSave": false,
+    "change": 1,
+    "openClose": true
+  },
+  "completionProvider": {
+    "resolveProvider": true,
+    "triggerCharacters": [
+      "\"",
+      "''",
+      "`",
+      " ",
+      ".",
+      "(",
+      "[",
+      "]",
+      "!",
+      "/",
+      "-",
+      ":"
+    ]
+  }
+}

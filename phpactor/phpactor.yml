@@ -5,5 +5,5 @@ code_transform.class_new.variants:
 language_server_php_cs_fixer.enabled: true
 language_server_phpstan.enabled: true
 phpunit.enabled: true
-php_code_sniffer.enabled: true
+php_code_sniffer.enabled: false 
 php_code_sniffer.bin: "~/.config/composer/vendor/bin/phpcs" 

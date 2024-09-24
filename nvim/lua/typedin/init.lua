@@ -55,38 +55,6 @@ require('lazy').setup({
     },
   },
 
-  -- NOTE: Plugins can also be configured to run lua code when they are loaded.
-  --
-  -- This is often very useful to both group configuration, as well as handle
-  -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VimEnter'
-  --
-  -- which loads which-key before all the UI elements are loaded. Events can be
-  -- normal autocommands events (`:help autocmd-events`).
-  --
-  -- Then, because we use the `config` key, the configuration only runs
-  -- after the plugin has been loaded:
-  --  config = function() ... end
-
-  { -- Useful plugin to show you pending keybinds.
-    'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-      }
-    end,
-  },
-
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
@@ -97,7 +65,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    -- branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for install instructions
@@ -308,8 +276,24 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        gopls = {},
+        asm_lsp = {},
+        clangd = {},
+        gopls = {
+          capabilities = {},
+          settings = {
+            gopls = {
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            },
+          },
+        },
         -- pyright = {},
         rust_analyzer = {
           capabilities = {},
@@ -321,7 +305,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        ts_ls = {},
         html = {},
         antlersls = {
           capabilities = {},
@@ -366,9 +350,9 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'phpstan', -- linter
-        'php-cs-fixer', -- formatter
-        'phpactor',
+        -- 'php-cs-fixer', -- formatter
+        -- 'phpactor', -- <- this is the one causing all the linting errors and warnings
+        'intelephense',
         'golangci-lint-langserver',
         'rustfmt', -- deprecated ??? me @11 april 2024
         'stylua', -- Used to format lua code
@@ -405,11 +389,22 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        jsx = { { 'prettierd', 'prettier', 'eslint' } },
-        tsx = { { 'prettierd', 'prettier', 'eslint' } },
-        javascript = { { 'prettierd', 'prettier', 'eslint' } },
-        php = { { 'php_cs_fixer', 'phpcbf', 'phpinsights', 'pint' } },
+        jsx = { 'prettierd', 'prettier', 'eslint' },
+        tsx = { 'prettierd', 'prettier', 'eslint' },
+        javascript = { 'prettierd', 'prettier', 'eslint' },
+        php = { 'pint', 'php-cs-fixer' },
         blade = { 'blade-formatter' },
+      },
+      formatters = {
+        ['php-cs-fixer'] = {
+          command = 'php-cs-fixer',
+          args = {
+            'fix',
+            '--rules=@PSR12', -- Formatting preset. Other presets are available, see the php-cs-fixer docs.
+            '$FILENAME',
+          },
+          stdin = false,
+        },
       },
     },
   },
@@ -580,7 +575,7 @@ require('lazy').setup({
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'rust', 'php', 'php_only' },
+        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'rust', 'php', 'phpdoc', 'php_only', 'blade' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
@@ -622,6 +617,11 @@ require('lazy').setup({
 
       local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 
+      vim.filetype.add {
+        pattern = {
+          ['.*%.blade%.php'] = 'blade',
+        },
+      }
       parser_config.blade = {
         install_info = {
           url = 'https://github.com/EmranMR/tree-sitter-blade',
@@ -631,11 +631,7 @@ require('lazy').setup({
         filetype = 'blade',
       }
 
-      vim.filetype.add {
-        pattern = {
-          ['.*%.blade%.php'] = 'blade',
-        },
-      }
+      --
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
       --

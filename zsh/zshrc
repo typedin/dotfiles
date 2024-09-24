@@ -39,6 +39,10 @@ PATH=$PATH:/usr/local/go/bin
 LUA_PACKAGES="${HOME}/.luarocks/"
 PATH="$PATH:$LUA_PACKAGES/bin"
 
+# Yazi
+TMP_HOME_PATH="${HOME}/tmp/"
+PATH="$PATH:$TMP_HOME_PATH/yazi/target/release/"
+
 export PATH
 source $ZSH/oh-my-zsh.sh
 
@@ -47,10 +51,4 @@ export OPENAI_API_KEY=`pass show chatgpt`
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# bun completions
-[ -s "/home/antoine/.bun/_bun" ] && source "/home/antoine/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 

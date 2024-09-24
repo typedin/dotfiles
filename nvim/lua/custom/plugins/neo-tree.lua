@@ -7,13 +7,18 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
-    'nvim-neotest/nvim-nio',
   },
   config = function()
-    vim.fn.sign_define('DiagnosticSignError', { text = signs.error, texthl = 'DiagnosticSignError' })
-    vim.fn.sign_define('DiagnosticSignWarn', { text = signs.warn, texthl = 'DiagnosticSignWarn' })
-    vim.fn.sign_define('DiagnosticSignInfo', { text = signs.info, texthl = 'DiagnosticSignInfo' })
-    vim.fn.sign_define('DiagnosticSignHint', { text = signs.hint, texthl = 'DiagnosticSignHint' })
+    vim.diagnostic.config {
+      signs = {
+        text = {
+          [vim.diagnostic.severity.HINT] = signs.hint,
+          [vim.diagnostic.severity.ERROR] = signs.error,
+          [vim.diagnostic.severity.WARN] = signs.warn,
+          [vim.diagnostic.severity.INFO] = signs.info,
+        },
+      },
+    }
   end,
   keys = {
     {
