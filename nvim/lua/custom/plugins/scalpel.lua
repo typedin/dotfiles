@@ -1,9 +1,9 @@
 return {
-  'wincent/scalpel',
-  keys = {
-    {
-      '<LocalLeader>e',
-      '<Plug>(Scalpel)',
+    "wincent/scalpel",
+    keys = {
+        {
+            "<LocalLeader>e",
+            "<Plug>(Scalpel)",
+        },
     },
-  },
 }
