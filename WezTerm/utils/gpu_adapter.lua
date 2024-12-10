@@ -31,9 +31,7 @@ GpuAdapters.__index = GpuAdapters
 
 ---See `https://github.com/gfx-rs/wgpu#supported-platforms` for more info on available backends
 GpuAdapters.AVAILABLE_BACKENDS = {
-	windows = { "Dx12", "Vulkan", "Gl" },
 	linux = { "Vulkan", "Gl" },
-	mac = { "Metal" },
 }
 
 ---@type WeztermGPUAdapter[]
@@ -43,8 +41,8 @@ GpuAdapters.ENUMERATED_GPUS = wt.gui.enumerate_gpus()
 ---@private
 function GpuAdapters:init()
 	local initial = {
-		__backends = self.AVAILABLE_BACKENDS[platform.os],
-		__preferred_backend = self.AVAILABLE_BACKENDS[platform.os][1],
+		__backends = { "Vulkan", "Gl" },
+		__preferred_backend = "Vulkan",
 		DiscreteGpu = nil,
 		IntegratedGpu = nil,
 		Cpu = nil,

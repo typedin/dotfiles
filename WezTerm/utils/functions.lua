@@ -7,14 +7,10 @@
 ---@diagnostic disable-next-line: assign-type-mismatch
 local wezterm = require("wezterm")
 
-local floor, ceil = math.floor, math.ceil
-
 ---User defined utility functions
 ---@class Utils.Fn
 ---@field fs    Utils.Fn.FileSystem
----@field mt    Utils.Fn.Maths
 ---@field str   Utils.Fn.String
----@field key   Utils.Fn.Keymap
 ---@field color Utils.Fn.Color
 local M = {}
 
@@ -54,25 +50,18 @@ M.fs.target_triple = wezterm.target_triple
 -- {{{2 META
 
 ---@class Utils.Fn.FileSystem.Platform
----@field os "windows"|"linux"|"mac"|"unknown" The operating system name
----@field is_win boolean Whether the platform is Windows.
+---@field os "linux" The operating system name
 ---@field is_linux boolean Whether the platform is Linux.
----@field is_mac boolean Whether the platform is Mac.
 
 -- }}}
 
 ---Determines the platform based on the target triple.
 ---
----This function checks the target triple string to determine if the platform is Windows,
----Linux, or macOS.
+---This function checks the target triple string to determine if the platform is Windows, Linux, or macOS.
 ---
 ---@return Utils.Fn.FileSystem.Platform platform
 M.fs.platform = function()
-	local is_win = M.fs.target_triple:find("windows") ~= nil
-	local is_linux = M.fs.target_triple:find("linux") ~= nil
-	local is_mac = M.fs.target_triple:find("apple") ~= nil
-	local os = is_win and "windows" or is_linux and "linux" or is_mac and "mac" or "unknown"
-	return { os = os, is_win = is_win, is_linux = is_linux, is_mac = is_mac }
+	return { os = "linux", is_linux = true }
 end
 
 ---Gets the user home directory.
@@ -89,7 +78,7 @@ end
 ---Path separator based on the platform.
 ---
 ---This variable holds the appropriate path separator character for the current platform.
-M.fs.path_separator = M.fs.platform().is_win and "\\" or "/"
+M.fs.path_separator = "/"
 
 ---Equivalent to POSIX `basename(3)`.
 ---
@@ -168,11 +157,7 @@ M.fs.get_cwd_hostname = function(pane, search_git_root_instead)
 		hostname = hostname:gsub("^%l", string.upper)
 	end
 
-	if M.fs.platform().is_win then
-		cwd = cwd:gsub("/" .. M.fs.home() .. "(.-)$", "~%1")
-	else
-		cwd = cwd:gsub(M.fs.home() .. "(.-)$", "~%1")
-	end
+	cwd = cwd:gsub(M.fs.home() .. "(.-)$", "~%1")
 
 	if search_git_root_instead then
 		local git_root = M.fs.find_git_dir(cwd)
@@ -201,40 +186,6 @@ M.fs.pathshortener = function(path, len)
 		short_path = short_path .. (short_dir == "." and dir:sub(1, len + 1) or short_dir) .. M.fs.path_separator
 	end
 	return short_path
-end
-
--- }}}
-
--- {{{1 Utils.Fn.Maths
-
----@class Utils.Fn.Maths
-M.mt = {}
-
----Rounds the given number to the nearest integer
----@param number number
----@return integer result closest integer number
-M.mt.round = function(number)
-	return floor(number + 0.5)
-end
-
----Rounds the given number to the nearest multiple given.
----@param number number Any number.
----@param multiple number Any number.
----@return number result floating point number rounded to the closest multiple.
-M.mt.mround = function(number, multiple)
-	local remainder = number % multiple
-	return number - remainder + (remainder > multiple * 0.5 and multiple or 0)
-end
-
----Converts a float into an integer.
----@param number number
----@param increment? number
----@return integer result
-M.mt.toint = function(number, increment)
-	if increment then
-		return floor(number / increment) * increment
-	end
-	return number >= 0 and floor(number + 0.5) or ceil(number - 0.5)
 end
 
 -- }}}
@@ -362,101 +313,6 @@ M.str.split = function(s, sep, opts)
 		t[#t + 1] = c
 	end
 	return t
-end
-
--- }}}
-
--- {{{1 Utils.Fn.Keymap
-
----@class Utils.Fn.Keymap
----@field private aliases   table
----@field private modifiers table
-M.key = {
-	aliases = {
-		CR = "Enter",
-		BS = "Backspace",
-		ESC = "Escape",
-		Bar = "|",
-		k0 = "Numpad0",
-		k1 = "Numpad1",
-		k2 = "Numpad2",
-		k3 = "Numpad3",
-		k4 = "Numpad4",
-		k5 = "Numpad5",
-		k6 = "Numpad6",
-		k7 = "Numpad7",
-		k8 = "Numpad8",
-		k9 = "Numpad9",
-	},
-
-	modifiers = { C = "CTRL", S = "SHIFT", W = "SUPER", M = "ALT" },
-}
-
----Maps an action using (n)vim-like syntax.
----
----This function allows you to map a key or a combination of keys to a specific action,
----using a syntax similar to that of (n)vim. The mapped keys and actions are inserted
----into the provided table.
----
----@param lhs string The key or key combination to map.
----@param rhs string|table A valid `wezterm.action.<action>` to execute upon keypress.
----@param tbl table The table in which to insert the keymaps.
----
----@usage
----```lua
----local keymaps = {}
----M.key.map("<leader>a", wezterm.action.ActivateTab(1), keymaps)
----M.key.map("<C-a>", wezterm.action.ActivateTab(2), keymaps)
----M.key.map("b", wezterm.action.SendString("hello"), keymaps)
----```
-M.key.map = function(lhs, rhs, tbl)
-	---Inserts the keymap in the table
-	---@param mods? string modifiers. defaults to `""`
-	---@param key string key to press.
-	local function __map(key, mods)
-		tbl[#tbl + 1] = { key = key, mods = mods or "", action = rhs }
-	end
-
-	---skip checks for single key mapping, just map it.
-	if #lhs == 1 then
-		return __map(lhs)
-	end
-
-	local aliases, modifiers = M.key.aliases, M.key.modifiers
-
-	local mods = {}
-	---search for a leader key
-	if lhs:find("^<leader>") then
-		lhs = (lhs:gsub("^<leader>", ""))
-		mods[#mods + 1] = "LEADER"
-	end
-
-	if lhs:find("%b<>") then
-		lhs = lhs:gsub("(%b<>)", function(str)
-			return str:sub(2, -2)
-		end)
-
-		local keys = M.str.split(lhs, "%-")
-		if #keys == 1 then
-			return __map(aliases[keys[1]] or keys[1])
-		end
-
-		local k = keys[#keys]
-		if modifiers[k] then
-			return wezterm.log_error("keymap cannot end with modifier!")
-		else
-			table.remove(keys, #keys)
-		end
-		k = aliases[k] or k
-
-		for i = 1, #keys do
-			mods[#mods + 1] = modifiers[keys[i]]
-		end
-
-		return __map(k, table.concat(mods, "|"))
-	end
-
-	return __map(lhs, table.concat(mods, "|"))
 end
 
 -- }}}
