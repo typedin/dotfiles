@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/antoine/.zsh/completions:"* ]]; then export FPATH="/home/antoine/.zsh/completions:$FPATH"; fi
 export ZSH=$HOME/.oh-my-zsh
 source ~/.config/zsh/zsh-aliases
 source ~/.config/zsh/zsh-exports
@@ -8,7 +10,7 @@ HIST_STAMPS="dd/mm/yyyy"
 
 plugins=(
     composer
-    debian
+    # debian
     git
     git
     laravel
@@ -52,3 +54,4 @@ export OPENAI_API_KEY=`pass show chatgpt`
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+. "/home/antoine/.deno/env"

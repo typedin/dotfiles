@@ -1,13 +1,16 @@
 {
-  "require-dev": {
-    "squizlabs/php_codesniffer": "^3.7",
-    "pestphp/pest": "^2.35"
+  "config": {
+    "platform": {
+      "php": ">=8.3"
+    }
   },
-  "require": {
+  "require-dev": {
     "laravel/installer": "^5.7",
     "laravel/pint": "^1.10",
     "phpstan/phpstan": "^1.12",
-    "statamic/cli": "dev-master"
+    "squizlabs/php_codesniffer": "^3.7",
+    "statamic/cli": "dev-master",
+    "phpunit/phpunit": "^11.4"
   },
   "config": {
     "allow-plugins": {

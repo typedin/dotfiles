@@ -3,9 +3,13 @@
     "Lua.diagnostics.globals": [
         "vim",
         "lfs",
-        "require"
+        "require",
+        "on_attach"
     ],
     "Lua.workspace.library": [
         "${3rd}/lfs/library"
+    ],
+    "diagnostics.disable": [
+        "undefined-field"
     ]
 }

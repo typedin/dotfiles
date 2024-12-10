@@ -1,8 +1,7 @@
 #!/bin/sh
+alias k="echo -e 'CTRL+u'"
+
 alias dotfiles="nvim $HOME/dotfiles/$1"
-alias k="clear"
-alias j='z'
-alias f='zi'
 alias g='lazygit'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias nvimrc='nvim ~/.config/nvim/'
@@ -40,10 +39,6 @@ alias mach_java_mode="export SDKMAN_DIR="$HOME/.sdkman" && [[ -s "$HOME/.sdkman/
 
 alias m="git checkout master"
 alias s="git checkout stable"
-
-if [[ $TERM == "xterm-kitty" ]]; then
-  alias ssh="kitty +kitten ssh"
-fi
 
 alias luamake=/home/antoine/tmp/lua-language-server/3rd/luamake/luamake
 
