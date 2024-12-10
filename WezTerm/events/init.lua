@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local mux = wezterm.mux
+local scandir = require("utils.functions").scandir
 
 wezterm.on("gui-startup", function(window)
 	local tab, pane, window = mux.spawn_window(window or {})
@@ -10,7 +11,6 @@ end)
 local function readjust_font_size(window, pane)
 	local window_dims = window:get_dimensions()
 	local pane_dims = pane:get_dimensions()
-
 	local config_overrides = {}
 	local initial_font_size = window:effective_config()["font_size "] or 10.0 -- set font size from config
 	config_overrides.font_size = initial_font_size
@@ -52,7 +52,24 @@ local function readjust_font_size(window, pane)
 	end
 end
 
+local function resize_nvim_splits()
+	local path = os.getenv("XDG_RUNTIME_DIR")
+	if not path then
+		return
+	end
+	local files = scandir(path)
+	for _key, value in ipairs(files) do
+		if string.find(value, "nvim") then
+			-- /!\ ligature /!\
+			-- it's <Ctrl-w> = without space.
+			local command = "nvim --server" .. "/run/user/1000/" .. value .. " --remote-send '<C-w>=' > /dev/null"
+			os.execute(command)
+		end
+	end
+end
+--
 -- Register the function to be called when the window is resized
 wezterm.on("window-resized", function(window, pane)
 	readjust_font_size(window, pane)
+	resize_nvim_splits()
 end)

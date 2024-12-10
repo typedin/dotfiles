@@ -542,6 +542,28 @@ end
 
 -- }}}
 
+local wezterm = require("wezterm")
+-- Lua implementation of PHP scandir function
+---@param directory string The directory in which we are operating. It must be absolute
+---@return table files table of all files found
+M.scandir = function(directory)
+	if not directory then
+		return {}
+	end
+
+	local i, files, popen = 0, {}, io.popen
+	local pfile = popen('ls -a "' .. directory .. '"')
+	if not pfile then
+		return {}
+	end
+
+	for filename in pfile:lines() do
+		i = i + 1
+		files[i] = filename
+	end
+	pfile:close()
+	return files
+end
 return M
 
 -- vim: fdm=marker fdl=0
