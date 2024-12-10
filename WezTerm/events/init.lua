@@ -2,12 +2,6 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local scandir = require("utils.functions").scandir
 
-wezterm.on("gui-startup", function(window)
-	local tab, pane, window = mux.spawn_window(window or {})
-	local gui_window = window:gui_window()
-	gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
-end)
-
 local function readjust_font_size(window, pane)
 	local window_dims = window:get_dimensions()
 	local pane_dims = pane:get_dimensions()
@@ -72,4 +66,10 @@ end
 wezterm.on("window-resized", function(window, pane)
 	readjust_font_size(window, pane)
 	resize_nvim_splits()
+end)
+
+wezterm.on("gui-startup", function(window)
+	local tab, pane, window = mux.spawn_window(window or {})
+	local gui_window = window:gui_window()
+	gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
 end)
