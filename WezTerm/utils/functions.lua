@@ -1,5 +1,3 @@
----@diagnostic disable: undefined-field
-
 ---Various utility functions
 ---
 ---@module "utils.functions"
@@ -7,7 +5,7 @@
 ---@license GNU-GPLv3
 
 ---@diagnostic disable-next-line: assign-type-mismatch
-local wt = require("wezterm")
+local wezterm = require("wezterm")
 
 local floor, ceil = math.floor, math.ceil
 
@@ -51,7 +49,7 @@ end
 ---@field private target_triple string
 M.fs = {}
 
-M.fs.target_triple = wt.target_triple
+M.fs.target_triple = wezterm.target_triple
 
 -- {{{2 META
 
@@ -84,7 +82,7 @@ end
 ---
 ---@return string home The path to the user home directory.
 M.fs.home = function()
-	local home = (os.getenv("USERPROFILE") or os.getenv("HOME") or wt.home or ""):gsub("\\", "/")
+	local home = (os.getenv("USERPROFILE") or os.getenv("HOME") or wezterm.home or ""):gsub("\\", "/")
 	return home
 end
 
@@ -148,7 +146,7 @@ M.fs.get_cwd_hostname = function(pane, search_git_root_instead)
 	if cwd_uri then
 		if type(cwd_uri) == "userdata" then
 			cwd = cwd_uri.file_path
-			hostname = cwd_uri.host or wt.hostname()
+			hostname = cwd_uri.host or wezterm.hostname()
 		else
 			cwd_uri = cwd_uri:sub(8)
 			local slash = cwd_uri:find("/")
@@ -165,7 +163,7 @@ M.fs.get_cwd_hostname = function(pane, search_git_root_instead)
 			hostname = hostname:sub(1, dot - 1)
 		end
 		if hostname == "" then
-			hostname = wt.hostname()
+			hostname = wezterm.hostname()
 		end
 		hostname = hostname:gsub("^%l", string.upper)
 	end
@@ -445,7 +443,7 @@ M.key.map = function(lhs, rhs, tbl)
 
 		local k = keys[#keys]
 		if modifiers[k] then
-			return wt.log_error("keymap cannot end with modifier!")
+			return wezterm.log_error("keymap cannot end with modifier!")
 		else
 			table.remove(keys, #keys)
 		end
@@ -477,7 +475,7 @@ M.color.get_schemes = function()
 		return colorschemes
 	end
 
-	colorschemes = wt.color.get_builtin_schemes()
+	colorschemes = wezterm.color.get_builtin_schemes()
 	for name, colors in pairs(require("colors")) do
 		colorschemes[name] = colors
 	end
@@ -488,7 +486,7 @@ end
 ---Returns the colorscheme name absed on the system appearance
 ---@return '"kanagawa-wave"'|'"kanagawa-lotus"' colorscheme name of the colorscheme
 M.color.get_scheme = function()
-	if (wt.gui and wt.gui.get_appearance() or ""):find("Dark") then
+	if (wezterm.gui and wezterm.gui.get_appearance() or ""):find("Dark") then
 		return "kanagawa-wave"
 	end
 	return "kanagawa-lotus"
@@ -536,13 +534,12 @@ M.color.set_tab_button = function(config, theme)
 		ButtonLayout:push(sep_bg, style.fg_color, " + ", attributes)
 		ButtonLayout:push(sep_bg, sep_fg, sep.left, attributes)
 
-		config.tab_bar_style[state] = wt.format(ButtonLayout)
+		config.tab_bar_style[state] = wezterm.format(ButtonLayout)
 	end
 end
 
 -- }}}
 
-local wezterm = require("wezterm")
 -- Lua implementation of PHP scandir function
 ---@param directory string The directory in which we are operating. It must be absolute
 ---@return table files table of all files found
@@ -564,6 +561,7 @@ M.scandir = function(directory)
 	pfile:close()
 	return files
 end
+
 return M
 
 -- vim: fdm=marker fdl=0

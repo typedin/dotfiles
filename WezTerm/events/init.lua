@@ -52,7 +52,7 @@ local function resize_nvim_splits()
 		return
 	end
 	local files = scandir(path)
-	for _key, value in ipairs(files) do
+	for _, value in ipairs(files) do
 		if string.find(value, "nvim") then
 			-- /!\ ligature /!\
 			-- it's <Ctrl-w> = without space.
@@ -61,13 +61,14 @@ local function resize_nvim_splits()
 		end
 	end
 end
---
--- Register the function to be called when the window is resized
+
+-- Register the functions to be called when the window is resized
 wezterm.on("window-resized", function(window, pane)
 	readjust_font_size(window, pane)
 	resize_nvim_splits()
 end)
 
+-- Register fullscreen action when wezterm starts
 wezterm.on("gui-startup", function(window)
 	local tab, pane, window = mux.spawn_window(window or {})
 	local gui_window = window:gui_window()
