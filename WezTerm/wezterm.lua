@@ -8,5 +8,6 @@ local config = wezterm.config_builder()
 
 utils.tbl_merge(config, appearance)
 
+require("events")
 -- must return a table
 return config

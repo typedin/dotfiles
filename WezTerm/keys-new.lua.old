@@ -1,4 +1,3 @@
-print("I was called")
 local wezterm = require("wezterm")
 
 -- if you are *NOT* lazy-loading smart-splits.nvim (recommended)

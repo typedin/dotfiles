@@ -5,6 +5,7 @@ local M = {
 	font = wezterm.font("JetBrains Mono"),
 	underline_thickness = 1,
 	font_size = 10.0,
+	font_shaper = "Harfbuzz",
 	line_height = 1.9,
 	window_background_opacity = 0.95,
 	window_decorations = "RESIZE",
@@ -19,8 +20,8 @@ local M = {
 		visual_bell = "#ff0000",
 	},
 	window_padding = {
-		left = 2,
-		right = 2,
+		left = 0,
+		right = 0,
 		top = 0,
 		bottom = 0,
 	},
