@@ -36,6 +36,7 @@ wezterm.on("ActivatePaneDirection-down", function(window, pane)
 end)
 
 return {
+    leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
     -- don't change the mod key
     keys = {
         { key = "h", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-left") },
@@ -44,6 +45,6 @@ return {
         { key = "l", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-right") },
         { key = "5", mods = "CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
         { key = "'", mods = "CTRL", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-        { key = "p", mods = "SHIFT|CTRL", action = wezterm.action.ActivateCommandPalette },
+        { key = "p", mods = "LEADER", action = wezterm.action.ActivateCommandPalette },
     },
 }

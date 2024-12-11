@@ -10,7 +10,6 @@ local M = {
     window_background_opacity = 0.95,
     window_decorations = "RESIZE",
     audible_bell = "Disabled",
-    enable_tab_bar = false,
     default_cursor_style = "BlinkingBlock",
     cursor_blink_rate = 800,
     cursor_blink_ease_in = "EaseOut",

@@ -1,6 +1,6 @@
 local M = {}
 
-M.enable_tab_bar = true
+M.enable_tab_bar = false
 M.hide_tab_bar_if_only_one_tab = false
 M.show_new_tab_button_in_tab_bar = true
 M.show_tab_index_in_tab_bar = false
