@@ -12,9 +12,11 @@ return {
                     changedelete = { text = "~" },
                 },
             })
-            vim.keymap.set("n", "<localleader>gp", ":Gitsigns preview_hunk<CR>", {})
-            vim.keymap.set("n", "<localleader>gt", ":Gitsigns toggle_current_line_blame<CR>", {})
         end,
+        keys = {
+            { "<localleader>gp", "<cmd>Gitsigns preview_hunk<CR>", desc = "[G]it [P]review hunk" },
+            { "<localleader>gt", "<cmd>Gitsigns toggle_current_line_blame<CR>", desc = "[G]it [T]oggle current line blame" },
+        },
     },
     {
         "tpope/vim-fugitive",

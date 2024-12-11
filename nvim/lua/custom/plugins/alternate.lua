@@ -19,8 +19,8 @@ return {
                 return (filename:gsub("%.mli", ".ml"))
             end)
 
-            vim.api.nvim_set_keymap("n", "<space>sea", "<cmd>vsplit<CR><cmd>EditAlternate<CR>", { silent = true })
-            vim.api.nvim_set_keymap("n", "<space>ea", "<cmd>EditAlternate<CR>", { silent = true })
+            -- vim.api.nvim_set_keymap("n", "<space>sea", "<cmd>vsplit<CR><cmd>EditAlternate<CR>", { silent = true })
+            -- vim.api.nvim_set_keymap("n", "<space>ea", "<cmd>EditAlternate<CR>", { silent = true })
         end,
     },
 }

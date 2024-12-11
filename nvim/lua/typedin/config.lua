@@ -1,4 +1,5 @@
 local signs = require("typedin.signs")
+
 vim.diagnostic.config({
     virtual_text = false,
     float = {
