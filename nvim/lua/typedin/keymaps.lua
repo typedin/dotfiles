@@ -1,3 +1,7 @@
+-- WARNING
+-- all plugins keymaps must stay in plugin conf files
+-- WARNING
+
 local set = vim.keymap.set
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`

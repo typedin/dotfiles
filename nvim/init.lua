@@ -6,14 +6,12 @@
 vim.g.mapleader = " "
 ---@diagnostic disable-next-line: inject-field
 vim.g.maplocalleader = ","
-
 -- Set to true if you have a Nerd Font installed
 ---@diagnostic disable-next-line: inject-field
 vim.g.have_nerd_font = true
 
 --[[
 -- Setup initial configuration,
--- 
 -- Primarily just download and execute lazy.nvim
 --]]
 
