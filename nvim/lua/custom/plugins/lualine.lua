@@ -1,4 +1,4 @@
-local signs = require("typedin.signs")
+local signs = require("custom.signs")
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {

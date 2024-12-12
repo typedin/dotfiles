@@ -1,4 +1,4 @@
-local signs = require("typedin.signs")
+local signs = require("custom.signs")
 
 vim.diagnostic.config({
     virtual_text = false,

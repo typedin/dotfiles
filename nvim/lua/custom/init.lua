@@ -1,6 +1,6 @@
-require("typedin.config")
-require("typedin.keymaps")
-require("typedin.autocommands")
+require("custom.config")
+require("custom.keymaps")
+require("custom.autocommands")
 
 local shortmessage_options = {
     "W", -- don't echo "[w]"/"[written]" when writing

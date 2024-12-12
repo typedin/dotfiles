@@ -31,8 +31,8 @@ require("lazy").setup({ import = "custom/plugins" }, {
         notify = false,
     },
     ui = {
-        icons = vim.g.have_nerd_font and {} or require("typedin.signs"),
+        icons = vim.g.have_nerd_font and {} or require("custom.signs"),
     },
 })
 
-require("typedin")
+require("custom")
