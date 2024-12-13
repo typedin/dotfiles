@@ -3,14 +3,12 @@ if [[ ":$FPATH:" != *":/home/antoine/.zsh/completions:"* ]]; then export FPATH="
 export ZSH=$HOME/.oh-my-zsh
 source ~/.config/zsh/zsh-aliases
 source ~/.config/zsh/zsh-exports
-# source ~/.config/zsh/zsh-path
 
 ZSH_THEME="spaceship"
 HIST_STAMPS="dd/mm/yyyy"
 
 plugins=(
     composer
-    # debian
     git
     git
     laravel
@@ -19,7 +17,7 @@ plugins=(
 
 export COLORTERM=truecolor
 export LC_ALL=en_US.UTF-8
-#
+
 # Per user npm bin
 NPM_PACKAGES="${HOME}/.local/share/npm-packages"
 PATH="$PATH:$NPM_PACKAGES/bin"
