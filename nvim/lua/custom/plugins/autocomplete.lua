@@ -50,17 +50,6 @@ return {
 
                     -- Accept ([y]es) the completion.
                     ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-
-                    -- Manually trigger a completion from nvim-cmp.
-                    --  Generally you don't need this, because nvim-cmp will display
-                    --  completions whenever it has completion options available.
-                    ["<C-Space>"] = false,
-                    -- <c-l> will move you to the right of each of the expansion locations.
-                    -- disabled
-                    ["<C-l>"] = false,
-                    -- <c-h> is similar, except moving you backwards.
-                    -- disabled
-                    ["<C-h>"] = false,
                 }),
                 sources = {
                     { name = "nvim_lsp" },
