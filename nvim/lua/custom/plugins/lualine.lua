@@ -34,6 +34,7 @@ return {
     },
     config = function()
         local git_blame = require("gitblame")
+        ---@diagnostic disable: inject-field
         vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text
         vim.g.gitblame_date_format = "%d-%m-%y (%H:%M)" -- Disable virtual text
         vim.g.gitblame_message_template = " <summary> • <date> • <author>" -- Disable virtual text
