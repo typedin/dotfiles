@@ -37,6 +37,16 @@ set("n", "]d", function()
     vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Go to [N]ext [D]iagnostic message" })
 
+-- Quick fix
+set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "[C]uickfix [N]ext" })
+set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "[C]uickfix [P]revious" })
+set("n", "<M-c>", "<cmd>cclose<CR>", { desc = "[C]uickfix [C]lose" })
+
+-- source current line
+set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "interpret current file in lua" })
+set("n", "<leader>x", ":.lua<CR>", { desc = "interpret current line in lua" })
+set("v", "<leader>x", ":lua<CR>", { desc = "interpret selected block in lua" })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
