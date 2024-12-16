@@ -43,7 +43,7 @@ return {
             options = {
                 icons_enabled = true,
                 globalstatus = true,
-                theme = "tokyonight",
+                theme = vim.g.colors_name,
             },
             sections = {
                 lualine_a = { "mode" },
@@ -58,8 +58,7 @@ return {
                 lualine_x = {
                     { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available },
                 },
-                lualine_y = { "filetype" },
-                lualine_z = {
+                lualine_y = {
                     {
                         "diagnostics",
                         sources = { "nvim_diagnostic" },
@@ -77,9 +76,15 @@ return {
                             info = signs.info,
                             warn = signs.warn,
                         },
-                        colored = true, -- Displays diagnostics status in color if set to true.
+                        colored = false, -- Displays diagnostics status in color if set to true.
                         update_in_insert = false, -- Update diagnostics in insert mode.
                         always_visible = false, -- Show diagnostics even if there are none.
+                    },
+                },
+                lualine_z = {
+                    {
+                        "filetype",
+                        colored = false, -- Displays diagnostics status in color if set to true.
                     },
                 },
             },
