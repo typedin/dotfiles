@@ -2,6 +2,10 @@ require("custom.config")
 require("custom.keymaps")
 require("custom.autocommands")
 
+-- used in autocommands.lua
+---@diagnostic disable-next-line: inject-field
+vim.g.highlight_on_cursor_hold = false
+
 local shortmessage_options = {
     "W", -- don't echo "[w]"/"[written]" when writing
     "I", -- no splash screen
