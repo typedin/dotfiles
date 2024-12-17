@@ -1,6 +1,6 @@
-require("custom.config")
-require("custom.keymaps")
 require("custom.autocommands")
+require("custom.diagnostic")
+require("custom.keymaps")
 
 -- used in autocommands.lua
 ---@diagnostic disable-next-line: inject-field
