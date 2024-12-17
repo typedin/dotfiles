@@ -1,12 +1,40 @@
 #!/bin/sh
-HISTSIZE=1000000
-SAVEHIST=1000000
 
-export PATH="$HOME/.local/bin":$PATH
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/share/go/bin:$PATH
-export GOPATH=$HOME/.local/share/go
-export PATH=$HOME/.fnm:$PATH
-export PATH="$PATH:./node_modules/.bin"
+
+# add rust cargo to path
+PATH=$PATH:"$HOME/.cargo/bin"
+
+# add user's bin to path
+# export PATH="$HOME/.local/bin":$PATH
+PATH=$PATH:"$HOME/.local/bin"
+PATH=$PATH:"$HOME/node_modules/.bin"
+
+# Per user npm bin
+NPM_PACKAGES="${HOME}/.local/share/npm-packages"
+PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Per user composer bin
+PATH="$(composer config -g home)/.local/share/composer/vendor/bin:$PATH"
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+# Per user add mason bin to path 
+MASON_PACKAGES="${HOME}/.local/share/nvim/mason"
+PATH="$PATH:$MASON_PACKAGES/bin"
+
+# Per user go 
+PATH=$PATH:/usr/local/go/bin
+GOPATH=$HOME/.local/share/go
+
+# Per user lua 
+LUA_PACKAGES="${HOME}/.luarocks/"
+PATH="$PATH:$LUA_PACKAGES/bin"
+
+# Yazi
+TMP_HOME_PATH="${HOME}/tmp/"
+PATH="$PATH:$TMP_HOME_PATH/yazi/target/release/"
+
+export PATH
