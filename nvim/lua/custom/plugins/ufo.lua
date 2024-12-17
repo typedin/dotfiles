@@ -27,35 +27,18 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 end
 
 return {
-    "kevinhwang91/nvim-ufo",
-    dependencies = "kevinhwang91/promise-async",
-    config = function()
-        require("ufo").setup({
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = {
+            "kevinhwang91/promise-async",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        event = "BufReadPost",
+        opts = {
             fold_virt_text_handler = handler,
             provider_selector = function()
                 return { "treesitter", "indent" }
             end,
-        })
-    end,
-    init = function()
-        -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-        -- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-        -- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-    end,
-    keys = {
-        {
-            "zO",
-            function()
-                require("ufo").openAllFolds()
-            end,
-            desc = "[O]pen all folds",
-        },
-        {
-            "zM",
-            function()
-                require("ufo").closeAllFolds()
-            end,
-            desc = "[M]ake all folds close",
         },
     },
 }
