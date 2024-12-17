@@ -68,9 +68,12 @@ wezterm.on("window-resized", function(window, pane)
     resize_nvim_splits()
 end)
 
+--[[
 -- Register fullscreen action when wezterm starts
 wezterm.on("gui-startup", function(a_window)
+    ---@diagnostic disable-next-line: unused-local
     local tab, pane, window = mux.spawn_window(a_window or {})
     local gui_window = window:gui_window()
     gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
 end)
+]]
