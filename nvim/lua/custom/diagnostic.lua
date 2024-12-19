@@ -9,15 +9,9 @@ vim.diagnostic.config({
     signs = {
         linehl = {
             [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-            [vim.diagnostic.severity.HINT] = "ErrorMsg",
-            [vim.diagnostic.severity.INFO] = "ErrorMsg",
-            [vim.diagnostic.severity.WARN] = "WarnMsg",
         },
         numhl = {
             [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-            [vim.diagnostic.severity.HINT] = "ErrorMsg",
-            [vim.diagnostic.severity.INFO] = "ErrorMsg",
-            [vim.diagnostic.severity.WARN] = "ErrorMsg",
         },
         text = {
             [vim.diagnostic.severity.ERROR] = signs.error,
