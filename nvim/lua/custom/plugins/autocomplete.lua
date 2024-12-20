@@ -1,5 +1,6 @@
+-- Autocompletion
 return {
-    { -- Autocompletion
+    {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
@@ -17,6 +18,7 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
+            "github/copilot.vim",
 
             -- If you want to add a bunch of pre-configured snippets,
             --    you can use this plugin to help you. It even has snippets
@@ -52,6 +54,7 @@ return {
                     ["<C-y>"] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = {
+                    { name = "copilot" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "path" },
