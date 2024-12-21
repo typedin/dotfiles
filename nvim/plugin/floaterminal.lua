@@ -5,7 +5,6 @@ local state = {
     },
 }
 
----@diagnostic disable: unused-local
 local function create_floating_window(opts)
     opts = opts or {}
 
@@ -50,3 +49,8 @@ end
 
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
 vim.keymap.set({ "n", "t" }, "<leader>t", toggle_terminal)
+
+return {
+    state = state,
+    toggle_terminal = toggle_terminal,
+}

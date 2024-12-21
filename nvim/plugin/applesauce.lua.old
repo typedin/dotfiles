@@ -1,0 +1,43 @@
+--[[
+    lorem ipsum
+--]]
+
+---@return string The function name under the cursor
+---@return string The absolute path for the file being edited.
+---@return string The filetype for the current buffer.
+local function applesauce()
+    -- get string under the cursor and trim any white space
+    local string_under_cursor = vim.trim(vim.api.nvim_get_current_line())
+    local buf = vim.api.nvim_get_current_buf()
+
+    local filepath = vim.api.nvim_buf_get_name(buf)
+    local filetype = vim.api.nvim_buf_get_option(buf, "filetype")
+
+    vim.print({
+        string_under_cursor,
+        filepath,
+        filetype,
+    })
+
+    return string_under_cursor, filepath, filetype
+end
+
+vim.keymap.set("n", "<leader>aa", applesauce)
+--
+--
+--
+local state = require("plugin.floaterminal").state
+local toggle_terminal = require("plugin.floaterminal").toggle_terminal
+-- Send text to terminal
+local send_to_terminal = function()
+    if not vim.api.nvim_win_is_valid(state.floating.win) then
+        toggle_terminal()
+    end
+    local job_id = vim.bo[state.floating.buf].channel
+    local string_under_cursor, filepath, filetype = applesauce()
+    print(string_under_cursor)
+    vim.api.nvim_chan_send(job_id, "echo " .. string_under_cursor .. "\n")
+end
+
+vim.api.nvim_create_user_command("SendToTerminal", send_to_terminal, {})
+vim.keymap.set({ "n", "t" }, "<leader>T", send_to_terminal)
