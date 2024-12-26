@@ -100,10 +100,10 @@ prompt_git_branch() {
 
 prompt_git_info() {
   local COLOR
-  if ${#STATUS}; then
+  if [ -z "$STATUS" ]; then
     COLOR="%F{red}"
   else
-    COLOR="%F{green}"
+    COLOR="%F{white}"
   fi
   [ ! -z "$vcs_info_msg_0_" ] && echo "$COLOR$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
