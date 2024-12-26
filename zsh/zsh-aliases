@@ -82,3 +82,5 @@ function cd_up() {
 }
 
 alias 'cd..'='cd_up'
+
+alias ls="ls --color=auto"
