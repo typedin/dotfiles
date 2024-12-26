@@ -1,14 +1,9 @@
 #!/usr/bin/env bash 
+
+# Based on:
 # Purification
 # by Matthieu Cneude
 # https://github.com/Phantas0s/purification
-
-# Based on:
-
-# Purity
-# by Kevin Lanni
-# https://github.com/therealklanni/purity
-# MIT License
 
 # prompt:
 # %F => color dict
@@ -19,103 +14,99 @@
 # %m => shortname host
 # %(?..) => prompt conditional - %(condition.true.false)
 
-# Display git status
-# TODO to refactor with switch / using someting else than grep
-# Might be faster using ripgrep too
+# Define Git status symbols in a lookup table
+declare -A GIT_STATUS_SYMBOLS=(
+  [added]=""
+  [ahead]=""
+  [behind]=""
+  [deleted]=""
+  [modified]=""
+  [renamed]=""
+  [stash]=""
+  [unmerged]=""
+  [untracked]=""
+)
+# Assign colors directly without using a lookup table
+ZSH_THEME_GIT_PROMPT_PREFIX=" "
+ZSH_THEME_GIT_PROMPT_DIRTY=""
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+ZSH_THEME_GIT_PROMPT_ADDED="${GIT_STATUS_SYMBOLS[added]}"
+ZSH_THEME_GIT_PROMPT_AHEAD="F${GIT_STATUS_SYMBOLS[ahead]}"
+ZSH_THEME_GIT_PROMPT_BEHIND="${GIT_STATUS_SYMBOLS[behind]}"
+ZSH_THEME_GIT_PROMPT_DELETED="${GIT_STATUS_SYMBOLS[deleted]}"
+ZSH_THEME_GIT_PROMPT_MODIFIED="${GIT_STATUS_SYMBOLS[modified]}"
+ZSH_THEME_GIT_PROMPT_RENAMED="${GIT_STATUS_SYMBOLS[renamed]}"
+ZSH_THEME_GIT_PROMPT_STASHED="${GIT_STATUS_SYMBOLS[stash]}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="${GIT_STATUS_SYMBOLS[unmerged]}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="${GIT_STATUS_SYMBOLS[untracked]}"
+
 git_prompt_status() { 
-  local INDEX STATUS
+  # Declare an array to hold status symbols
+  local STATUS=""
+  local STATUS_ARRAY=()
 
   # Get the git status summary
-  INDEX=$(git status --porcelain -b 2>/dev/null)
+  local git_status=$(git status --porcelain -b 2>/dev/null)
 
-  STATUS=""
-
-  # Function to append status symbols
-  append_status() {
-    local SYMBOL=$1
-    STATUS="${SYMBOL}${STATUS}"
+  # Function to check and append symbols to the array
+  check_untracked() {
+    if [[ "$1" == "?? "* ]]; then
+      STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_UNTRACKED")
+    fi
   }
 
-  # Iterate through each line in the Git status output
+  check_added_modified() {
+    if [[ "$1" =~ ^(A  |M  |MM ) ]]; then
+      STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_ADDED")
+    fi
+  }
+
+  check_modified() {
+    if [[ "$1" =~ ^( M |AM | T ) ]]; then
+      STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_MODIFIED")
+    fi
+  }
+
+  check_renamed() {
+    if [[ "$1" == "R  "* ]]; then
+      STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_RENAMED")
+    fi
+  }
+
+  check_deleted() {
+    if [[ "$1" =~ ^( D |D  |AD ) ]]; then
+      STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_DELETED")
+    fi
+  }
+
+  # Check for stashed changes
+  check_stash() {
+    if git rev-parse --verify refs/stash >/dev/null 2>&1; then
+      STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_STASHED")
+    fi
+  }
+
+  # Process each line of the status
   while IFS= read -r line; do
-    case "$line" in
-      # Untracked Files
-      # Matches lines starting with '?? ' indicating untracked files (not added to Git).
-      "?? "*)
-        append_status "$ZSH_THEME_GIT_PROMPT_UNTRACKED"
-        ;;
+    check_untracked "$line"
+    check_added_modified "$line"
+    check_modified "$line"
+    check_renamed "$line"
+    check_deleted "$line"
+  done <<< "$git_status"
 
-      # Added Files
-      # Matches:
-      # - "A  " : File staged for addition.
-      # - "M  " : File modified and staged.
-      # - "MM " : File modified in both index and working directory.
-      "A  "* | "M  "* | "MM "*)
-        append_status "$ZSH_THEME_GIT_PROMPT_ADDED"
-        ;;
+  check_stash
 
-      # Modified Files
-      # Matches:
-      # - " M " : File modified but not staged.
-      # - "AM " : File added and then modified.
-      # - " T " : File type (e.g., permissions) has changed.
-      " M "* | "AM "* | " T "*)
-        append_status "$ZSH_THEME_GIT_PROMPT_MODIFIED"
-        ;;
-
-      # Renamed Files
-      # Matches lines starting with 'R  ' indicating renamed files.
-      "R  "*)
-        append_status "$ZSH_THEME_GIT_PROMPT_RENAMED"
-        ;;
-
-      # Deleted Files
-      # Matches:
-      # - " D " : File deleted but not staged.
-      # - "D  " : File staged for deletion.
-      # - "AD " : File added and then deleted.
-      " D "* | "D  "* | "AD "*)
-        append_status "$ZSH_THEME_GIT_PROMPT_DELETED"
-        ;;
-
-      # Unmerged Files
-      # Matches lines starting with 'UU ' indicating unresolved merge conflicts.
-      "UU "*)
-        append_status "$ZSH_THEME_GIT_PROMPT_UNMERGED"
-        ;;
-
-      # Ahead of Remote
-      # Matches lines starting with '##' containing 'ahead' indicating commits are ahead of remote.
-      "## "*ahead*)
-        append_status "$ZSH_THEME_GIT_PROMPT_AHEAD"
-        ;;
-
-      # Behind Remote
-      # Matches lines starting with '##' containing 'behind' indicating the branch is behind the remote.
-      "## "*behind*)
-        append_status "$ZSH_THEME_GIT_PROMPT_BEHIND"
-        ;;
-
-      # Diverged from Remote
-      # Matches lines starting with '##' containing 'diverged' indicating the branch is both ahead and behind.
-      "## "*diverged*)
-        append_status "$ZSH_THEME_GIT_PROMPT_DIVERGED"
-        ;;
-    esac
-  done <<< "$INDEX"
-
-  # Check for stashed changes using ripgrep
-  if git rev-parse --verify refs/stash >/dev/null 2>&1; then
-    append_status "$ZSH_THEME_GIT_PROMPT_STASHED"
+  # Concatenate array into STATUS string with a space between symbols
+  if [[ ${#STATUS_ARRAY[@]} -gt 0 ]]; then
+    # don't remove one of the 2 white spaces
+    STATUS="[ ${STATUS_ARRAY[*]}  ]"
   fi
 
-  # Output the status if not empty
-  if [[ -n "$STATUS" ]]; then
-    echo "[ $STATUS ]"
-  fi
-
+  # Return the final status string
+  echo "$STATUS"
 }
-
 
 prompt_git_branch() {
   autoload -Uz vcs_info 
@@ -126,8 +117,7 @@ prompt_git_branch() {
 }
 
 prompt_git_info() {
-  # [ ! -z "$vcs_info_msg_0_" ] && echo "$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
-  [ -z "$vcs_info_msg_0_" ] && echo "%F{white}$ZSH_THEME_GIT_PROMPT_PREFIX%f$ZSH_THEME_GIT_PROMPT_SUFFIX" || echo "%F{red}$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo "%B%F{white}%$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 prompt_purity_precmd() {
@@ -136,36 +126,20 @@ prompt_purity_precmd() {
 }
 
 prompt_purification_setup() {
-  # Display git branch
-
-  autoload -Uz add-zsh-hook
-  add-zsh-hook precmd prompt_purity_precmd
-
-  ZSH_THEME_GIT_PROMPT_PREFIX="   "
-  ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red} %f "
-  ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green} %f "
-
-  ZSH_THEME_GIT_PROMPT_ADDED="%F{green} %f "
-  ZSH_THEME_GIT_PROMPT_MODIFIED="%F{blue} %f "
-  ZSH_THEME_GIT_PROMPT_DELETED="%F{red} %f "
-  ZSH_THEME_GIT_PROMPT_RENAMED="%F{magenta} %f "
-  ZSH_THEME_GIT_PROMPT_UNMERGED="%F{yellow} %f "
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{white} %f "
-  ZSH_THEME_GIT_PROMPT_STASHED="%B%F{red} %f%b "
-  ZSH_THEME_GIT_PROMPT_BEHIND="%B%F{red} %f%b "
-  ZSH_THEME_GIT_PROMPT_AHEAD="%B%F{green} %f%b "
-
+  # Load Git branch info
   prompt_git_branch
 
-  # sets the left part of the prompt line
-  # sets the current path to white
+  # Set up the left side of the prompt
   CURRENT_PATH='%F{white}%~%f'
-  # sets the prompt symbol to a right arrow and it is set to a dark blue color
-  PROMPT_SYMBOL='%B%F{blue} %f%b'
-  PROMPT=$'$CURRENT_PATH $PROMPT_SYMBOL '
+  PROMPT_SYMBOL='%B%F{blue} %f%b '
+  PROMPT="$CURRENT_PATH $PROMPT_SYMBOL "
 
-  # sets the right part of the prompt line
+  # Set up the right side of the prompt with git info and status
   RPROMPT='$(prompt_git_info) $(git_prompt_status)'
+
+  # Set the precmd function to include an empty line before the prompt
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd prompt_purity_precmd
 }
 
 prompt_purification_setup
