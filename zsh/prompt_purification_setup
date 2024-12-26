@@ -100,7 +100,7 @@ prompt_git_branch() {
 
 prompt_git_info() {
   local COLOR
-  if $STATUS; then
+  if ${#STATUS}; then
     COLOR="%F{red}"
   else
     COLOR="%F{green}"
