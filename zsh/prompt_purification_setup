@@ -99,7 +99,6 @@ prompt_git_branch() {
 }
 
 prompt_git_info() {
-  local COLOR
   if [ -z "$STATUS" ]; then
     COLOR="%F{red}"
   else
