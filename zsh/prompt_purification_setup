@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash 
 # Purification
 # by Matthieu Cneude
 # https://github.com/Phantas0s/purification
@@ -99,7 +99,13 @@ prompt_git_branch() {
 }
 
 prompt_git_info() {
-  [ ! -z "$vcs_info_msg_0_" ] && echo "$ZSH_THEME_GIT_PROMPT_PREFIX%F{white}$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  local COLOR
+  if $STATUS; then
+    COLOR="%F{red}"
+  else
+    COLOR="%F{green}"
+  fi
+  [ ! -z "$vcs_info_msg_0_" ] && echo "$COLOR$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 prompt_purity_precmd() {
@@ -113,9 +119,9 @@ prompt_purification_setup() {
   autoload -Uz add-zsh-hook
   add-zsh-hook precmd prompt_purity_precmd
 
-  ZSH_THEME_GIT_PROMPT_PREFIX=" %F{red} %f "
-  ZSH_THEME_GIT_PROMPT_DIRTY=""
-  ZSH_THEME_GIT_PROMPT_CLEAN=""
+  ZSH_THEME_GIT_PROMPT_PREFIX="   "
+  ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red} %f "
+  ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green} %f "
 
   ZSH_THEME_GIT_PROMPT_ADDED="%F{green} %f "
   ZSH_THEME_GIT_PROMPT_MODIFIED="%F{blue} %f "
