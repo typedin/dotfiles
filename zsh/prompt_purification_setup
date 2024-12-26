@@ -99,12 +99,12 @@ prompt_git_branch() {
 }
 
 prompt_git_info() {
-  if [ -z "$STATUS" ]; then
-    COLOR="%F{red}"
-  else
-    COLOR="%F{white}"
+  if [ ! -z "$vcs_info_msg_0_" ]; then
+echo "%F{red}$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
+else
+echo "%F{white}$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
-  [ ! -z "$vcs_info_msg_0_" ] && echo "$COLOR$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  # [ ! -z "$vcs_info_msg_0_" ] && echo "%F{red}$ZSH_THEME_GIT_PROMPT_PREFIX$vcs_info_msg_0_%f$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 prompt_purity_precmd() {
