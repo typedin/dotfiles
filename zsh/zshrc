@@ -1,4 +1,9 @@
 #!/usr/bin/env zsh
+# +------------+
+# | Color theme|
+# +------------+
+# define the color palette right away so that it can be used in the rest of the file
+source ~/.config/zsh/themes/tokyo-night.zsh
 
 # +------------+
 # | COMPLETION |
@@ -57,4 +62,6 @@ autoload -Uz prompt_purification_setup && prompt_purification_setup
 # +---------------------+
 # | SYNTAX HIGHLIGHTING |
 # +---------------------+
+# must be at the end of the file
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh/themes/theme.zsh
