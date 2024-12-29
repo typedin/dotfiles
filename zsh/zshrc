@@ -1,20 +1,76 @@
 #!/usr/bin/env zsh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # +------------+
-# | Color theme|
+# |  PLUGINS   |
 # +------------+
-# define the color palette right away so that it can be used in the rest of the file
-source ~/.config/zsh/themes/tokyo-night.zsh
+# Set the directory where zinit and plugins will be installed
+# parameter extension: 
+# if XDG_DATA_HOME is set, use it, otherwise use HOME (~/.local/share)
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# check if zinit is installed, if not, install it
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+# source zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# +------------+
+# |   THEME    |
+# +------------+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+source ~/.config/zsh/plugins/p10k.zsh 
+# syntax highlighting
+zinit light zsh-users/zsh-syntax-highlighting
 
 # +------------+
 # | COMPLETION |
 # +------------+
-autoload -U compinit; compinit
+# completions
+zinit light zsh-users/zsh-completions
+autoload -U compinit && compinit
+# suggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# +-------------------+
+# | Shell Integration |
+# +-------------------+
+# fzf
+zinit light Aloxaf/fzf-tab
+zstyle ':completion:*' menu no # deactivate default menu
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # create a preview of the folder in the fzf menu
+# zoxide
+eval "$(zoxide init --cmd cd zsh)"
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath' # create a preview of the folder in the fzf menu
+
+# +------------+
+# | Keybindings|
+# +------------+
+# use vi keybindings
+bindkey -v
+bindkey '^y' autosuggest-accept         # same keybind as in my neovim config
+bindkey '^p' history-search-backward    # same keybind as in my neovim config
+bindkey '^n' history-search-forward     # same keybind as in my neovim config
+
+# completion styling
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":/home/antoine/.zsh/completions:"* ]]; then 
     export FPATH="/home/antoine/.zsh/completions:$FPATH"; 
 fi
 
+# +------------+
+# | TODO       |
+#  clean those next lines
+# +------------+
 source ~/.config/zsh/zsh-aliases
 source ~/.config/zsh/zsh-exports
 export COLORTERM=truecolor
@@ -46,22 +102,13 @@ setopt HIST_IGNORE_SPACE                  # Do not record an event starting with
 setopt HIST_SAVE_NO_DUPS                  # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY                        # Do not execute immediately upon history expansion.
 
-bindkey '\e[A' history-search-backward    # autocompletion using down arrow key (based on history)
-bindkey '\e[B' history-search-forward     # autocompletion using up arrow key (based on history)
 
 HISTFILE=$HOME/.zhistory                  # Set the history file.
 SAVEHIST=1000                             # Set the number of history entries to save.
 HISTSIZE=999                              # Set the number of history entries to save.
-
-# +--------+
-# | PROMPT |
-# +--------+
-fpath=(~/.config/zsh/ $fpath)       # add current directory to path
-autoload -Uz prompt_purification_setup && prompt_purification_setup
 
 # +---------------------+
 # | SYNTAX HIGHLIGHTING |
 # +---------------------+
 # must be at the end of the file
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.config/zsh/themes/theme.zsh

@@ -1,4 +1,4 @@
-#!/bin/sh
+##!/bin/sh
 alias k="echo -e 'clear<CR>'"
 
 alias dotfiles="nvim $HOME/dotfiles/$1"
@@ -83,4 +83,4 @@ function cd_up() {
 
 alias 'cd..'='cd_up'
 
-alias ls="ls --color=auto"
+alias ls="ls --color"
