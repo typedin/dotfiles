@@ -1,5 +1,17 @@
 #!/usr/bin/env bash 
 
+# Use ANSI escape codes for RG# Extract RGB values from the hex code
+hex_to_rgb() {
+    local hex="${1/#\#}" # Remove leading hash if present
+    echo $((16#${hex[1,2]})) $((16#${hex[3,4]})) $((16#${hex[5,6]}))
+}
+
+# Apply RGB color using ANSI escape codes
+apply_rgb_color() {
+  local rgb=(${(s: :)$(hex_to_rgb "$1")})  
+  echo "%{\e[38;2;${rgb[1]};${rgb[2]};${rgb[3]}m%}$2%{\e[0m%}"
+}
+
 # Based on:
 # Purification
 # by Matthieu Cneude
@@ -45,11 +57,11 @@ git_prompt_status() {
   # Declare an array to hold status symbols
   local STATUS=""
   local STATUS_ARRAY=()
-
+  local GIT_COLOR=""
+  
   # Get the git status summary
   local git_status=$(git status --porcelain -b 2>/dev/null)
 
-  # Function to check and append symbols to the array
   check_untracked() {
     if [[ "$1" == "?? "* ]]; then
       STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_UNTRACKED")
@@ -80,7 +92,6 @@ git_prompt_status() {
     fi
   }
 
-  # Check for stashed changes
   check_stash() {
     if git rev-parse --verify refs/stash >/dev/null 2>&1; then
       STATUS_ARRAY+=("$ZSH_THEME_GIT_PROMPT_STASHED")
@@ -104,8 +115,10 @@ git_prompt_status() {
     STATUS="[ ${STATUS_ARRAY[*]}  ]"
   fi
 
+  print $STATUS
   # Return the final status string
-  echo "$STATUS"
+  # print "%F${colors[red]}$STATUS"
+  # apply_rgb_color "${colors[red]}" "$STATUS"
 }
 
 prompt_git_branch() {
@@ -130,7 +143,7 @@ prompt_purification_setup() {
   prompt_git_branch
 
   # Set up the left side of the prompt
-  CURRENT_PATH='%F{white}%~%f'
+  CURRENT_PATH=' %F{white}%~%f'
   PROMPT_SYMBOL='%B%F{blue} %f%b '
   PROMPT="$CURRENT_PATH $PROMPT_SYMBOL "
 
