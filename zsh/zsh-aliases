@@ -55,7 +55,7 @@ alias nah="git reset --hard && git clean -df"
 
 # zoxide
 # alias z="__zoxide_zi"
-# alias cd="__zoxide_cd"
+# alias cd="__zoxidecd"
 
 # create a directory if doesn't exist
 # move into it

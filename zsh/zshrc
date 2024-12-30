@@ -50,7 +50,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # create a pr
 # manually installed this way:
 # curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 # install path is ~/.local/bin/
-eval "$(zoxide init --cmd cd zsh)" # initialize zoxide with an alias to cd
+eval "$(zoxide init --cmd cd zsh)" # initialize zoxide with an alias to cd don't pass --no-aliases or it will not work
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath' # create a preview of the folder in the fzf menu
 
 # +------------+
