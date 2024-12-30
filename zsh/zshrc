@@ -38,15 +38,19 @@ autoload -U compinit && compinit
 # suggestions
 zinit light zsh-users/zsh-autosuggestions
 
-# +-------------------+
-# | Shell Integration |
-# +-------------------+
+# +------------------------+
+# | Shell Integration      |
+# | must be after compinit |
+# +------------------------+
 # fzf
 zinit light Aloxaf/fzf-tab
 zstyle ':completion:*' menu no # deactivate default menu
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # create a preview of the folder in the fzf menu
 # zoxide
-eval "$(zoxide init --cmd cd zsh)"
+# manually installed this way:
+# curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+# install path is ~/.local/bin/
+eval "$(zoxide init --cmd cd zsh)" # initialize zoxide with an alias to cd
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath' # create a preview of the folder in the fzf menu
 
 # +------------+

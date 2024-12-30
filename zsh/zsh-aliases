@@ -1,9 +1,7 @@
-##!/bin/sh
+##!/bin/sh 
 alias k="echo -e 'clear<CR>'"
 
-alias dotfiles="nvim $HOME/dotfiles/$1"
 alias g='lazygit'
-alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias nvimrc='nvim ~/.config/nvim/'
 
 # Colorize grep output (good for log files)
@@ -20,17 +18,11 @@ alias rm='rm -i'
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
 # replace git with config alias for dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # vim point to nvim
 alias nvi="nvim"
-alias c="nvim"
 alias vi="nvim"
 alias vim="nvim"
 
@@ -55,17 +47,15 @@ alias cda="composer dump-autoload"
 alias cu="composer update"
 alias bat="/usr/bin/batcat"
 
-# YARN
-alias yw="yarn watch"
-alias yd="yarn dev"
-alias yu="yarn upgrade"
-alias ys="yarn serve"
-
 # GIT
 alias ga="git add"
 alias gaa="git add ."
 alias gs="git status"
 alias nah="git reset --hard && git clean -df"
+
+# zoxide
+# alias z="__zoxide_zi"
+# alias cd="__zoxide_cd"
 
 # create a directory if doesn't exist
 # move into it
