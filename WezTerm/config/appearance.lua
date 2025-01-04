@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local M = {
     color_scheme = "Tokyo Night Moon",
-    font = wezterm.font("JetBrains Mono"),
+    font = wezterm.font("JetBrains Mono"), -- this font is bundled in @see https://wezfurlong.org/wezterm/config/fonts.html
     underline_thickness = 1,
     font_size = 10.0,
     font_shaper = "Harfbuzz",
