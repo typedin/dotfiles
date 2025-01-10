@@ -1,7 +1,8 @@
+-- "gc" to comment visual regions/lines
+-- it's built in to nvim since Neovim>=0.10
+-- see :h comment
 -- Highlight todo, notes, etc in comments
 return {
-    -- "gc" to comment visual regions/lines
-    { "numToStr/Comment.nvim", opts = {} },
     {
         "folke/todo-comments.nvim",
         event = "VimEnter",
