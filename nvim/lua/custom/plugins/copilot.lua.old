@@ -1,0 +1,12 @@
+local set = vim.api.nvim_set_keymap
+return {
+    {
+        "github/copilot.vim",
+        config = function()
+            set("i", "<C-N>", "copilot#Next()", { expr = true, silent = true, noremap = false })
+            set("i", "<C-P>", "copilot#Previous()", { expr = true, silent = true, noremap = false })
+            set("i", "<C-Y>", "copilot#Accept()", { expr = true, silent = true, noremap = false })
+            set("i", "<C-E>", "copilot#Cancel()", { expr = true, silent = true, noremap = false })
+        end,
+    },
+}

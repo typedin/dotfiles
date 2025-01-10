@@ -1,4 +1,3 @@
--- Autocompletion
 return {
     {
         "hrsh7th/nvim-cmp",
@@ -9,8 +8,7 @@ return {
                 "L3MON4D3/LuaSnip",
                 -- follow latest release.
                 version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-                -- install jsregexp (optional!).
-                build = "make install_jsregexp",
+                build = "make install_jsregexp", -- install jsregexp (optional!).
             },
             "saadparwaiz1/cmp_luasnip",
 
@@ -18,19 +16,35 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-emoji",
             {
                 "zbirenbaum/copilot-cmp",
                 config = function()
                     require("copilot_cmp").setup()
                 end,
+                dependencies = {
+                    "zbirenbaum/copilot.lua",
+                    cmd = "Copilot",
+                    event = "InsertEnter",
+                    config = function()
+                        require("copilot").setup({})
+                    end,
+                },
             },
-
-            -- If you want to add a bunch of pre-configured snippets,
-            --    you can use this plugin to help you. It even has snippets
-            --    for various frameworks/libraries/etc. but you will have to
-            --    set up the ones that are useful for you.
-            -- 'rafamadriz/friendly-snippets',
+            -- DISABLED for testing purposes
+            -- I'm testing the ones above
+            {
+                -- "github/copilot.vim",
+                -- config = function()
+                --     -- copilot seems to be is completing only if there are no other completions options
+                --     -- so I'm using <C-N> and <C-P> to navigate the completions.
+                --     -- If there are many completions provided by copilot, a n/o will appear next the completions
+                --     -- they are not shown by default
+                --      local set = vim.api.nvim_set_keymap
+                --      set("i", "<C-n>", "copilot#Next()", { expr = true, silent = true, noremap = false })
+                --      set("i", "<C-p>", "copilot#Previous()", { expr = true, silent = true, noremap = false })
+                --      set("i", "<C-y>", "copilot#Accept()", { expr = true, silent = true, noremap = false })
+                -- end,
+            },
         },
         config = function()
             -- See `:help cmp`
@@ -38,15 +52,46 @@ return {
             local luasnip = require("luasnip")
             luasnip.config.setup({})
             cmp.setup({
+                -- For an understanding of why these mappings were
+                -- chosen, you will need to read `:help ins-completion`
+                completion = { completeopt = "menu,menuone,noinsert" },
+                formatting = {
+                    -- See: https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
+                    format = function(entry, vim_item)
+                        -- Set `kind` to "$icon $kind".
+                        local lsp_kinds = require("custom.signs").lsp_kinds
+                        vim_item.kind = string.format("%s %s", lsp_kinds[vim_item.kind], vim_item.kind)
+                        vim_item.menu = ({
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[LuaSnip]",
+                            nvim_lua = "[Lua]",
+                            latex_symbols = "[LaTeX]",
+                        })[entry.source.name]
+                        return vim_item
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    -- Select the [n]ext item
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    -- Select the [p]revious item
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    -- Accept ([y]es) the completion.
+                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                }),
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body) -- For `luasnip` users.
-                        -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-                        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                        -- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-                        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
                     end,
+                },
+                sources = {
+                    { name = "copilot" },
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                    { name = "nvim_lua" },
+                    { name = "buffer" },
+                    -- { name = "calc" },
+                    -- { name = "path" },
                 },
                 sorting = {
                     priority_weight = 2,
@@ -65,44 +110,6 @@ return {
                         cmp.config.compare.length,
                         cmp.config.compare.order,
                     },
-                },
-                formatting = {
-                    -- See: https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
-                    format = function(entry, vim_item)
-                        -- Set `kind` to "$icon $kind".
-                        local lsp_kinds = require("custom.signs").lsp_kinds
-                        vim_item.kind = string.format("%s %s", lsp_kinds[vim_item.kind], vim_item.kind)
-                        vim_item.menu = ({
-                            buffer = "[Buffer]",
-                            nvim_lsp = "[LSP]",
-                            luasnip = "[LuaSnip]",
-                            nvim_lua = "[Lua]",
-                            latex_symbols = "[LaTeX]",
-                        })[entry.source.name]
-                        return vim_item
-                    end,
-                },
-                completion = { completeopt = "menu,menuone,noinsert" },
-                -- For an understanding of why these mappings were
-                -- chosen, you will need to read `:help ins-completion`
-                -- No, but seriously. Please read `:help ins-completion`, it is really good!
-                mapping = cmp.mapping.preset.insert({
-                    -- Select the [n]ext item
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    -- Select the [p]revious item
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    -- Accept ([y]es) the completion.
-                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-                }),
-                sources = {
-                    { name = "copilot" },
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                    { name = "nvim_lua" },
-                    { name = "buffer" },
-                    { name = "calc" },
-                    { name = "emoji" },
-                    { name = "path" },
                 },
                 window = {
                     completion = cmp.config.window.bordered({
