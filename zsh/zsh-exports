@@ -33,8 +33,10 @@ GOPATH=$HOME/.local/share/go
 LUA_PACKAGES="${HOME}/.luarocks/"
 PATH="$PATH:$LUA_PACKAGES/bin"
 
-# Yazi
 TMP_HOME_PATH="${HOME}/tmp/"
+# Yazi
 PATH="$PATH:$TMP_HOME_PATH/yazi/target/release/"
+# Wezterm
+PATH="$PATH:$TMP_HOME_PATH/wezterm/target/release/"
 
 export PATH
