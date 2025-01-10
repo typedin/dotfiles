@@ -1,7 +1,9 @@
+-- WARNING
+-- don't lazy load this one or it will break the bindings
+-- WARNING
 return {
     "mrjones2014/smart-splits.nvim",
     dependencies = "mrjones2014/legendary.nvim",
-    lazy = true,
     opts = { ignored_buftypes = { "nofile" } },
     config = function()
         require("legendary").setup({
