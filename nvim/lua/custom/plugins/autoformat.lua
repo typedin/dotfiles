@@ -1,9 +1,11 @@
 return {
     {
         "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+        lazy = true,
     },
     { -- Autoformat
         "stevearc/conform.nvim",
+        lazy = true,
         opts = {
             notify_on_error = false,
             format_on_save = {

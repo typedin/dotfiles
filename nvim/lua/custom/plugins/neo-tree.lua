@@ -2,7 +2,7 @@ local signs = require("custom.signs")
 return {
     {
         "nvim-neo-tree/neo-tree.nvim",
-        lazy = false,
+        lazy = true,
         cmd = "Neotree",
         branch = "v3.x",
         dependencies = {

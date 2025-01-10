@@ -4,7 +4,7 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
     },
-    lazy = false,
+    lazy = true,
     config = function()
         require("refactoring").setup()
         -- load refactoring Telescope extension

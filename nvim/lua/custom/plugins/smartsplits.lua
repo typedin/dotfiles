@@ -1,7 +1,7 @@
 return {
     "mrjones2014/smart-splits.nvim",
     dependencies = "mrjones2014/legendary.nvim",
-    lazy = false,
+    lazy = true,
     opts = { ignored_buftypes = { "nofile" } },
     config = function()
         require("legendary").setup({
