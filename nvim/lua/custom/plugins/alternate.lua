@@ -2,7 +2,12 @@ return {
     {
         "tjdevries/edit_alternate.vim",
         lazy = true,
-        dependencies = { "tjdevries/standard.vim", "tjdevries/conf.vim" },
+        dependencies = {
+            "tjdevries/standard.vim",
+            "tjdevries/conf.vim",
+            -- not a dependency
+            "tpope/vim-projectionist",
+        },
         config = function()
             vim.fn["edit_alternate#rule#add"]("go", function(filename)
                 if filename:find("_test.go") then
