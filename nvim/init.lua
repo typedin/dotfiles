@@ -1,7 +1,6 @@
--- Set <space> as the leader key
--- See `:help mapleader`
+--
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-
+--
 ---@diagnostic disable-next-line: inject-field
 vim.g.mapleader = " "
 ---@diagnostic disable-next-line: inject-field
@@ -10,11 +9,8 @@ vim.g.maplocalleader = ","
 ---@diagnostic disable-next-line: inject-field
 vim.g.have_nerd_font = true
 
---[[
 -- Setup initial configuration,
 -- Primarily just download and execute lazy.nvim
---]]
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
