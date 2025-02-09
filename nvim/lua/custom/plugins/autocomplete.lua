@@ -31,21 +31,6 @@ return {
                     end,
                 },
             },
-            -- DISABLED for testing purposes
-            -- I'm testing the ones above
-            {
-                -- "github/copilot.vim",
-                -- config = function()
-                --     -- copilot seems to be is completing only if there are no other completions options
-                --     -- so I'm using <C-N> and <C-P> to navigate the completions.
-                --     -- If there are many completions provided by copilot, a n/o will appear next the completions
-                --     -- they are not shown by default
-                --      local set = vim.api.nvim_set_keymap
-                --      set("i", "<C-n>", "copilot#Next()", { expr = true, silent = true, noremap = false })
-                --      set("i", "<C-p>", "copilot#Previous()", { expr = true, silent = true, noremap = false })
-                --      set("i", "<C-y>", "copilot#Accept()", { expr = true, silent = true, noremap = false })
-                -- end,
-            },
         },
         config = function()
             -- See `:help cmp`
@@ -98,8 +83,7 @@ return {
                     priority_weight = 2,
                     comparators = {
                         require("copilot_cmp.comparators").prioritize,
-
-                        -- Below is the default comparitor list and order for nvim-cmp
+                        -- Below is the default comparator list and order for nvim-cmp
                         cmp.config.compare.offset,
                         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
                         cmp.config.compare.exact,
