@@ -1,15 +1,61 @@
--- Basic Autocommands
 -- See `:help lua-guide-autocommands`
+-- disable copilot by default
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        vim.cmd("Copilot disable")
+    end,
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking (copying) text",
     group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
     callback = function()
         vim.highlight.on_yank()
+    end,
+})
+
+-- Make all splits the same width when moving back to neovim after losing focus
+-- Variable to store the cursor position
+local last_cursor_pos = nil
+
+-- Autocommand group
+vim.api.nvim_create_augroup("FocusGroup", { clear = true })
+
+-- Save cursor position when Neovim loses focus
+vim.api.nvim_create_autocmd("FocusLost", {
+    group = "FocusGroup",
+    callback = function()
+        last_cursor_pos = vim.api.nvim_win_get_cursor(0)
+    end,
+})
+
+-- Restore cursor position and adjust window splits when Neovim gains focus
+vim.api.nvim_create_autocmd("FocusGained", {
+    group = "FocusGroup",
+    callback = function()
+        if last_cursor_pos then
+            vim.api.nvim_win_set_cursor(0, last_cursor_pos) -- Restore cursor position
+        end
+        vim.cmd("wincmd =") -- Equalize window widths
+    end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+    ---@diagnostic disable-next-line: undefined-global
+    buffer = bufnr,
+    callback = function()
+        local opts = {
+            focusable = false,
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+            border = "rounded",
+            source = "always",
+            prefix = " ",
+            scope = "cursor",
+        }
+        vim.diagnostic.open_float(nil, opts)
     end,
 })
 
