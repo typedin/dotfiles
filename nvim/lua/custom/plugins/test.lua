@@ -1,7 +1,6 @@
 return {
     {
-        -- "typedin/altestnate.nvim",
-        dir = "/home/antoine/code/altestnate.nvim",
+        "typedin/altestnate.nvim",
     },
     {
         "nvim-neotest/neotest",
@@ -60,7 +59,6 @@ return {
                         ---@param file_path string Path of the potential vitest test file
                         ---@return boolean
                         is_test_file = function(file_path)
-                            print(file_path)
                             if string.match(file_path, "test.ts") then
                                 return true
                             end
