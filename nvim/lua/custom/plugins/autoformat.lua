@@ -1,7 +1,7 @@
 return {
-    {
-        "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-    },
+    -- {
+    --     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+    -- },
     { -- Autoformat
         "stevearc/conform.nvim",
         opts = {
