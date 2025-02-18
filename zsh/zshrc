@@ -11,7 +11,13 @@ fi
 # +------------+
 # export binaries before using them
 source ~/.config/zsh/zsh-exports
-# source is relative to the root of zshrc
+# +------------+
+# |   COLORS   |
+# +------------+
+# source theme directory 
+THEME_DIR="${0:a:h}"
+fpath+="$THEME_DIR"
+autoload -U colors
 source ./themes/tokyo-night.zsh
 
 # +------------+
