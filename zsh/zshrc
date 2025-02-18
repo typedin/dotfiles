@@ -11,8 +11,14 @@ fi
 # +------------+
 # export binaries before using them
 source ~/.config/zsh/zsh-exports
-# source is relative to the root of zshrc
-source ./themes/tokyo-night.zsh
+# +------------+
+# |   COLORS   |
+# +------------+
+# Source the theme file (adjust relative path)
+source ~/.config/zsh/themes/tokyo-night.zsh
+# Load color definitions
+autoload -U colors
+
 
 # +------------+
 # |  PLUGINS   |
