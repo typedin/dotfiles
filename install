@@ -51,7 +51,8 @@ else
 fi
 
 # Clone Neovim repository
-TMP_DIR=$(mktemp -d)
+mkdir -p "${HOME}/tmp"
+TMP_DIR="${HOME}/tmp"
 echo "Cloning Neovim repository into $TMP_DIR..."
 git clone https://github.com/neovim/neovim.git "$TMP_DIR/neovim"
 
