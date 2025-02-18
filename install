@@ -4,93 +4,115 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 mkdir -p "$HOME"/.config
 
+echo "Setting up dotfiles from: $DOTFILES"
+
 ###############################################################
 # ZSH
 ###############################################################
-# no typo I don't want to have a hidden file
-# so it's not .zshrc
+echo "Configuring ZSH..."
 ln -sf "$DOTFILES"/zsh/zshrc "$HOME"/.zshrc
 
 rm -rf "$HOME"/.config/zsh
 ln -sf "$DOTFILES"/zsh "$HOME"/.config/zsh
 
+echo "Configuring Spaceship prompt..."
 rm -rf "$HOME"/.config/spaceship
 ln -sf "$DOTFILES"/spaceship "$HOME"/.config/spaceship
 
 ###############################################################
 # NPM
 ###############################################################
-rm -rf "$HOME"/.npmrc
-ln -sf "$DOTFILES"/npm/npmrc "$HOME"/.npmrc
+echo "Checking for npm..."
+if ! command -v npm &> /dev/null; then
+    echo "npm not found. Installing..."
+    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+    sudo apt install -y nodejs
+fi
+
+echo "Setting up npm global packages..."
+mkdir -p "${HOME}/.local/share/npm-packages"
+npm config set prefix "${HOME}/.local/share/npm-packages"
+npm i -g tree-sitter-cli intelephense
 
 ###############################################################
 # nvim
 ###############################################################
+echo "Configuring Neovim..."
 rm -rf "$HOME"/.config/nvim
 ln -s "$DOTFILES"/nvim "$HOME"/.config/nvim
 
-###############################################################
-# alacritty
-###############################################################
-rm -rf "$HOME"/.config/alacritty
-ln -s "$DOTFILES"/alacritty "$HOME"/.config/alacritty
+echo "Checking for PHPActor..."
+mkdir -p "${HOME}/.local/share/nvim/opt"
+if [ ! -d "${HOME}/.local/share/nvim/opt/phpactor/.git" ]; then
+    echo "Cloning PHPActor..."
+    git clone git@github.com:phpactor/phpactor "${HOME}/.local/share/nvim/opt/phpactor"
+else
+    echo "PHPActor already installed. Skipping."
+fi
+
+# Clone Neovim repository
+TMP_DIR=$(mktemp -d)
+echo "Cloning Neovim repository into $TMP_DIR..."
+git clone https://github.com/neovim/neovim.git "$TMP_DIR/neovim"
 
 ###############################################################
 # WezTerm
 ###############################################################
+echo "Configuring WezTerm..."
 rm -rf "$HOME"/.wezterm.lua
 ln -s "$DOTFILES"/WezTerm/ "$HOME"/.config/wezterm
-# ln -s "$DOTFILES"/WezTerm/config.lua "$HOME"/.wezterm.lua
 
-###############################################################
-# zellij
-###############################################################
-rm -rf "$HOME"/.config/zellij
-ln -s "$DOTFILES"/zellij "$HOME"/.config/zellij
+# Clone WezTerm repository
+echo "Cloning WezTerm repository into $TMP_DIR..."
+git clone https://github.com/wez/wezterm.git "$TMP_DIR/wezterm"
 
 ###############################################################
 # git
 ###############################################################
+echo "Checking for git..."
+if ! command -v git &> /dev/null; then
+    echo "git not found. Installing..."
+    sudo apt install -y git
+fi
+
+echo "Setting up git configuration..."
 ln -sf "$DOTFILES"/git/gitconfig "$HOME"/.gitconfig
 ln -sf "$DOTFILES"/git/gitignore_global "$HOME"/.gitignore_global
 
 ###############################################################
 # phpactor
 ###############################################################
-rm -rf $HOME/.config/phpactor
-ln -s $DOTFILES/phpactor $HOME/.config/phpactor
+echo "Configuring PHPActor..."
+rm -rf "$HOME/.config/phpactor"
+ln -s "$DOTFILES/phpactor" "$HOME/.config/phpactor"
 
-if ! command -v npm &> /dev/null
-then
-    echo "npm executable could not be found"
-else
-    mkdir -p "${HOME}/.local/share/npm-packages"
-    npm config set prefix "${HOME}/.local/share/npm-packages"
-
-    npm i -g tree-sitter-cli intelephense
+###############################################################
+# composer
+###############################################################
+echo "Checking for Composer..."
+if ! command -v composer &> /dev/null; then
+    echo "Composer not found. Installing..."
+    curl -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
 fi
 
-if ! command -v git &> /dev/null
-then
-    echo "git executable could not be found"
-else
-    # nvim
-    mkdir -p "${HOME}/.local/share/nvim/opt"
-    git clone git@github.com:phpactor/phpactor "${HOME}/.local/share/nvim/opt/phpactor"
+echo "Setting up Composer global configuration..."
+mkdir -p "${HOME}/.local/share/composer"
+ln -sf "$DOTFILES"/composer/composer.json "$HOME"/.config/composer/composer.json
+composer global install
+
+###############################################################
+# cargo
+###############################################################
+echo "Checking for Rust and Cargo..."
+if ! command -v cargo &> /dev/null; then
+    echo "Cargo not found. Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source "$HOME/.cargo/env"
 fi
 
-if ! command -v composer &> /dev/null
-then
-    echo "git executable could not be found"
-else
-    mkdir -p "${HOME}/.local/share/composer"
-    ln -sf "$DOTFILES"/composer/composer.json "$HOME"/.config/composer/composer.json
-    composer global install
-fi
+echo "Installing Stylua..."
+cargo install stylua
 
-if ! command -v cargo &> /dev/null
-then
-    echo "cargo executable could not be found"
-else
-    cargo install stylua
-fi
+echo "Dotfiles setup completed successfully!"
+
