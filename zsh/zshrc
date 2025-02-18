@@ -7,6 +7,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # +------------+
+# |  EXPORTS   |
+# +------------+
+# export binaries before using them
+source ~/.config/zsh/zsh-exports
+
+# +------------+
 # |  PLUGINS   |
 # +------------+
 # Set the directory where zinit and plugins will be installed
@@ -76,7 +82,6 @@ fi
 #  clean those next lines
 # +------------+
 source ~/.config/zsh/zsh-aliases
-source ~/.config/zsh/zsh-exports
 export COLORTERM=truecolor
 export LC_ALL=en_US.UTF-8
 
