@@ -13,7 +13,6 @@ ln -sf "$DOTFILES"/zsh/zshrc "$HOME"/.zshrc
 
 rm -rf "$HOME"/.config/zsh
 ln -sf "$DOTFILES"/zsh "$HOME"/.config/zsh
-ln -sf "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
 
 rm -rf "$HOME"/.config/spaceship
 ln -sf "$DOTFILES"/spaceship "$HOME"/.config/spaceship
@@ -78,8 +77,6 @@ else
     # nvim
     mkdir -p "${HOME}/.local/share/nvim/opt"
     git clone git@github.com:phpactor/phpactor "${HOME}/.local/share/nvim/opt/phpactor"
-    # tmux
-    git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
 fi
 
 if ! command -v composer &> /dev/null
