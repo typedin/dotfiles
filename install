@@ -45,7 +45,7 @@ echo "Checking for PHPActor..."
 mkdir -p "${HOME}/.local/share/nvim/opt"
 if [ ! -d "${HOME}/.local/share/nvim/opt/phpactor/.git" ]; then
     echo "Cloning PHPActor..."
-    git clone git@github.com:phpactor/phpactor "${HOME}/.local/share/nvim/opt/phpactor"
+    git clone https://github.com/phpactor/phpactor "${HOME}/.local/share/nvim/opt/phpactor"
 else
     echo "PHPActor already installed. Skipping."
 fi
