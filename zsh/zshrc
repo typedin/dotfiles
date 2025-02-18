@@ -11,6 +11,8 @@ fi
 # +------------+
 # export binaries before using them
 source ~/.config/zsh/zsh-exports
+# source is relative to the root of zshrc
+source ./themes/tokyo-night.zsh
 
 # +------------+
 # |  PLUGINS   |
