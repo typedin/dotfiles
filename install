@@ -15,10 +15,6 @@ ln -sf "$DOTFILES"/zsh/zshrc "$HOME"/.zshrc
 rm -rf "$HOME"/.config/zsh
 ln -sf "$DOTFILES"/zsh "$HOME"/.config/zsh
 
-echo "Configuring Spaceship prompt..."
-rm -rf "$HOME"/.config/spaceship
-ln -sf "$DOTFILES"/spaceship "$HOME"/.config/spaceship
-
 ###############################################################
 # NPM
 ###############################################################
