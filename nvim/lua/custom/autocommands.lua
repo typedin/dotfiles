@@ -6,6 +6,31 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function(args)
+        -- WARNING chatgpted this
+        local ignore_file = vim.fn.getcwd() .. "/.ignoreautoformat"
+        local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ":t")
+        -- Read .ignoreautoformat and check if filename is in it
+        local ignore_list = {}
+        local f = io.open(ignore_file, "r")
+        if f then
+            for line in f:lines() do
+                ignore_list[line] = true
+            end
+            f:close()
+        end
+        -- If the file is in .ignoreautoformat, don't format
+        if ignore_list[filename] then
+            vim.notify("\nFile is ignored from auto format autocommand.", vim.log.levels.INFO)
+            return
+        end
+        -- end WARNING chatgpted this
+        require("conform").format({ bufnr = args.buf, timeout_ms = 500, lsp_fallback = true })
+    end,
+})
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`

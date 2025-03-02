@@ -112,4 +112,3 @@ echo "Installing Stylua..."
 cargo install stylua
 
 echo "Dotfiles setup completed successfully!"
-

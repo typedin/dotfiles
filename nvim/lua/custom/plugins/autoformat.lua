@@ -4,10 +4,10 @@ return {
         config = function()
             require("conform").setup({
                 notify_on_error = false,
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_fallback = true,
-                },
+                -- format_on_save = {
+                --     timeout_ms = 500,
+                --     lsp_fallback = true,
+                -- },
                 formatters_by_ft = {
                     makefile = { "cmake-format" },
                     c = { "clang-format" },
@@ -22,7 +22,7 @@ return {
                     tsx = { "prettier", "eslint" },
                     javascript = { "prettier", "eslint" },
                     php = { "pint", "php-cs-fixer" },
-                    blade = { "blade-formatter" },
+                    blade = { "blade-formatter", "prettier" },
                 },
                 formatters = {
                     prettier = {
